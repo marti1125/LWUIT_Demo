@@ -1,0 +1,545 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en-US">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   <meta http-equiv="Content-Language" content="en-US">
+<title>Resources</title>
+
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="Generator" content="XSolBook3.5 XML Custom XSLT Filter">
+<meta name="keywords" content="LWUIT">
+<meta name="dc.title" content="Resources">
+<meta name="description" content="This Developer&#8217;s Guide describes how to use the Lightweight UI toolkit.">
+<meta name="identifier" content="12-11-09">
+<meta name="date" content="">
+<meta name="issued" content="2009-12-11">
+<meta name="revision" content="">
+<meta name="publisher" content="Sun Microsystems, Inc.">
+<meta name="collection" content="reference">
+<meta name="robots" content="index, follow">
+
+<!--Inserts the stylesheet-->
+<link rel="STYLESHEET" href="unx_str_styles.css" charset="ISO-8859-1" type="text/css">
+</head>
+<body class="HlpBdy" leftmargin="10" topmargin="10" marginheight="10" marginwidth="10" bgcolor="#ffffff"><a name="top"></a><div class="navbar" align="center">
+<table dir="LTR" width="100%" cellpadding="0" cellspacing="0" border="0" summary="Navigation bar, includes the book title and navigation buttons"><colgroup span="2"><col id="t1" span="1" width="50%"><col id="t2" span="1" width="50%"></colgroup><tr bgcolor="#cccccc"><td class="navbartitle" align="left" rowspan="1" colspan="1" abbr="ChapTitle"><a name="CJBCGCDD"></a>&nbsp;&nbsp;LWUIT Developer&#8217;s Guide</td><td valign="top" align="right" rowspan="1" colspan="1" abbr="NavButtons"><a href="index.html"><img src="shared/toc01.gif" width="30" height="26" border="0" title="Table Of Contents" alt="Table Of Contents"></a>
+<a href="chapter10.html"><img width="30" height="26" border="0" src="shared/prev01.gif" title="Previous Chapter" alt="Previous Chapter"></a><a href="chapter12.html"><img src="shared/next01.gif" width="30" height="26" border="0" title="Next Chapter" alt="Next Chapter"></a><a href="ix.html"><img src="shared/index01.gif" width="30" height="26" border="0" title="Book Index" alt="Book Index"></a></td></tr></table><br><br></div>
+<table dir="LTR" width="100%" border="0" summary="Chapter Number" abbr="ChapNum"><colgroup span="1"><col id="ch1" span="1"></colgroup><tr><td align="right" class="ChapNumber"><span class="ChapNumPrefix">C H A P T E R</span>&nbsp;
+<span class="ChapNumNum">11</span><span class="ChapNumSuffix"></span></td></tr></table>
+<hr size="7" noshade="1">
+<!-- ============ -->
+<!-- MAIN CONTENT -->
+<!-- ============ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- BEGIN PAGETITLE ONE LINE -->
+<h1 class="ChapTitle" align="right"><a name="d0e4425"></a>Resources</h1>
+<!-- END PAGETITLE ONE LINE -->
+
+<div class="highlights"><p class="paragraph"><a name="d0e4429"></a>LWUIT permits the following resource elements:</p>
+<ul class="bullet1" type="square"><li class="bullet1"><p class="paragraph"><a name="d0e4434"></a><a href="chapter11.html#CJBDAHDJ">Image Resources</a></p></li>
+<li class="bullet1"><p class="paragraph"><a name="d0e4438"></a><a href="chapter11.html#CJBJCEBG">Dynamic Fonts</a></p></li>
+<li class="bullet1"><p class="paragraph"><a name="d0e4442"></a><a href="chapter11.html#CJBHGHFJ">Localization (L10N)</a> bundles</p></li>
+<li class="bullet1"><p class="paragraph"><a name="d0e4447"></a><a href="chapter11.html#CJBEAHFA">Themes</a></p></li></ul>
+<p class="paragraph"><a name="d0e4450"></a>Resources can be delivered as a bundle (a binary file that
+can be loaded and used on the device). A bundle can combine several
+different resource types within a single file, thereby easing distribution
+and improving compression. LWUIT supports two methods for creating
+a resource bundle: a set of Ant tasks, or the graphical Theme Creator
+utility (see <a href="chapter11.html#CJBGJEIB">The LWUIT Theme Creator</a>). </p></div>
+<div class="sect1"><a name="Z40006f51296068"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e4456"></a>11.1 Resource Elements</h1>
+<p class="paragraph"><a name="d0e4459"></a>The following sections detail the five resource types and
+the ways in which they relate to the resource bundle mechanism.</p>
+<div class="sect2"><a name="d0e4462"></a><h2 class="head2"><a name="d0e4463"></a>11.1.1 Building a Bundle</h2>
+<p class="paragraph"><a name="d0e4466"></a>A <a class="indexterm" name="d0e4468"></a>resource
+bundle can be built using Ant during the standard application build process.
+Resource files convert existing files into bundles as necessary.
+An application can have any number of resource files.</p>
+<p class="paragraph"><a name="d0e4473"></a>A resource file it is loaded fully into memory (due to Java
+ME IO constraints), so you should group resources based on the needs
+of the application flow. This allows the application to load only
+the necessary resources for a given form or use case and leaves
+memory free for additional resources needed by other forms or use
+cases.</p>
+<a name="Z40006f51295860"></a><div class="sect3"><h3 class="head3"><a name="d0e4477"></a>11.1.1.1 Creating a Resource</h3>
+<p class="paragraph"><a name="d0e4480"></a>To create a <a class="indexterm" name="d0e4482"></a>resource, use code similar
+to the following example in your build file:</p>
+<p class="literallayout"><pre>&lt;taskdef 
+&nbsp;&nbsp;classpath="editor.jar" 
+&nbsp;&nbsp;classname="com.sun.lwuit.tools.resourcebuilder.LWUITTask" 
+&nbsp;&nbsp;name="build" /&gt;
+&lt;build dest="src/myresourceFile .res"&gt;
+&nbsp;&nbsp;&lt;image file="images/myImage.png" name=&#8221;imageName&#8221; /&gt;
+&lt;/build&gt;</p></pre>
+<p class="paragraph"><a name="d0e4511"></a>You can add several additional types of resources to the build
+tag. These optional resource tags are explained in the remainder
+of this chapter.</p></div>
+<a name="d0e4514"></a><div class="sect3"><h3 class="head3"><a name="d0e4515"></a>11.1.1.2 Loading a Resource</h3>
+<p class="paragraph"><a name="d0e4518"></a>To load a <a class="indexterm" name="d0e4520"></a>resource into your application,
+use code similar to this:</p>
+<p class="literallayout"><pre>Resources res = Resources.open(&#8220;/myresourceFile.res&#8221;);
+Image i = res.getImage(&#8220;imageName&#8221;);</p></pre></div></div>
+<div class="sect2"><a name="CJBDAHDJ"></a><h2 class="head2"><a name="d0e4535"></a>11.1.2 Image Resources</h2>
+<p class="paragraph"><a name="d0e4538"></a>There are several types of images in LWUIT, most of which
+can be stored either individually in the Java archive (JAR&#8482;)
+or packaged as part of a <a class="indexterm" name="d0e4540"></a>resource bundle. </p>
+<p class="paragraph"><a name="d0e4548"></a>To load an <a class="indexterm" name="d0e4550"></a>image
+stored in the JAR file, use the following code: </p>
+<p class="literallayout"><pre>Image image = Image.createImage("/images/duke.png"); </pre></p>
+<p class="paragraph"><a name="d0e4558"></a>The Image tag supports the following attributes:</p>
+<br><table border="1" cellpadding="5" cellspacing="0" dir="LTR" class="untitled" summary="Table that is not numbered or titled">
+
+
+
+<tbody class="tbody">
+<tr>
+<td align="left" valign="top"><p class="literallayout"><pre>name</pre></p></td>
+<td align="left" valign="top">The name of the resource (defaults to
+the name of the file name).</td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="literallayout"><pre>file</pre></p></td>
+<td align="left" valign="top">The file that would be used for the image
+(required)</td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="literallayout"><pre>indexed</pre></p></td>
+<td align="left" valign="top">True or false. whether to store a indexed
+image. Defaults to False (see <a href="chapter11.html#CJBJIJFB">Indexed Images</a> below).</td>
+</tr>
+</tbody>
+</table>
+<br>
+<p class="paragraph"><a name="d0e4608"></a>Once loaded, the image is ready to be used as a background
+image of a component or even as an icon for a component that can
+contain an image. </p>
+<p class="paragraph"><a name="d0e4611"></a>To package an image in the resource bundle, use the code sample
+described in <a href="chapter11.html#CJBJIJFB">Indexed Images</a>.</p></div>
+<div class="sect2"><a name="CJBJIJFB"></a><h2 class="head2"><a name="d0e4617"></a>11.1.3 Indexed Images</h2>
+<p class="paragraph"><a name="d0e4620"></a><a class="indexterm" name="d0e4621"></a>Images
+can occupy a great deal of memory in runtime. For example, a background image
+scaled to a phone with 320x240 resolution with 1.6 million colors
+would take up 320x240x4 bytes (307200 bytes = 300 kilobytes)!</p>
+<p class="paragraph"><a name="d0e4626"></a>Some devices have barely 2mb of RAM allocated to Java, yet
+feature high resolutions and color depths, leaving very little space
+in which the application can function. Indexed <a class="indexterm" name="d0e4628"></a>images work on the tried
+and true concept of using a palette to draw. Rather than store the
+image as a set of Alpha, Red, Green, Blue (ARGB) values, the indexed
+image relies on the notion that there are no more than 256 colors
+in an image (if there are more, the Ant task tries to gracefully
+reduce the color count, resulting in lost details). An image with
+256 colors or less can be represented using an array of bytes and
+an array of integers (no bigger that 256x4=1kb) thus saving approximately
+70 percent of the RAM required for the image!</p>
+<p class="paragraph"><a name="d0e4636"></a>For example, assuming the image mentioned above uses all 256
+colors, the memory occupied is 320x240+1024 (77824 bytes = 76kb),
+or a savings of 74.7 percent! The memory savings are significant,
+and especially welcome on low&#8208;end devices. </p>
+<p class="paragraph"><a name="d0e4639"></a>The downsides to using a index image are as follows:</p>
+<ul class="bullet1" type="square"><li class="bullet1"><p class="paragraph"><a name="d0e4644"></a>They are slower to render on the screen
+since they require a lookup for every pixel. This is noticeable
+when rendering complex elements, but on modern devices (even weak
+devices) it isn't obvious.</p></li>
+<li class="bullet1"><p class="paragraph"><a name="d0e4648"></a>Resource bundles must be used to store indexed images
+because there is no standard format for indexed images supported
+across all Java ME devices.</p></li>
+<li class="bullet1"><p class="paragraph"><a name="d0e4652"></a>Converting an image in runtime to a indexed image
+can be very slow and can fail (if there are too many colors), which
+is why it is beneficial to choose indexed images during the build
+phase.</p></li>
+<li class="bullet1"><p class="paragraph"><a name="d0e4656"></a>Because indexed images aren't compressed the resource
+file appears larger (and the space taken on the device is larger),
+however, in practice the indexed images compress very well in the
+JAR and in fact take less space than the equivalent PNG image after
+compression.</p></li></ul>
+<p class="paragraph"><a name="d0e4659"></a>You can read more in the <kbd class="command">IndexedImage</kbd> API
+documentation. Since indexed images are derivatives of the Image
+class they can be replaced in place with reasonable compatibility. </p>
+<p class="paragraph"><a name="d0e4665"></a>Notice that indexed images are immutable and can't be modified
+after they are created, so methods such as <kbd class="command">getGraphics()</kbd> do
+not work correctly. Consult the API documentation to verify the
+appropriate functionality.</p></div>
+<div class="sect2"><a name="d0e4671"></a><h2 class="head2"><a name="d0e4672"></a>11.1.4 Fonts</h2>
+<p class="paragraph"><a name="d0e4675"></a>The LWUIT library supports bitmap <a class="indexterm" name="d0e4677"></a>fonts,
+system fonts, and loadable fonts. System fonts use basic native
+fonts and are based on the common MIDP fonts. For more detailed
+information please see the Font API in the API documentation located
+in <var class="replaceable">install&#8208;dir</var><kbd class="command">/docs/api/lwuit</kbd>.</p>
+<p class="paragraph"><a name="d0e4687"></a>Bitmap fonts generate fonts on the desktop as image files.
+These image can be used to draw desktop quality fonts on a device
+without requiring specific support from the device.</p>
+<p class="paragraph"><a name="d0e4690"></a>Loadable fonts support specifying a font as a name or even
+as a TrueType font file, if the underlying operating system supports
+such fonts, the font object would be created. </p>
+<p class="paragraph"><a name="d0e4693"></a>All fonts can be used in a theme file and are represented
+using the Font class in LWUIT.</p>
+<a name="d0e4696"></a><div class="sect3"><h3 class="head3"><a name="d0e4697"></a>11.1.4.1 System Font</h3>
+<p class="paragraph"><a name="d0e4700"></a>Three basic parameters define a <a class="indexterm" name="d0e4702"></a>system font<a class="indexterm" name="d0e4706"></a>:</p>
+<br><table border="1" cellpadding="5" cellspacing="0" dir="LTR" class="untitled" summary="Table that is not numbered or titled">
+
+
+
+<tbody class="tbody">
+<tr>
+<td align="left" valign="top" rowspan="3"><kbd class="command">Face </kbd>
+<p class="tabletext"><a name="d0e4731"></a><kbd class="command">Style </kbd></p>
+<p class="tabletext"><a name="d0e4735"></a><kbd class="command">Size </kbd></p></td>
+<td align="left" valign="top">Valid values are <kbd class="command">FACE_SYSTEM</kbd>, <kbd class="command">FACE_PROPORTIONAL</kbd> and <kbd class="command">FACE_MONOSPACE</kbd>.</td>
+</tr>
+<tr>
+<td align="left" valign="top">Valid values are <kbd class="command">STYLE_PLAIN</kbd>, <kbd class="command">STYLE_ITALIC</kbd>, <kbd class="command">STYLE_BOLD</kbd>.</td>
+</tr>
+<tr>
+<td align="left" valign="top">Valid values are <kbd class="command">SIZE_SMALL</kbd>, <kbd class="command">SIZE_MEDIUM</kbd>, <kbd class="command">SIZE_LARGE</kbd>.</td>
+</tr>
+</tbody>
+</table>
+<br>
+<p class="paragraph"><a name="d0e4787"></a>To create a system font, use the following code:</p>
+<p class="literallayout"><pre>Font.createSystemFont(Font.FACE_SYSTEM, 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Font.STYLE_BOLD, 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Font.SIZE_MEDIUM);</p></pre>
+<p class="paragraph"><a name="d0e4799"></a>To create a bold italic font style use code similar to the
+following:</p>
+<p class="literallayout"><pre>Font.createSystemFont(Font.FACE_SYSTEM, 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Font.STYLE_BOLD | Font.STYLE_ITALIC,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Font.SIZE_MEDIUM);</p></pre></div>
+<a name="CJBJCEBG"></a><div class="sect3"><h3 class="head3"><a name="d0e4812"></a>11.1.4.2 Dynamic Fonts</h3>
+<p class="paragraph"><a name="d0e4815"></a>Different platforms have different <a class="indexterm" name="d0e4817"></a>font support, e.g. phones
+usually only support system and bitmap fonts while TV's usually
+support TrueType fonts but don't work well with bitmap fonts. LWUIT
+has support for defining fonts in resources that allow a resource
+to adapt for different devices. To support portability LWUIT allows specifying
+a loadable font if such a font is supported by the underlying system
+and allows bundling bitmaps for increased portability. As a fallback
+a system font is always defined, thus if the native font isn't supported
+or a developer isn't interested in using a bitmap font the system
+font fallback can always be used. It is possible to define such
+a font using the Ant task with the following syntax: </p>
+<p class="literallayout"><pre>&lt;build dest="src/myresourceFile.res"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;font logicalName=&#8221;SansSerif&#8221; name=&#8221;myFont&#8221; size=&#8221;20&#8221; /&gt; 
+&lt;/build&gt;</p></pre>
+<p class="paragraph"><a name="d0e4834"></a>The following attributes are supported for the font Ant task:</p>
+<br><table border="1" cellpadding="5" cellspacing="0" dir="LTR" class="untitled" summary="Table that is not numbered or titled">
+
+
+
+<tbody class="tbody">
+<tr>
+<td align="left" valign="top"><p class="literallayout"><pre>name</pre></p></td>
+<td align="left" valign="top">Name of the font to load from the resource
+file (optional: defaults to logical name or file name).</td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="literallayout"><pre>charset</pre></p></td>
+<td align="left" valign="top">Defaults to the English alphabet, numbers
+and common signs. Should contain a list of all characters that are
+supported by a font. For example, if a font is always used for uppercase
+letters then it would save space to define the charset as: "ABCDEFGHIJKLMNOPQRSTUVWXYZ"</td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="literallayout"><pre>src </pre></p></td>
+<td align="left" valign="top">Font file in the case of using a file.
+Defaults to TrueType font. size floating point size of the font.</td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="literallayout"><pre>bold</pre></p></td>
+<td align="left" valign="top">Defaults to False. Indicates whether
+the font should be bold.</td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="literallayout"><pre>trueType</pre></p></td>
+<td align="left" valign="top">Defaults to True, relevant only when
+src is used. If set to False, type 1 fonts are assumed.</td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="literallayout"><pre>antiAliasing</pre></p></td>
+<td align="left" valign="top">Defaults to True. If false, fonts are
+aliased.</td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="literallayout"><pre>logicalName</pre></p></td>
+<td align="left" valign="top">The logical name of the font as specified
+by java.awt.Font in Java SE: Dialog, DialogInput, Monospaced, Serif,
+or SansSerif.</td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="literallayout"><pre>createBitmap</pre></p></td>
+<td align="left" valign="top">Defaults to True. If false no bitmap
+version of the font is created.</td>
+</tr>
+</tbody>
+</table>
+<br></div></div>
+<div class="sect2"><a name="CJBHGHFJ"></a><h2 class="head2"><a name="d0e4938"></a>11.1.5 Localization (L10N)</h2>
+<p class="paragraph"><a name="d0e4941"></a>Resource bundles support <a class="indexterm" name="d0e4943"></a>localization
+resources, allowing the developer to store key&#8208;value pairs
+within the resource file. The localization bundles use the format
+of Java property files, which only support USASCII characters. To
+enter characters in a different script, either use a special editor
+(such as NetBeans) or use the native2ascii JDK tool with the Ant
+task to convert the file.</p>
+<p class="paragraph"><a name="d0e4948"></a>To create a resource bundle use the following code</p>
+<p class="literallayout"><pre>&lt;build dest="src/myresourceFile.res"&gt;
+&nbsp;&nbsp;&nbsp;&lt;l10n name="localize"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;locale name="en" file="l10n/localize.properties" /&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;locale name="iw" file="l10n/localize_iw_IL.properties" /&gt;
+&nbsp;&nbsp;&nbsp;&lt;/l10n&gt;
+&lt;/build&gt;</p></pre>
+<p class="paragraph"><a name="d0e4969"></a>To load the localization resource use the following syntax:</p>
+<p class="literallayout"><pre>Hashtable h = bundle.getL10N("localize", "en");</pre></p>
+<p class="paragraph"><a name="d0e4975"></a>The hashtable contains the key value pairs of the resources
+within the bundle allowing for easy localization. LWUIT supports
+automatic localization through the <kbd class="command">UIManager.setResourceBundle(Hashtable)</kbd> method.
+This installs a global resource bundle which is &#8220;checked&#8221; whenever
+a localizable resource is created, thus allowing for the replacement
+of the entire UI language without querying the resource bundle manually.</p></div>
+<div class="sect2"><a name="d0e4981"></a><h2 class="head2"><a name="d0e4982"></a>11.1.6 Themes</h2>
+<p class="paragraph"><a name="d0e4985"></a>This section discusses how themes work as resources. See <a href="chapter8.html#BADGGABB">Chapter 8</a> and <a href="chapter10.html#BADBCIEI">Chapter 10</a> to both
+of these chapters in-depth discussions of styles and theming in
+LWUIT.</p>
+<p class="paragraph"><a name="d0e4992"></a>A <a class="indexterm" name="d0e4994"></a>theme can
+be defined using a key value properties file containing selectors
+and values. A selector can be defined as an attribute value, optionally
+with a component name prepended to it for narrowing the selection
+further. </p>
+<p class="paragraph"><a name="d0e4999"></a>The value of an entry in the theme depends on the type of
+the entry, some entries such as bgImage expect an image object and
+some entries such as Font expect a font definition. Most entries
+just expect numbers. For example, this is a typical snippet from
+a theme:</p>
+<p class="literallayout"><pre>sel#fgColor= 0017ff 
+font= systemSmall 
+Form.bgImage=myBackground 
+Form.font=Serif 
+SoftButton.bgColor= ff 
+SoftButton.fgColor= ffffff</p></pre>
+<p class="paragraph"><a name="d0e5020"></a>To add this theme into a resource, add the following: </p>
+<p class="literallayout"><pre>&lt;build dest="src/myresourceFile .res"&gt; 
+&nbsp;&nbsp;&nbsp;&lt;font logicalName="Serif" bold="true" /&gt; 
+&nbsp;&nbsp;&nbsp;&lt;font createBitmap="false" name="systemSmall" 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;system="FACE_SYSTEM ; STYLE_PLAIN; SIZE_SMALL" /&gt; 
+&nbsp;&nbsp;&nbsp;&lt;image file="images/background.png" name="myBackground" 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pack="true" /&gt; 
+&nbsp;&nbsp;&nbsp;&lt;theme file="themes/myTheme.conf" name="myTheme" /&gt; 
+&lt;/build&gt;</p></pre>
+<p class="paragraph"><a name="d0e5041"></a>This theme can then be installed as follows:</p>
+<p class="literallayout"><pre>UIManager.getInstance().setThemeProps(res.getTheme(myTheme));</pre></p></div></div>
+<div class="sect1"><a name="CJBGJEIB"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e5048"></a>11.2 The LWUIT Theme Creator</h1>
+<p class="paragraph"><a name="d0e5051"></a>The <a class="indexterm" name="d0e5053"></a>Theme
+Creator is a standalone GUI tool that allows UI experts, developers,
+and translators to open, create, and edit resource packages for
+LWUIT. The Theme Creator was designed for visual work and provides &#8220;live&#8221; preview
+of all UI changes, enabling rapid UI customization. </p>
+<p class="paragraph"><a name="d0e5058"></a>Currently the Theme Creator and the Ant tasks accomplish the
+same thing, with one limitation. In the Theme Creator all bitmap
+fonts used by the theme must be defined within the theme itself.
+A theme cannot reference a bitmap font defined in a different resource
+file.</p>
+<p class="paragraph"><a name="d0e5061"></a>The Theme Creator supports the six resource types described
+in <a href="chapter11.html#Z40006f51296068">Resource Elements</a>. </p>
+<a name="Z4000f5f1296762"></a><div class="figurebox"><p class="figurecaption"><a name="d0e5067"></a><b>FIGURE 11-1&nbsp;&nbsp;&nbsp;Editing the Default LWUIT
+Look and Feel</b></p></div>
+<img alt="Editing the Default LWUIT Look and Feel" title="Editing the Default LWUIT Look and Feel" src="figures/resource_editor.jpg"><br><br><br>
+<p class="paragraph"><a name="d0e5079"></a>To use the tool, launch the Theme Creator application from
+your LWUIT distribution.</p>
+<ul class="bullet1" type="square"><li class="bullet1"><p class="paragraph"><a name="d0e5084"></a>Use File &gt; Open to load an existing
+resource (<kbd class="command">.res</kbd>) file.</p></li>
+<li class="bullet1"><p class="paragraph"><a name="d0e5091"></a>To add a resource, click the + button in the tab
+representing the element type you wish to add and specify a name
+for the resource. Specify a name for the resource. The new resource
+is added under the appropriate tab.button in the tab representing
+the element type you wish to add and specify a name for the resource.
+Specify a name for the resource. The new resource is added under
+the appropriate tab. </p>
+<img alt="Add resource dialog" title="Add resource dialog" src="figures/addResource.jpg"><br><br></li>
+<li class="bullet1"><p class="paragraph"><a name="d0e5104"></a>To create a new theme, select the Theme node, then
+click the + button. Note that a resource bundle can contain more
+than one theme.</p>
+<br><hr noshade="1" size="1">
+<table class="tipnote" dir="LTR" width="100%" summary="TipNote"><colgroup span="1"></colgroup><tr align="left" valign="top"><td rowspan="1" colspan="1" abbr="TipNoteText"><p class="TipNote"><a name="d0e5108"></a><b>Note  - </b>The live preview is displayed for themes only and represents
+the behavior of the theme alone. It doesn&#8217;t contain the other resources
+in the file that do not relate to the theme.</p></td></tr></table>
+<hr noshade="1" size="1"><br></li></ul>
+<div class="sect2"><a name="d0e5111"></a><h2 class="head2"><a name="d0e5112"></a>11.2.1 Images and Animations</h2>
+<p class="paragraph"><a name="d0e5115"></a>Images and animations can be used either by a theme or by
+the LWUIT application. The Theme Creator supports images (JPEG,
+PNG) and animated GIFs. The image and animations can be replaced
+using the ... button. </p>
+<a name="Z4000f5f1297388"></a><div class="figurebox"><p class="figurecaption"><a name="d0e5119"></a><b>FIGURE 11-2&nbsp;&nbsp;&nbsp;Image View</b></p></div>
+<img alt="Image view shows ... button for file replacement&#xA;and Indexed toggle box" title="Image view shows ... button for file replacement&#xA;and Indexed toggle box" src="figures/Picture-3.jpg"><br><br><br>
+<p class="paragraph"><a name="d0e5131"></a>Standard <a class="indexterm" name="d0e5133"></a>images
+can also be indexed. An indexed image takes less space in the final application
+and occupies less memory space, however, it takes longer to draw
+and supports up to 256 colors. When you click the Indexed image
+radio button, the number of colors is verified. If more than 256
+colors are present the application offers to try to reduce that
+number (with quality implications). It is a good practice to use
+an image editing tool to index images before including them.</p>
+<p class="paragraph"><a name="d0e5138"></a>Note that an Alpha channel (beyond full transparency) might
+be somewhat problematic with indexed images.</p></div>
+<div class="sect2"><a name="d0e5141"></a><h2 class="head2"><a name="d0e5142"></a>11.2.2 Fonts</h2>
+<p class="paragraph"><a name="d0e5145"></a>The Theme Creator can use device specific fonts or create
+bitmap <a class="indexterm" name="d0e5147"></a>fonts for
+the devices from any font installed in your desktop operating system. <a href="chapter11.html#Z4000f5f1297433">FIGURE 11-3</a> shows the font editing
+dialog that appears when adding a new font to the resource file.</p>
+<a name="Z4000f5f1297433"></a><div class="figurebox"><p class="figurecaption"><a name="d0e5155"></a><b>FIGURE 11-3&nbsp;&nbsp;&nbsp;Font Editing View</b></p></div>
+<img alt="Font Editing View showing system font" title="Font Editing View showing system font" src="figures/resource_editor_font.jpg"><br><br><br>
+<br><hr noshade="1" size="1">
+<table class="tipnote" dir="LTR" width="100%" summary="TipNote"><colgroup span="1"></colgroup><tr align="left" valign="top"><td rowspan="1" colspan="1" abbr="TipNoteText"><p class="TipNote"><a name="d0e5168"></a><b>Note  - </b>Using the Theme Creator does not grant you permission
+to use the fonts commercially in any way. Licensing the right to
+use a particular font within a mobile application is strictly your
+responsibility!</p></td></tr></table>
+<hr noshade="1" size="1"><br>
+<p class="paragraph"><a name="d0e5171"></a>To create a bitmap <a class="indexterm" name="d0e5173"></a>font, the "Create Bitmap"
+checkbox must be enabled. make sure to specify the characters you
+need from the font (defaults to upper and lower case English with
+numbers and symbols). Notice that the more characters you pick in
+the character set, the more RAM the font will consume on the device.
+Anti-aliasing is built in to the bitmap font. When running under
+Java 5 the Theme Creator has two anti-aliasing options: Off indicates
+no anti-aliasing in the bitmap font, and Simple indicates standard
+anti-aliasing.</p></div>
+<div class="sect2"><a name="d0e5181"></a><h2 class="head2"><a name="d0e5182"></a>11.2.3 Localization</h2>
+<p class="paragraph"><a name="d0e5185"></a>A <a class="indexterm" name="d0e5187"></a>localization
+resource can be edited by assigning key/value pairs to use within
+the application. A key can be mapped to a resource name in any locale.</p>
+<p class="paragraph"><a name="d0e5192"></a>The editor allows you to add or remove locales listed in the
+combo box above and appropriately edit the locale entries in the
+table below. To add or remove a locale property use the buttons
+on the bottom of the screen.</p>
+<a name="Z4000f5f1297489"></a><div class="figurebox"><p class="figurecaption"><a name="d0e5196"></a><b>FIGURE 11-4&nbsp;&nbsp;&nbsp;Localization and Internationalization
+View</b></p></div>
+<img alt="Localization and Internationalization View&#xA;with name selected" title="Localization and Internationalization View&#xA;with name selected" src="figures/Picture-2.jpg"><br><br><br></div>
+<div class="sect2"><a name="CJBEAHFA"></a><h2 class="head2"><a name="d0e5211"></a>11.2.4 Themes</h2>
+<p class="paragraph"><a name="d0e5214"></a>To modify a <a class="indexterm" name="d0e5216"></a>theme
+resource, set the selectors and the theme resources to appropriate values
+to produce an attractive UI. When creating a new theme you see a
+UI containing the table of selectors and resources (for more in
+depth details of themes for developers, see <a href="chapter10.html#BADBCIEI">Chapter 10</a>).</p>
+<a name="Z4000f5f1297591"></a><div class="figurebox"><p class="figurecaption"><a name="d0e5224"></a><b>FIGURE 11-5&nbsp;&nbsp;&nbsp;Blank Theme View Without Any
+Styles</b></p></div>
+<img alt="blank theme view with icons on the right" title="blank theme view with icons on the right" src="figures/resource_editor_theme.jpg"><br><br><br>
+<p class="paragraph"><a name="d0e5236"></a>To modify the theme, choose a selector on the left side and
+click the Edit button. You can add new selectors using the Add button
+in the theme. To modify an existing selector, select it in the table
+and double click or press the Edit button.</p>
+<a name="d0e5239"></a><div class="sect3"><h3 class="head3"><a name="d0e5240"></a>11.2.4.1 Example: Adding a New Theme</h3>
+<p class="paragraph"><a name="d0e5243"></a>This section describes how to add a new <a class="indexterm" name="d0e5245"></a>theme using the Theme Creator.</p>
+<ol class="list1" type="1"><li class="list1"><p class="paragraph"><a name="d0e5255"></a>Use the + button
+to add a new theme and select it in the tab.</p></li>
+<li class="list1"><p class="paragraph"><a name="d0e5259"></a>Click the Add button within the theme area (Add
+Entry) and select bgColor for the attribute. </p>
+<ul class="bullet1" type="square"><li class="bullet1"><p class="paragraph"><a name="d0e5264"></a>Pick yellow using the ... button next
+to color. Click OK.</p></li>
+<li class="bullet1"><p class="paragraph"><a name="d0e5268"></a>You have created a &#8220;default attribute&#8221; where
+the default background color for all components is yellow. </p></li></ul></li>
+<li class="list1"><p class="paragraph"><a name="d0e5272"></a>Click the Add button again and select SoftButton
+in the Components combo box. </p>
+<ul class="bullet1" type="square"><li class="bullet1"><p class="paragraph"><a name="d0e5277"></a>Select bgColor in the attribute combo
+box. </p></li>
+<li class="bullet1"><p class="paragraph"><a name="d0e5281"></a>Use the ... button next to color to pick blue. Click
+OK. </p></li>
+<li class="bullet1"><p class="paragraph"><a name="d0e5285"></a>You have overridden the default specifically for
+the SoftButton.</p></li></ul></li>
+<li class="list1"><p class="paragraph"><a name="d0e5289"></a>Because black over blue is unreadable, add another
+entry for SoftButton.</p>
+<ul class="bullet1" type="square"><li class="bullet1"><p class="paragraph"><a name="d0e5294"></a>Pick the fgColor attribute and make
+it white.</p>
+<img alt="Theme built from scratch with yellow bgColor" title="Theme built from scratch with yellow bgColor" src="figures/Picture-10.jpg"><br><br></li></ul></li>
+<li class="list1"><p class="paragraph"><a name="d0e5307"></a>The title looks small and insignificant. You might
+add a Title fgColor and set it to red, but that&#8217;s not quite enough. </p>
+<ul class="bullet1" type="square"><li class="bullet1"><p class="paragraph"><a name="d0e5312"></a>Click on add and select the Title
+component and the font attribute</p></li>
+<li class="bullet1"><p class="paragraph"><a name="d0e5316"></a>In the Font Type row, click Bitmap. The Bitmap font
+dropdown is enabled.</p></li>
+<li class="bullet1"><p class="paragraph"><a name="d0e5320"></a>In the Bitmap Font row, click ... to add a new font. <a href="chapter11.html#Z4000f5f1297433">FIGURE 11-3</a> shows a system font selected.</p></li>
+<li class="bullet1"><p class="paragraph"><a name="d0e5326"></a>Click OK when you are finished.</p></li></ul></li></ol>
+<a name="Z4000f5f1298018"></a><div class="figurebox"><p class="figurecaption"><a name="d0e5330"></a><b>FIGURE 11-6&nbsp;&nbsp;&nbsp;Theme View When Editing the
+Default LWUIT Look and Feel</b></p></div>
+<img alt="Theme View when Editing the default LWUIT look&#xA;and feel" title="Theme View when Editing the default LWUIT look&#xA;and feel" src="figures/resource_editor_java_theme.jpg"><br><br><br>
+<p class="paragraph"><a name="d0e5342"></a>You can gain deeper understanding of the selector concept
+from <a href="chapter8.html#BADGGABB">Chapter 8</a> and <a href="chapter10.html#BADBCIEI">Chapter 10</a>.</p></div>
+<a name="d0e5349"></a><div class="sect3"><h3 class="head3"><a name="d0e5350"></a>11.2.4.2 Modifying Theme Properties</h3>
+<p class="paragraph"><a name="d0e5353"></a>Another way to learn about <a class="indexterm" name="d0e5355"></a>themes is by experimentation.
+When you check the Live Highlighting box (as shown in <a href="chapter11.html#Z4000f5f1298018">FIGURE 11-6</a>) and select a table entry,
+the relevant property &#8220;blinks&#8221; on the screen.
+This allows you to investigate what theme aspects affect the application,
+with some minor caveats: a property might affect a different form
+in the application, otherwise, it might be hard to notice its effect.</p>
+<p class="paragraph"><a name="d0e5365"></a>You can modify and add theme properties very easily using
+the Edit dialog (<a href="chapter11.html#Z4000f5f1298302">FIGURE 11-7</a>).
+This dialog allows you to specify the component type (or no component
+for a global or default property) and the attribute that you wish
+to modify. As you make changes in this dialog the preview is updated.
+Click OK to make the changes made to the preview permanent.</p>
+<a name="Z4000f5f1298302"></a><div class="figurebox"><p class="figurecaption"><a name="d0e5371"></a><b>FIGURE 11-7&nbsp;&nbsp;&nbsp;Theme View Editing Option</b></p></div>
+<img alt="Theme View Editing Option" title="Theme View Editing Option" src="figures/Picture-6.jpg"><br><br><br>
+<p class="paragraph"><a name="d0e5383"></a>This dialog abstracts most of the complexity related to the
+different attribute types. For example, the font attribute only
+allows setting a bitmap or system font while a bgImage attribute
+only allows selecting or adding an image.</p></div>
+<a name="d0e5386"></a><div class="sect3"><h3 class="head3"><a name="d0e5387"></a>11.2.4.3 Data</h3>
+<p class="paragraph"><a name="d0e5390"></a>Data is generally designed for developers and shouldn't be
+used by designers. </p>
+<p class="paragraph"><a name="d0e5393"></a>An arbitrary file can be placed within this section and it
+can be accessed by developers in runtime. This section has no effect
+on the rest of the functionality even if the data file is an image
+or font.</p></div>
+<a name="d0e5396"></a><div class="sect3"><h3 class="head3"><a name="d0e5397"></a>11.2.4.4 Customizing the Preview</h3>
+<p class="paragraph"><a name="d0e5400"></a>The <a class="indexterm" name="d0e5402"></a>preview<a class="indexterm" name="d0e5406"></a> showing the LWUIT Demo
+allows for easy customization of a MIDlet which is not necessarily
+limited to the LWUIT Demo. The Theme Creator supports plugging in
+your own MIDlet so you can test your theme on the fly.</p>
+<p class="paragraph"><a name="d0e5415"></a>To install your own MIDlet into the Theme Creator preview
+panel, use the MIDlet &gt; Pick MIDlet menu and select the JAR file
+for your own MIDlet.</p>
+<a name="Z4000f5f1298351"></a><div class="figurebox"><p class="figurecaption"><a name="d0e5419"></a><b>FIGURE 11-8&nbsp;&nbsp;&nbsp;Theme Creator With a Different
+MIDlet</b></p></div>
+<img alt="Theme Creator With a Different MIDlet" title="Theme Creator With a Different MIDlet" src="figures/ResourceEditor.jpg"><br><br><br>
+<p class="paragraph"><a name="d0e5431"></a>There are, however, several restrictions and limitations in
+this feature. Since the MIDlet will be executed in Java SE it can't
+leverage <kbd class="command">javax.microedition</kbd> APIs. While the APIs
+are present they are implemented in stub form. For example, if you use
+RMS, GCF, and so forth, they will return null for all queries and
+do nothing in all operations. Additionally, invoking features such
+as theming won't work.</p>
+<p class="paragraph"><a name="d0e5437"></a>If there is a failure in the MIDlet the Theme Creator will
+silently load the LWUIT Demo in the preview and use it instead.
+To debug the failure, execute the Theme Creator from command line
+using <kbd class="command">java -jar ResourceEditor.jar</kbd>. When entering
+the theme option you can see the stack trace of the exception that
+caused the failure.</p></div>
+<a name="d0e5443"></a><div class="sect3"><h3 class="head3"><a name="d0e5444"></a>11.2.4.5 Known Issues</h3>
+<p class="paragraph"><a name="d0e5447"></a>There is currently a known issue in some operating systems
+which causes the Theme Creator to fail in some cases when using
+the Aero theme. This issue stems from Java SE's look and feel implementation
+and the only workaround is to change the application look and feel
+using the Look And Feel menu option. </p>
+<p class="paragraph"><a name="d0e5450"></a></p></div></div></div>
+<!-- =================== -->
+<!-- END OF MAIN CONTENT -->
+<!-- =================== -->
+
+
+
+<div class="navbar" align="center"><br><br>
+<table dir="LTR" width="100%" cellpadding="0" cellspacing="0" border="0" summary="Navigation bar, includes the book title and navigation buttons"><colgroup span="3"><col id="b1" span="1" width="45%"><col id="b2" span="1" width="25%"><col id="b3" span="1" width="30%"></colgroup><tr bgcolor="#cccccc"><td class="navbartitle" align="left" rowspan="1" colspan="1" abbr="ChapTitle">&nbsp;&nbsp;LWUIT Developer&#8217;s Guide</td><td class="navbartitle" align="right" rowspan="1" colspan="1" abbr="PartNum">12-11-09</td><td valign="top" align="right" rowspan="1" colspan="1" abbr="NavButtons"><a href="index.html"><img src="shared/toc01.gif" width="30" height="26" border="0" title="Table Of Contents" alt="Table Of Contents"></a>
+<a href="chapter10.html"><img width="30" height="26" border="0" src="shared/prev01.gif" title="Previous Chapter" alt="Previous Chapter"></a><a href="chapter12.html"><img src="shared/next01.gif" width="30" height="26" border="0" title="Next Chapter" alt="Next Chapter"></a><a href="ix.html"><img src="shared/index01.gif" width="30" height="26" border="0" title="Book Index" alt="Book Index"></a></td></tr></table>
+</div><p class="copyrightlink"><a href="bookinfo.html">Copyright</a> &copy; 2009, Sun Microsystems, Inc.  All rights reserved.</p></body></html>

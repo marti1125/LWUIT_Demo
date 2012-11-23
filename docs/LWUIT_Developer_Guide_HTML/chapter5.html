@@ -1,0 +1,191 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en-US">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   <meta http-equiv="Content-Language" content="en-US">
+<title>Using Dialogs</title>
+
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="Generator" content="XSolBook3.5 XML Custom XSLT Filter">
+<meta name="keywords" content="LWUIT">
+<meta name="dc.title" content="Using Dialogs">
+<meta name="description" content="This Developer&#8217;s Guide describes how to use the Lightweight UI toolkit.">
+<meta name="identifier" content="12-11-09">
+<meta name="date" content="">
+<meta name="issued" content="2009-12-11">
+<meta name="revision" content="">
+<meta name="publisher" content="Sun Microsystems, Inc.">
+<meta name="collection" content="reference">
+<meta name="robots" content="index, follow">
+
+<!--Inserts the stylesheet-->
+<link rel="STYLESHEET" href="unx_str_styles.css" charset="ISO-8859-1" type="text/css">
+</head>
+<body class="HlpBdy" leftmargin="10" topmargin="10" marginheight="10" marginwidth="10" bgcolor="#ffffff"><a name="top"></a><div class="navbar" align="center">
+<table dir="LTR" width="100%" cellpadding="0" cellspacing="0" border="0" summary="Navigation bar, includes the book title and navigation buttons"><colgroup span="2"><col id="t1" span="1" width="50%"><col id="t2" span="1" width="50%"></colgroup><tr bgcolor="#cccccc"><td class="navbartitle" align="left" rowspan="1" colspan="1" abbr="ChapTitle"><a name="CEHBCCIJ"></a>&nbsp;&nbsp;LWUIT Developer&#8217;s Guide</td><td valign="top" align="right" rowspan="1" colspan="1" abbr="NavButtons"><a href="index.html"><img src="shared/toc01.gif" width="30" height="26" border="0" title="Table Of Contents" alt="Table Of Contents"></a>
+<a href="chapter4.html"><img width="30" height="26" border="0" src="shared/prev01.gif" title="Previous Chapter" alt="Previous Chapter"></a><a href="chapter6.html"><img src="shared/next01.gif" width="30" height="26" border="0" title="Next Chapter" alt="Next Chapter"></a><a href="ix.html"><img src="shared/index01.gif" width="30" height="26" border="0" title="Book Index" alt="Book Index"></a></td></tr></table><br><br></div>
+<table dir="LTR" width="100%" border="0" summary="Chapter Number" abbr="ChapNum"><colgroup span="1"><col id="ch1" span="1"></colgroup><tr><td align="right" class="ChapNumber"><span class="ChapNumPrefix">C H A P T E R</span>&nbsp;
+<span class="ChapNumNum">5</span><span class="ChapNumSuffix"></span></td></tr></table>
+<hr size="7" noshade="1">
+<!-- ============ -->
+<!-- MAIN CONTENT -->
+<!-- ============ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- BEGIN PAGETITLE ONE LINE -->
+<h1 class="ChapTitle" align="right"><a name="d0e2524"></a>Using Dialogs</h1>
+<!-- END PAGETITLE ONE LINE -->
+
+<div class="highlights"><p class="paragraph"><a name="d0e2528"></a>A Dialog is a form that occupies a part of the
+screen as a top level component. By default dialogs always appear
+as a modal entity to the user. Modality indicates that a dialog
+blocks the calling thread even if the calling thread is the <i>Event
+Dispatcher Thread</i> (<a class="indexterm" name="d0e2533"></a>EDT). Dialogs allow us to prompt users
+for information and rely on the information being returned as a
+response after the dialog <kbd class="command">show</kbd> method. Each <a class="indexterm" name="d0e2540"></a>Dialog has a body that is located
+in the center of the dialog. The Body can contain a component, so
+you can use your own customer component or pre&#8208;built container.</p>
+<br><hr noshade="1" size="1">
+<table class="tipnote" dir="LTR" width="100%" summary="TipNote"><colgroup span="1"></colgroup><tr align="left" valign="top"><td rowspan="1" colspan="1" abbr="TipNoteText"><p class="TipNote"><a name="d0e2547"></a><b>Note  - </b>A modal dialog does not release the block until a <a class="indexterm" name="d0e2549"></a>dispose method is called. For
+example, calling <kbd class="command">show()</kbd> from another form does
+not release the block.</p></td></tr></table>
+<hr noshade="1" size="1"><br></div>
+<div class="sect1"><a name="d0e2558"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e2559"></a>5.1 Dialog Types</h1>
+<p class="paragraph"><a name="d0e2562"></a>For better user experience, dialogs have five types of alerts.
+The alert <a class="indexterm" name="d0e2564"></a>type indicates a sound to
+play or an icon to display if none is explicitly set:</p>
+<ul class="bullet1" type="square"><li class="bullet1"><p class="paragraph"><a name="d0e2574"></a>ALARM</p></li>
+<li class="bullet1"><p class="paragraph"><a name="d0e2578"></a>CONFIRMATION</p></li>
+<li class="bullet1"><p class="paragraph"><a name="d0e2582"></a>ERROR</p></li>
+<li class="bullet1"><p class="paragraph"><a name="d0e2586"></a>INFO</p></li>
+<li class="bullet1"><p class="paragraph"><a name="d0e2590"></a>WARNING</p></li></ul>
+<p class="paragraph"><a name="d0e2593"></a>By default the alerts are set to play the device alert sounds. </p>
+<p class="paragraph"><a name="d0e2596"></a>Icons are not currently provided by default, but you can manually
+add them to customized dialogs. Icons can be used to indicate the
+alert state, similar to JDialog icons in Swing. See <kbd class="url"><a href="http://java.sun.com/docs/books/tutorial/uiswing/components/dialog.html">http://java.sun.com/docs/books/tutorial/uiswing/components/dialog.html</a></kbd>.</p></div>
+<div class="sect1"><a name="d0e2602"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e2603"></a>5.2 Creating a Dialog</h1>
+<p class="paragraph"><a name="d0e2606"></a>To create and show a dialog you can do the following:</p>
+<ul class="bullet1" type="square"><li class="bullet1"><p class="paragraph"><a name="d0e2611"></a>Create and show the dialog using one
+of the static show methods. </p></li>
+<li class="bullet1"><p class="paragraph"><a name="d0e2615"></a>Use <kbd class="command">new Dialog()</kbd> and invoke its <kbd class="command">show()</kbd> method.
+The static methods are only helpers. </p></li></ul>
+<p class="paragraph"><a name="d0e2624"></a>The arguments to all of the show methods are standardized,
+though the number of arguments for each method varies. The static
+show methods provide support for laying out standard dialogs, providing
+icons, specifying the dialog title and text, and customizing the
+button text. </p>
+<p class="paragraph"><a name="d0e2627"></a>The following list describes each argument. To see the exact
+list of arguments for a particular method, see the Dialog API in
+the API documentation located in <var class="replaceable">install&#8208;dir</var><kbd class="filename">/docs/api/lwuit</kbd>.</p>
+<p class="paragraph"><a name="d0e2635"></a><kbd class="command">String</kbd> <i>title</i> </p>
+<p class="paragraph"><a name="d0e2643"></a>The title of the dialog</p>
+<p class="paragraph"><a name="d0e2646"></a><kbd class="command">Component</kbd> <i>body</i></p>
+<p class="paragraph"><a name="d0e2653"></a>Component placed in the center of the dialog. This component
+can be a container that contains other components.</p>
+<p class="paragraph"><a name="d0e2656"></a><kbd class="command">String</kbd> <i>text</i></p>
+<p class="paragraph"><a name="d0e2663"></a>The text displayed in the dialog which can be used instead
+of Body. </p>
+<p class="paragraph"><a name="d0e2666"></a><kbd class="command">Command[]</kbd> <i>cmds</i></p>
+<p class="paragraph"><a name="d0e2673"></a>Array of commands that are added to the dialog. Any click
+on any command disposes of the dialog. Examples of commands are
+OK and Cancel.</p>
+<p class="paragraph"><a name="d0e2676"></a><kbd class="command">int</kbd> <i>type</i></p>
+<p class="paragraph"><a name="d0e2683"></a>The type of the alert can be one of TYPE_WARNING, TYPE_INFO,
+TYPE_ERROR, TYPE_CONFIRMATION or TYPE_ALARM to indicate the sound
+to play or an icon to display.</p>
+<p class="paragraph"><a name="d0e2686"></a><kbd class="command">Image</kbd> <i>icon</i></p>
+<p class="paragraph"><a name="d0e2693"></a>The icon to display in the dialog.</p>
+<p class="paragraph"><a name="d0e2696"></a><kbd class="command">long</kbd> <i>timeout</i></p>
+<p class="paragraph"><a name="d0e2703"></a>A timeout in milliseconds, after which the dialog closes and
+null is returned. If time-out value is 0, the dialog remains open
+indefinitely, until its dispose method is invoked.</p>
+<p class="paragraph"><a name="d0e2706"></a><kbd class="command">Transition</kbd> <i>transition</i></p>
+<p class="paragraph"><a name="d0e2713"></a>The transition installed when the dialog enters and leaves
+the screen. For more information see <a href="chapter12.html#Z40006f61289435">Transition</a>.</p>
+<p class="paragraph"><a name="d0e2718"></a><kbd class="command">String</kbd> <i>okText</i></p>
+<p class="paragraph"><a name="d0e2725"></a>The text to appear in the command dismissing the dialog.</p>
+<p class="paragraph"><a name="d0e2728"></a><kbd class="command">String</kbd> <i>cancelText</i> </p>
+<p class="paragraph"><a name="d0e2736"></a>Optionally null for a text to appear in the cancel command
+for canceling the dialog. </p>
+<p class="paragraph"><a name="d0e2739"></a><kbd class="command">int</kbd> <i>top</i></p>
+<p class="paragraph"><a name="d0e2746"></a>Inset in pixels between the top of the screen and the form. </p>
+<p class="paragraph"><a name="d0e2749"></a><kbd class="command">int</kbd> <i>bottom</i></p>
+<p class="paragraph"><a name="d0e2756"></a>Inset in pixels between the bottom of the screen and the form. </p>
+<p class="paragraph"><a name="d0e2759"></a><kbd class="command">int</kbd> <i>left</i></p>
+<p class="paragraph"><a name="d0e2766"></a>Inset in pixels between the left of the screen and the form. </p>
+<p class="paragraph"><a name="d0e2769"></a><kbd class="command">int</kbd> <i>right</i></p>
+<p class="paragraph"><a name="d0e2776"></a>Inset in pixels between the right of the screen and the form. </p>
+<p class="paragraph"><a name="d0e2779"></a><kbd class="command">boolean</kbd> <i>includeTitle</i></p>
+<p class="paragraph"><a name="d0e2786"></a>Whether the title should hang in the top of the screen or
+be glued onto the dialog content pane.</p>
+<div class="sect2"><a name="d0e2789"></a><h2 class="head2"><a name="d0e2790"></a>5.2.1 Return Types of Show Methods</h2>
+<p class="paragraph"><a name="d0e2793"></a>You can use one of three convenient return value show methods:
+void, Command, or boolean. </p>
+<ul class="bullet1" type="square"><li class="bullet1"><p class="paragraph"><a name="d0e2798"></a>Command returns the command object
+the user clicked. See the Command API in the API documentation found
+in <var class="replaceable">install-dir</var><kbd class="filename">/docs/api/lwuit</kbd>.</p></li>
+<li class="bullet1"><p class="paragraph"><a name="d0e2807"></a>The boolean value of true is returned when the OK
+command is pressed or if <kbd class="command">cancelText</kbd> is null (meaning
+there is no cancel command text visible). It is false otherwise.</p></li></ul></div>
+<div class="sect2"><a name="CEHHEJJH"></a><h2 class="head2"><a name="d0e2814"></a>5.2.2 Non-Static Show Methods</h2>
+<p class="paragraph"><a name="d0e2817"></a>The dialog API provides two non-static methods to create two
+more types of dialogs. </p>
+<p class="paragraph"><a name="d0e2820"></a>The first method takes no arguments and produces a dialog
+without any commands. The only way to close such a dialog is to
+invoke the <a class="indexterm" name="d0e2822"></a><kbd class="command">dispose()</kbd> method
+on the dialog. Since the dialog is blocking, meaning once the dialog
+is displayed its calling thread can not proceed until it is closed,
+the call to <kbd class="command">dispose</kbd> must be made from a different
+thread. To do this, schedule the call to <kbd class="command">dispose</kbd> with
+a timer thread. Note that the timer thread must be started before
+the dialog is displayed. This approach is referred to as an auto-closing
+dialog.</p>
+<p class="paragraph"><a name="d0e2835"></a>The second dialog type has five parameters. The first four
+are the four wing insets (top, bottom, left, and right) and the
+fifth parameter determines whether to include the Dialog title assigned
+through the dialog constructor (see <a href="chapter5.html#Z40006f01291451">FIGURE 5-1</a>). </p>
+<p class="literallayout"><pre>// Call show with inset parameters
+dialog.show(90, 90, 10, 10, true);</p></pre></div>
+<div class="sect2"><a name="d0e2846"></a><h2 class="head2"><a name="d0e2847"></a>5.2.3 Using the <kbd class="command">dispose()</kbd> Method</h2>
+<p class="paragraph"><a name="d0e2853"></a>The <a class="indexterm" name="d0e2855"></a>dispose
+methods closes the current dialog and returns to the parent form.
+When <kbd class="command">show()</kbd> is used without arguments, one way
+to close the dialog is to set a timer to call <kbd class="command">dispose</kbd> just
+before calling the <kbd class="command">show</kbd> method (otherwise the
+dispose method is never performed).</p></div>
+<div class="sect2"><a name="d0e2869"></a><h2 class="head2"><a name="d0e2870"></a>5.2.4 Getting the User's Input from a Dialog</h2>
+<p class="paragraph"><a name="d0e2873"></a>As mentioned in <a href="chapter5.html#CEHHEJJH">Non-Static Show Methods</a>, return
+value types can be either Command or a boolean value. For example,
+if a user has a dialog with two commands, Approve and Decline, the
+user clicks and the selected command is returned. For the boolean
+return type, a true or false value indicates whether the user clicked
+the OK command.</p>
+<a name="Z40006f01291451"></a><div class="figurebox"><p class="figurecaption"><a name="d0e2879"></a><b>FIGURE 5-1&nbsp;&nbsp;&nbsp;Typical Dialogs</b></p></div>
+<img alt="Dialogs are OK Cancel, Info, Non-static show()&#xA;and Dialog with insets" title="Dialogs are OK Cancel, Info, Non-static show()&#xA;and Dialog with insets" src="figures/dialogs.jpg"><br><br><br>
+<p class="paragraph"><a name="d0e2891"></a></p></div></div>
+<!-- =================== -->
+<!-- END OF MAIN CONTENT -->
+<!-- =================== -->
+
+
+
+<div class="navbar" align="center"><br><br>
+<table dir="LTR" width="100%" cellpadding="0" cellspacing="0" border="0" summary="Navigation bar, includes the book title and navigation buttons"><colgroup span="3"><col id="b1" span="1" width="45%"><col id="b2" span="1" width="25%"><col id="b3" span="1" width="30%"></colgroup><tr bgcolor="#cccccc"><td class="navbartitle" align="left" rowspan="1" colspan="1" abbr="ChapTitle">&nbsp;&nbsp;LWUIT Developer&#8217;s Guide</td><td class="navbartitle" align="right" rowspan="1" colspan="1" abbr="PartNum">12-11-09</td><td valign="top" align="right" rowspan="1" colspan="1" abbr="NavButtons"><a href="index.html"><img src="shared/toc01.gif" width="30" height="26" border="0" title="Table Of Contents" alt="Table Of Contents"></a>
+<a href="chapter4.html"><img width="30" height="26" border="0" src="shared/prev01.gif" title="Previous Chapter" alt="Previous Chapter"></a><a href="chapter6.html"><img src="shared/next01.gif" width="30" height="26" border="0" title="Next Chapter" alt="Next Chapter"></a><a href="ix.html"><img src="shared/index01.gif" width="30" height="26" border="0" title="Book Index" alt="Book Index"></a></td></tr></table>
+</div><p class="copyrightlink"><a href="bookinfo.html">Copyright</a> &copy; 2009, Sun Microsystems, Inc.  All rights reserved.</p></body></html>

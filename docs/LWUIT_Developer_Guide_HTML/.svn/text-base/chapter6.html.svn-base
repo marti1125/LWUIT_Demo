@@ -1,0 +1,309 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en-US">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   <meta http-equiv="Content-Language" content="en-US">
+<title>Using Layout Managers</title>
+
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="Generator" content="XSolBook3.5 XML Custom XSLT Filter">
+<meta name="keywords" content="LWUIT">
+<meta name="dc.title" content="Using Layout Managers">
+<meta name="description" content="This Developer&#8217;s Guide describes how to use the Lightweight UI toolkit.">
+<meta name="identifier" content="12-11-09">
+<meta name="date" content="">
+<meta name="issued" content="2009-12-11">
+<meta name="revision" content="">
+<meta name="publisher" content="Sun Microsystems, Inc.">
+<meta name="collection" content="reference">
+<meta name="robots" content="index, follow">
+
+<!--Inserts the stylesheet-->
+<link rel="STYLESHEET" href="unx_str_styles.css" charset="ISO-8859-1" type="text/css">
+</head>
+<body class="HlpBdy" leftmargin="10" topmargin="10" marginheight="10" marginwidth="10" bgcolor="#ffffff"><a name="top"></a><div class="navbar" align="center">
+<table dir="LTR" width="100%" cellpadding="0" cellspacing="0" border="0" summary="Navigation bar, includes the book title and navigation buttons"><colgroup span="2"><col id="t1" span="1" width="50%"><col id="t2" span="1" width="50%"></colgroup><tr bgcolor="#cccccc"><td class="navbartitle" align="left" rowspan="1" colspan="1" abbr="ChapTitle"><a name="BBJEHCEA"></a>&nbsp;&nbsp;LWUIT Developer&#8217;s Guide</td><td valign="top" align="right" rowspan="1" colspan="1" abbr="NavButtons"><a href="index.html"><img src="shared/toc01.gif" width="30" height="26" border="0" title="Table Of Contents" alt="Table Of Contents"></a>
+<a href="chapter5.html"><img width="30" height="26" border="0" src="shared/prev01.gif" title="Previous Chapter" alt="Previous Chapter"></a><a href="chapter7.html"><img src="shared/next01.gif" width="30" height="26" border="0" title="Next Chapter" alt="Next Chapter"></a><a href="ix.html"><img src="shared/index01.gif" width="30" height="26" border="0" title="Book Index" alt="Book Index"></a></td></tr></table><br><br></div>
+<table dir="LTR" width="100%" border="0" summary="Chapter Number" abbr="ChapNum"><colgroup span="1"><col id="ch1" span="1"></colgroup><tr><td align="right" class="ChapNumber"><span class="ChapNumPrefix">C H A P T E R</span>&nbsp;
+<span class="ChapNumNum">6</span><span class="ChapNumSuffix"></span></td></tr></table>
+<hr size="7" noshade="1">
+<!-- ============ -->
+<!-- MAIN CONTENT -->
+<!-- ============ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- BEGIN PAGETITLE ONE LINE -->
+<h1 class="ChapTitle" align="right"><a name="d0e2911"></a>Using Layout Managers</h1>
+<!-- END PAGETITLE ONE LINE -->
+
+<div class="highlights"><p class="paragraph"><a name="d0e2915"></a>This chapter shows you how to use the layout managers
+provided by the Lightweight UI Toolkit library. It also gives an example of
+writing a custom layout manager. For each layout manager, this chapter
+supplies sample code demonstrating how to use the layout manager
+and a general illustration. </p>
+<p class="paragraph"><a name="d0e2918"></a>In Lightweight UI Toolkit you can find the following layout managers:</p>
+<ul class="bullet1" type="square"><li class="bullet1"><p class="paragraph"><a name="d0e2923"></a><a href="chapter6.html#BBJDIDGG">BorderLayout</a></p></li>
+<li class="bullet1"><p class="paragraph"><a name="d0e2927"></a><a href="chapter6.html#BBJFGBBH">BoxLayout</a></p></li>
+<li class="bullet1"><p class="paragraph"><a name="d0e2931"></a><a href="chapter6.html#BBJHEIBE">FlowLayout</a></p></li>
+<li class="bullet1"><p class="paragraph"><a name="d0e2935"></a><a href="chapter6.html#BBJHBJBI">GridLayout</a></p></li>
+<li class="bullet1"><p class="paragraph"><a name="d0e2939"></a><a href="chapter6.html#BBJEHJJG">GroupLayout</a></p></li>
+<li class="bullet1"><p class="paragraph"><a name="d0e2943"></a><a href="chapter6.html#BBJFEEFB">Coordinate Layout</a></p></li>
+<li class="bullet1"><p class="paragraph"><a name="d0e2947"></a><a href="chapter6.html#BBJBJCBD">Table Layout</a></p></li></ul></div>
+<div class="sect1"><a name="BBJDIDGG"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e2951"></a>6.1 BorderLayout</h1>
+<p class="paragraph"><a name="d0e2954"></a>A <a class="indexterm" name="d0e2956"></a>BorderLayout
+object has five areas. These areas are specified by the BorderLayout constants: </p>
+<ul class="bullet1" type="square"><li class="bullet1"><p class="paragraph"><a name="d0e2963"></a>Center</p></li>
+<li class="bullet1"><p class="paragraph"><a name="d0e2967"></a>East</p></li>
+<li class="bullet1"><p class="paragraph"><a name="d0e2971"></a>North</p></li>
+<li class="bullet1"><p class="paragraph"><a name="d0e2975"></a>South</p></li>
+<li class="bullet1"><p class="paragraph"><a name="d0e2979"></a>West</p></li></ul>
+<p class="paragraph"><a name="d0e2982"></a>When adding a component to a container, specify the component's
+location (for example, <kbd class="command">BorderLayout.CENTER</kbd>) as
+one of the arguments to the addComponent method. If this component
+is missing from a container, controlled by a BorderLayout object,
+make sure that the component's location was specified and that no
+other component was placed in the same location. <a class="indexterm" name="d0e2987"></a></p>
+<p class="literallayout"><pre>addComponent(BorderLayout.CENTER, component) // preferred</pre></p>
+<p class="paragraph"><a name="d0e2994"></a>or</p>
+<p class="literallayout"><pre>addComponent(&#8220;Center&#8221;, component) // valid but error prone</pre></p>
+<p class="paragraph"><a name="d0e3000"></a>The center area gets as much of the available space as possible.
+The other areas expand only as much as necessary to fit the components
+that have been added to it. Often a container uses only one or two
+of the areas of the BorderLayout object &#8212; just the center,
+or the center and the bottom. </p>
+<a name="Z40006f11290807"></a><div class="figurebox"><p class="figurecaption"><a name="d0e3004"></a><b>FIGURE 6-1&nbsp;&nbsp;&nbsp;BorderLayoutLocations</b></p></div>
+<img alt="Border Layout Location shows N, S, E, W, and&#xA;Center locations" title="Border Layout Location shows N, S, E, W, and&#xA;Center locations" src="figures/borderLayout.jpg"><br><br><br></div>
+<div class="sect1"><a name="BBJFGBBH"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e3019"></a>6.2 BoxLayout</h1>
+<p class="paragraph"><a name="d0e3022"></a>The <a class="indexterm" name="d0e3024"></a>BoxLayout
+class puts components either on top of each other or in a row  &#8211; your choice.</p>
+<div class="sect2"><a name="d0e3029"></a><h2 class="head2"><a name="d0e3030"></a>6.2.1 X_AXIS</h2>
+<p class="paragraph"><a name="d0e3033"></a>To lay out components in a row, use <kbd class="command">BoxLayout.X_AXIS</kbd> as
+the axis indication.</p>
+<p class="literallayout"><pre>BoxLayout boxLayout = new BoxLayout(BoxLayout.X_AXIS);</pre></p>
+<p class="paragraph"><a name="d0e3042"></a>In this layout, the box layout manager honors the component
+width of each layout component to fill the width of the container,
+and the height is determined by the container height. Any extra
+space appears at the right side of the container, as shown in <a href="chapter6.html#Z40006f11290845">FIGURE 6-2</a>.</p>
+<a name="Z40006f11290845"></a><div class="figurebox"><p class="figurecaption"><a name="d0e3048"></a><b>FIGURE 6-2&nbsp;&nbsp;&nbsp;BoxLayout.X_AXIS Components
+in a Row</b></p></div>
+<img alt="BoxLayout.X_AXIS Components in a Row" title="BoxLayout.X_AXIS Components in a Row" src="figures/boxlayout_x.jpg"><br><br><br></div>
+<div class="sect2"><a name="d0e3062"></a><h2 class="head2"><a name="d0e3063"></a>6.2.2 Y_AXIS</h2>
+<p class="paragraph"><a name="d0e3066"></a>To lay out components in a column, use <kbd class="command">BoxLayout.Y_AXIS</kbd> as
+the axis indication.</p>
+<p class="literallayout"><pre>BoxLayout boxLayout = new BoxLayout(BoxLayout.Y_AXIS);</pre></p>
+<p class="paragraph"><a name="d0e3075"></a>In this layout, the box layout manager honors the component
+height of each layout component to fill the height of the container,
+and the width is determined by the container width. Any extra space
+appears at the bottom of the container, as shown in <a href="chapter6.html#Z40006f11290895">FIGURE 6-3</a>. </p>
+<a name="Z40006f11290895"></a><div class="figurebox"><p class="figurecaption"><a name="d0e3081"></a><b>FIGURE 6-3&nbsp;&nbsp;&nbsp;BoxLayout_Y_Axis Components
+in a Row</b></p></div>
+<img alt="BoxLayout_Y_Axis Components in a Row" title="BoxLayout_Y_Axis Components in a Row" src="figures/boxlayout_y.jpg"><br><br><br></div></div>
+<div class="sect1"><a name="BBJHEIBE"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e3096"></a>6.3 FlowLayout</h1>
+<p class="paragraph"><a name="d0e3099"></a>The <a class="indexterm" name="d0e3101"></a>FlowLayout
+class provides a very simple layout manager that is the default layout
+manager for Container objects. </p>
+<p class="paragraph"><a name="d0e3106"></a>The FlowLayout class puts components in a row, sized at their
+preferred size. If the horizontal space in the container is too
+small to put all the components in one row, the FlowLayout class
+uses multiple rows. To align the row to the left, right, or center, use
+a FlowLayout constructor that takes an alignment argument. </p>
+<p class="paragraph"><a name="d0e3109"></a>The code snippet below creates a FlowLayout object and the
+components it manages. </p>
+<p class="literallayout"><pre>FlowLayout exampleLayout = new FlowLayout();
+
+...
+
+container.setLayout(exampleLayout);
+
+container.addComponent(new Button("Button 1"));
+container.addComponent(new Button("Button 2"));
+container.addComponent(new Button("Button 3"));
+container.addComponent(new Button("Button 4"));</p></pre>
+<a name="Z40006f11290949"></a><div class="figurebox"><p class="figurecaption"><a name="d0e3140"></a><b>FIGURE 6-4&nbsp;&nbsp;&nbsp;FlowLayout Default Alignment</b></p></div>
+<img alt="FlowLayout Default Alignment" title="FlowLayout Default Alignment" src="figures/flowLayout_left.jpg"><br><br><br>
+<p class="paragraph"><a name="d0e3152"></a>When constructing a FlowLayout manager you can select either
+the Left, Right, or Center option to set up the component's orientation.
+The default alignment is Left. The following code snippet applies
+the Right component orientation to the above exampleLayout. </p>
+<p class="literallayout"><pre>FlowLayout exampleLayout = new FlowLayout(Component.RIGHT);</pre></p>
+<a name="Z40006f11290990"></a><div class="figurebox"><p class="figurecaption"><a name="d0e3159"></a><b>FIGURE 6-5&nbsp;&nbsp;&nbsp;FlowLayout With Right Alignment</b></p></div>
+<img alt="FlowLayout With Right Alignment" title="FlowLayout With Right Alignment" src="figures/flowLayout_right.jpg"><br><br><br></div>
+<div class="sect1"><a name="BBJHBJBI"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e3174"></a>6.4 GridLayout</h1>
+<p class="paragraph"><a name="d0e3177"></a>A <a class="indexterm" name="d0e3179"></a>GridLayout
+object places components in a grid of cells. Each component takes
+all the available space within its cell, and each cell is exactly
+the same size. </p>
+<p class="paragraph"><a name="d0e3184"></a>The code snippet below creates the GridLayout object and the
+components it manages. </p>
+<p class="literallayout"><pre><kbd class="command">GridLayout exampleLayout = new GridLayout(0,2);</kbd>
+
+<kbd class="command">...</kbd>
+<kbd class="command">container.setLayout(exampleLayout);</kbd>
+
+<kbd class="command">container.addComponent(new Button("Button 1"));</kbd>
+<kbd class="command">container.addComponent(new Button("Button 2"));</kbd>
+<kbd class="command">container.addComponent(new Button("Button 3"));</kbd>
+<kbd class="command">container.addComponent(new Button("Button 4"));</kbd></p></pre>
+<p class="paragraph"><a name="d0e3219"></a>In this example the constructor of the GridLayout class creates
+an instance that has two columns and as many rows as necessary. </p>
+<a name="Z40006f11291038"></a><div class="figurebox"><p class="figurecaption"><a name="d0e3223"></a><b>FIGURE 6-6&nbsp;&nbsp;&nbsp;GridLayout With Two Columns</b></p></div>
+<img alt="GridLayout With Two Columns" title="GridLayout With Two Columns" src="figures/grid_layout.jpg"><br><br><br></div>
+<div class="sect1"><a name="BBJEHJJG"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e3238"></a>6.5 GroupLayout</h1>
+<p class="paragraph"><a name="d0e3241"></a><a class="indexterm" name="d0e3242"></a>GroupLayout
+is a layout manager that was developed for GUI builders such as Matisse,
+the Java SE GUI builder delivered with the NetBeans IDE. Although
+the layout manager was originally designed to suit GUI builder needs,
+it also works well for manual coding. To get more information you
+can refer to the GroupLayout API (<kbd class="url"><a href="http://java.sun.com/javase/6/docs/api/javax/swing/GroupLayout.html">http://java.sun.com/javase/6/docs/api/javax/swing/GroupLayout.html</a></kbd>)
+or review the Swing GroupLayout tutorial at: </p>
+<p class="paragraph"><a name="d0e3250"></a><kbd class="url"><a href="http://java.sun.com/docs/books/tutorial/uiswing/layout/group.html">http://java.sun.com/docs/books/tutorial/uiswing/layout/group.html</a></kbd></p></div>
+<div class="sect1"><a name="BBJFEEFB"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e3255"></a>6.6 Coordinate Layout</h1>
+<p class="paragraph"><a name="d0e3258"></a>Unlike other <a class="indexterm" name="d0e3260"></a>layout
+managers coordinate layout assigns a component an absolute position
+in relation to the space available within the UI. The coordinate
+layout allows developers to position components within an X/Y location,
+however, it doesn't guarantee the position won't change and doesn't
+determine absolute positions.</p>
+<p class="paragraph"><a name="d0e3265"></a>Instead coordinate layout accepts positions as "relative"
+and calculates the actual position based on available space. This
+is essential since the available size for a container might change
+at runtime based on font size, screen rotation, etcetera.</p>
+<p class="paragraph"><a name="d0e3268"></a>For example, a coordinate layout for 200x200 will show a 20x20
+component placed in the 90x90 position exactly in the center, regardless
+of the actual size of the container. If the container is laid out
+to a larger size, for example, 190x300 the component in the center
+would still be centered.</p>
+<p class="paragraph"><a name="d0e3271"></a>Unlike the other standard layouts in LWUIT the coordinate
+layout allows positioning components on top of one another to achieve
+z-ordering. The z-ordering is determined by the order in which the
+components are placed into the parent container.The last component
+added is the one on top.</p>
+<p class="literallayout"><pre>Display.init(this);
+final Form mainForm = new Form("Coordinate Layout");
+mainForm.setLayout(new CoordinateLayout(200, 200));
+
+Label centeredLabel = new Label("Center");
+centeredLabel.setX(90);
+centeredLabel.setY(90);
+centeredLabel.getUnselectedStyle().setBgTransparency(100);
+centeredLabel.getUnselectedStyle().setBgColor(0xff);
+
+Label underCenter = new Label("Under Center");
+underCenter.setX(80);
+underCenter.setY(95);
+
+Label top = new Label("Top Left");
+top.setAlignment(Component.CENTER);
+top.setX(0);
+top.setY(0);
+top.setPreferredW(200);
+top.setPreferredH(30);
+top.getUnselectedStyle().setBgColor(0xff0000);
+
+mainForm.addComponent(underCenter);
+mainForm.addComponent(centeredLabel);
+mainForm.addComponent(top);
+
+mainForm.show();</p></pre>
+<p class="paragraph"><a name="d0e3350"></a>This code produces <a href="chapter6.html#Z4000fd31292294">FIGURE 6-7</a>:</p>
+<a name="Z4000fd31292294"></a><div class="figurebox"><p class="figurecaption"><a name="d0e3356"></a><b>FIGURE 6-7&nbsp;&nbsp;&nbsp;Coordinate Layout Sample</b></p></div>
+<img alt="Coordinate Layout Sample" title="Coordinate Layout Sample" src="figures/coordinatelayout.jpg"><br><br><br>
+<p class="paragraph"><a name="d0e3368"></a>There are several interesting things we can glean even from
+this simple example:</p>
+<ul class="bullet1" type="square"><li class="bullet1"><p class="paragraph"><a name="d0e3373"></a>Coordinate layout must be hard&#8208;coded.
+The coordinates are implicitly scaled by LWUIT so there is no need
+to use logic, such as <kbd class="command">getWidth/Height,</kbd> to calculate positions.</p></li>
+<li class="bullet1"><p class="paragraph"><a name="d0e3380"></a>Elements are sized based on their preferred size,
+yet positioned based on their X and Y coordinates. Their dimensions
+determined via <kbd class="command">setWidth</kbd> and <kbd class="command">getHeight</kbd> are
+ignored. </p></li>
+<li class="bullet1"><p class="paragraph"><a name="d0e3390"></a>Unlike the X and Y coordinates that are relative
+to layout dimensions, the preferred size is absolute in pixels and
+should be calculated based on content dimensions. This works as
+expected as long as you don't change the preferred size on your
+own. </p></li>
+<li class="bullet1"><p class="paragraph"><a name="d0e3394"></a>Alignment and other LWUIT related positioning logic
+should work as you would expect. </p></li></ul></div>
+<div class="sect1"><a name="BBJBJCBD"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e3398"></a>6.7 Table Layout</h1>
+<p class="paragraph"><a name="d0e3401"></a>The <a class="indexterm" name="d0e3403"></a>table
+layout is a part of the table component discussed later, however
+it is quite useful on its own. It is largely inspired by the HTML
+table tag and also influenced by AWT's GridBagLayout.</p>
+<p class="paragraph"><a name="d0e3408"></a>The table layout is a constraint based layout (similar to
+the border layout). Other layout managers expect components to be
+added on their own. For example:</p>
+<p class="paragraph"><a name="d0e3411"></a><kbd class="command">container.addComponent(component);</kbd></p>
+<p class="paragraph"><a name="d0e3415"></a>The table layout container expects something like this:</p>
+<p class="paragraph"><a name="d0e3418"></a><kbd class="command">container.addComponent(tableConstraint, component);</kbd></p>
+<p class="paragraph"><a name="d0e3422"></a>Notice that this syntax is optional. If the constraint is
+omitted, the component will be placed in the next available cell.</p>
+<p class="paragraph"><a name="d0e3425"></a>The table layout will automatically size components to the
+largest preferred size in the row or column until you run out of
+space. If the table is not horizontally scrollable this will happen
+when the edge of the parent container is reached (near the edge
+of the screen), and additional components will be "crammed together". Notice
+that all cells in the table layout are always sized to fit the entire
+cell. To change a cell&#8217;s alignment or margin, use the Component
+or Style methods.</p>
+<p class="paragraph"><a name="d0e3428"></a>The constraint argument is an instance of TableLayout.Constraint
+that can be used only once. Reusing the instance will cause an exception.</p>
+<p class="paragraph"><a name="d0e3431"></a>A constraint can specify the absolute row/column where the
+entry should fit as well as spanning between cell boundaries. </p>
+<a name="Z40002551292121"></a><div class="figurebox"><p class="figurecaption"><a name="d0e3435"></a><b>FIGURE 6-8&nbsp;&nbsp;&nbsp;Table Layout Sample</b></p></div>
+<img alt="table layout window showing 5 cells with a&#xA;span underneath" title="table layout window showing 5 cells with a&#xA;span underneath" src="figures/tablelayout.jpg"><br><br><br>
+<p class="paragraph"><a name="d0e3447"></a>In <a href="chapter6.html#Z40002551292121">FIGURE 6-8</a>, the "First" cell is
+spanned vertically while the "Spanning" cell is spanned horizontally.
+This is immensely useful in creating elaborate UIs.</p>
+<p class="paragraph"><a name="d0e3452"></a>Constraints can also specify a height/width for a column/row
+that will override the default. This size is indicated in percentage
+of the total table layout size. In the code below you can see that
+the "First" label is sized to 50% width while the "Fourth" label is
+sized to 20% height.</p>
+<p class="literallayout"><pre>final Form mainForm = new Form("Table Layout");
+TableLayout layout = new TableLayout(4, 3);
+mainForm.setLayout(layout);
+TableLayout.Constraint constraint = layout.createConstraint();
+constraint.setVerticalSpan(2);
+constraint.setWidthPercentage(50);
+mainForm.addComponent(constraint, new Label("First"));
+mainForm.addComponent(new Label("Second"));
+mainForm.addComponent(new Label("Third"));
+
+constraint = layout.createConstraint();
+constraint.setHeightPercentage(20);
+mainForm.addComponent(constraint, new Label("Fourth"));
+mainForm.addComponent(new Label("Fifth"));
+constraint = layout.createConstraint();
+constraint.setHorizontalSpan(3);
+Label span = new Label("Spanning");
+span.getStyle().setBorder(Border.createLineBorder(2));
+span.setAlignment(Component.CENTER);
+mainForm.addComponent(constraint, span);
+mainForm.show();</p></pre>
+<p class="paragraph"><a name="d0e3517"></a></p></div>
+<!-- =================== -->
+<!-- END OF MAIN CONTENT -->
+<!-- =================== -->
+
+
+
+<div class="navbar" align="center"><br><br>
+<table dir="LTR" width="100%" cellpadding="0" cellspacing="0" border="0" summary="Navigation bar, includes the book title and navigation buttons"><colgroup span="3"><col id="b1" span="1" width="45%"><col id="b2" span="1" width="25%"><col id="b3" span="1" width="30%"></colgroup><tr bgcolor="#cccccc"><td class="navbartitle" align="left" rowspan="1" colspan="1" abbr="ChapTitle">&nbsp;&nbsp;LWUIT Developer&#8217;s Guide</td><td class="navbartitle" align="right" rowspan="1" colspan="1" abbr="PartNum">12-11-09</td><td valign="top" align="right" rowspan="1" colspan="1" abbr="NavButtons"><a href="index.html"><img src="shared/toc01.gif" width="30" height="26" border="0" title="Table Of Contents" alt="Table Of Contents"></a>
+<a href="chapter5.html"><img width="30" height="26" border="0" src="shared/prev01.gif" title="Previous Chapter" alt="Previous Chapter"></a><a href="chapter7.html"><img src="shared/next01.gif" width="30" height="26" border="0" title="Next Chapter" alt="Next Chapter"></a><a href="ix.html"><img src="shared/index01.gif" width="30" height="26" border="0" title="Book Index" alt="Book Index"></a></td></tr></table>
+</div><p class="copyrightlink"><a href="bookinfo.html">Copyright</a> &copy; 2009, Sun Microsystems, Inc.  All rights reserved.</p></body></html>

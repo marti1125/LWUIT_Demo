@@ -1,0 +1,719 @@
+/* UNIX CSS STYLES FOR HTML EXPORTED FROM STRUCTURED FM FILES */
+
+.feedback {
+    margin-top : 0.5em;
+    margin-bottom : 0.1em;
+    text-align : right;
+    font-weight : bold;
+    font-size : 10pt;
+    font-family : helvetica, sans-serif;
+    color: #35556B;
+}
+
+/* original feedback
+.feedback {
+	margin-top : 0.1em;
+	margin-bottom : 0.1em;
+	text-align : right;
+	font-weight : bold;
+	color: #dda0dd;
+}
+*/
+
+.paragraph-optcat {
+        font-weight : normal;
+}
+
+
+.paragraph {
+	font-weight : normal;
+}
+
+* div.sect3-optcat {
+       	margin-left: 2em;
+}
+
+div.sect1 {
+	margin-top: 3.0em;
+}
+
+/****************************************************************/
+/* error messages					 	*/
+/****************************************************************/
+
+.errortxt {
+	margin-left : 22pt;
+}
+
+.errormsg {
+	margin-top : 2.5em;
+	font-family : courier;
+	font-size : 130%;
+}
+
+/****************************************************************/
+/* admonitions 						 	*/
+/****************************************************************/
+
+B.caution {
+	font-family : helvetica, sans-serif;
+	font-style : normal;
+	font-weight : bold;
+	font-size : 115%;
+}
+
+B.tipnote {
+	font-family : helvetica, sans-serif;
+	font-style : normal;
+	font-weight : bold;
+	font-size : 115%;
+}
+
+
+/****************************************************************/
+/* rule tables for TCK templates			 	*/
+/****************************************************************/
+
+
+/****************************************************************/
+/* legend tables and callouts				 	*/
+/****************************************************************/
+
+.callout {
+	font-family : helvetica, sans-serif;
+	font-size : 8pt;
+	line-height : 8pt;
+	text-indent : -2em;
+}
+
+.calloutpara {
+	margin-left : 2em;
+	font-family : helvetica, sans-serif;
+	font-size : 8pt;
+	line-height : 8pt;
+}
+
+.figurelegend {
+	font-family : helvetica, sans-serif;
+	font-size : 8pt;
+	font-weight : bold;
+	text-indent : -1.5em;
+}
+
+div.LegendTable-2colwide, 
+div.LegendTable-2col, 
+div.LegendTable-4colwide, 
+div.LegendTable-4col  {
+	margin-left: 1em;
+}
+
+/****************************************************************/
+/* questions and answers 				 	*/
+/****************************************************************/
+
+.qandaset {
+	margin-bottom : 2.5em;
+}
+
+.qandaentry {
+	margin-bottom : 2.5em;
+}
+
+.blockquote {
+	margin-left : 3em;
+	margin-right : 3em;
+}
+
+/****************************************************************/
+/* inlines		 				 	*/
+/****************************************************************/
+
+kbd.option {
+	font-weight : bold;
+} 
+
+pre.codeline {
+	font-family : courier;
+	white-space : pre;
+}
+
+.literallayout {
+	font-family : courier;
+	font-weight : normal;
+	white-space : pre; 
+	margin-top : 2em;
+	margin-bottom : 2em;
+}
+
+pre.screentext {
+	font-family : courier;
+	font-weight : normal;
+	font-style : normal;
+	white-space : pre;
+	line-height : 12pt;
+}
+
+.userinput {
+	font-family : courier;
+	font-weight : bold;
+	font-style : normal;
+	white-space : pre;
+}
+
+.usertype {
+	font-family : courier;
+	font-weight : bold;
+	font-style : normal;
+	white-space : pre;
+}
+
+.methodname {
+	font-family : courier;
+	white-space : pre;
+}
+
+.filename-command {
+	font-family : courier;
+	font-weight : normal;
+	white-space : pre;
+}
+
+.command {
+	font-family : courier;
+	font-weight : bold;
+	white-space : pre;
+}
+
+.filename {
+	font-family : courier;
+	font-weight : normal;
+	white-space : pre;
+}
+
+.envar {
+	font-family : courier;
+	font-weight : bold;
+	white-space : pre;
+}
+
+.computeroutput {
+	font-family : courier;
+	font-weight : bold;
+	white-space : pre;
+}
+
+.screenoutput {
+	font-family : courier;
+	font-weight : bold;
+	white-space : pre;
+}
+
+.returnvalue {
+	font-family : courier;
+	font-weight : bold;
+	white-space : pre;
+}
+
+.systemitem {
+	font-family : courier;
+	white-space : pre;
+}
+
+.function {
+	font-family : courier;
+	font-weight : normal;
+	white-space : pre;
+}
+
+.literal {
+	font-family : courier;
+	font-weight : normal;
+	white-space : pre;
+}
+
+.replaceable {
+ 	font-family : Times;
+	font-weight : normal;
+	font-style : italic;
+	white-space : normal;
+}
+
+.variable {
+ 	font-family : Times;
+	font-weight : normal;
+	font-style : italic;
+}
+
+.parameter {
+	font-weight : normal;
+	font-style : italic;
+}
+
+.lineannotation {
+	font-family : Times;
+	font-weight : normal;
+	font-style : italic;
+	white-space : normal;
+}
+
+.isbn {
+	margin-bottom : 1em;
+}
+
+.pubdate {
+	margin-top : -10px;
+}
+
+.publisher {
+	margin-top : -10px;
+}
+
+.publishername {
+	margin-top : -14px;
+}
+
+.abstract {
+	margin-top : 1em;
+	margin-bottom : 1.5em;
+	border-style : solid;
+	border-color : #cccccc;
+	border-width : 5px;
+	text-align : left;
+	padding : 5px;
+	font-size : 12pt;
+}
+
+/****************************************************************/
+/* navigation bar 	 					*/
+/****************************************************************/
+
+td span.ChapNumPrefix {
+	font-size : 12pt;
+	font-weight : normal;
+	font-style : normal;
+	font-family : helvetica, sans-serif;
+}
+
+td.navbartitle {
+	vertical-align : middle;
+	font-size : 11pt;
+	font-weight : normal;
+	font-style : normal;
+	font-family : helvetica, sans-serif;
+}
+
+td span.ChapNumNum, TD.ChapNumberA {
+	font-size : 30pt;
+	font-weight : bold;
+	font-style : normal;
+	font-family : helvetica, sans-serif;
+}
+
+/****************************************************************/
+/* formatting of book title, book subtitle in bookinfo.html	*/
+/****************************************************************/
+.titletext {
+	font-size : 16pt;
+	font-style : normal;
+	font-family : helvetica, sans-serif;
+}
+
+.subtitletext {
+	margin-top : -10px;
+	font-size : 12pt;
+	font-weight : normal;
+	font-style : italic;
+	font-family : helvetica, sans-serif;
+}
+
+/****************************************************************/
+/* headings 		 					*/
+/****************************************************************/
+
+.title {
+	font-size : 16pt;
+	font-weight : bold;
+	font-style : normal;
+	font-family : helvetica, sans-serif;
+}
+
+.parttitle {
+ 	margin : 1.25em 0 0 2em;
+        font-size : 16pt;
+        font-weight : bold;
+        font-style : normal;
+        font-family : helvetica, sans-serif;
+}
+
+.ChapTitle, .ChapTitleA, .ChapTitleCSR, .ChapTitleC, .ChapTitleG, .ChapTitleI, .ChapTitleP {
+	font-size : 26pt;
+	font-weight : bold;
+	font-style : normal;
+	font-family : helvetica, sans-serif;
+}
+
+.head1, .head1A, .head1C, .head1CSR, .head1G, .head1P {
+	margin-top : 0em;
+	font-size : 22pt;
+	font-weight : bold;
+	font-style : normal;
+	font-family : helvetica, sans-serif;
+}
+
+.head2, .head2A, .head2CSR, .head2G, .head2P, .head2-OptFlag {
+	margin-top : 2em;
+	font-size : 18pt;
+	font-weight : bold;
+	font-style : normal;
+	font-family : helvetica, sans-serif;
+}
+
+.head3, .head3A, .head3CSR, .head3G, .head3P, .head2ProcTitle {
+	margin-top : 2em;
+	font-size : 14pt;
+	font-weight : bold;
+	font-style : normal;
+	font-family : helvetica, sans-serif;
+}
+
+.head3-OptCat {
+	margin-top : 2em;
+	font-size : 14pt;
+	font-weight : bold;
+	font-style : normal;
+	font-family : helvetica, sans-serif;
+}
+
+.head4, .head3ProcTitle {
+	margin-top : 5em;
+	font-size : 12pt;
+	font-weight : bold;
+	font-style : normal;
+	font-family : helvetica, sans-serif;
+}
+
+P.copyrightlink {
+	font-weight : bold;
+	font-style : normal;
+	font-family : helvetica, sans-serif;
+}
+
+/****************************************************************/
+/* formatting of book title, book subtitle and pubsnumber in	*/
+/*	index.html						*/
+/****************************************************************/
+P.booktitle {
+	font-size : 16pt;
+	font-style : normal;
+	font-family : helvetica, sans-serif;
+}
+
+P.booksubtitle {
+	margin-top : -0.5px;
+	font-size : 12pt;
+	font-weight : normal;
+	font-style : italic;
+	font-family : helvetica, sans-serif;
+}
+
+P.pubsnumber {
+	font-size : 12pt;
+	font-style : normal;
+	font-family : helvetica, sans-serif;
+}
+
+/****************************************************************/
+/* tables 		 					*/
+/****************************************************************/
+
+.tablecaption {
+	white-space : nowrap;
+	font-weight : bold;
+	font-style : normal;
+	font-family : helvetica, sans-serif;
+}
+
+.codecaption {
+	white-space : nowrap;
+	font-weight : bold;
+	font-style : normal;
+	font-family : helvetica, sans-serif;
+}
+
+TD {
+	vertical-align : top;
+}
+
+TD P {
+	vertical-align : top;
+}
+
+TH {
+	vertical-align : bottom;
+}
+
+table.code {
+	margin-top : 1em;
+	margin-bottom : 1em;
+}
+
+table.titled {
+	margin-top : 1em;
+	margin-bottom : 1em;
+}
+
+table.untitled {
+	margin-top : 1em;
+	margin-bottom : 1em;
+}
+
+table.noborder {
+	margin-top : 1em;
+	margin-bottom : 1em;
+}
+
+table.noborder td {
+	padding-left: 0em;
+	padding-right: 5em;
+	padding-top: 0em;
+	padding-bottom: 0em;
+	border-style: none;
+}
+
+td.simplelist-cell {
+	padding-right : 20px;
+}
+
+/****************************************************************/
+/* figures 		 					*/
+/****************************************************************/
+
+.figurecaption {
+	white-space : nowrap;
+	font-size : 12pt;
+	font-weight : bold;
+	font-style : normal;
+	font-family : helvetica, sans-serif;
+	margin-top : 2.5em;
+}
+
+.figure, .figure-wide {
+	white-space : pre;
+	font-weight : bold;
+	font-style : normal;
+	font-family : helvetica, sans-serif;
+}
+
+/****************************************************************/
+/* procedures and steps 					*/
+/****************************************************************/
+
+ol.procedure {
+	font-weight : bold;
+}
+
+P.step {
+	font-weight : bold;
+	font-style : normal;
+	font-family : helvetica, sans-serif;
+}
+
+P.step1 {
+	font-weight : bold;
+	font-style : normal;
+	font-family : helvetica, sans-serif;
+}
+
+P.step2 {
+	font-weight : bold;
+	font-style : normal;
+	font-family : helvetica, sans-serif;
+}
+
+P.step3 {
+	font-weight : bold;
+	font-style : normal;
+	font-family : helvetica, sans-serif;
+}
+
+P.steppara1 {
+	font-weight : normal;
+	margin-left : 0;
+}
+
+P.steppara2 {
+	font-weight : normal;
+	margin-left : 0;
+}
+
+P.steppara3 {
+	font-weight : normal;
+	margin-left : 0;
+}
+
+UL.singleprocedure {
+	list-style-type: none;
+	list-style-image: url(shared/bullet.gif);
+}
+
+UL.stepalternatives {
+	list-style-image: url();
+}
+
+UL.stepalternatives UL.stepalternatives {
+	list-style-image: url();
+}
+
+P.stepsingle {
+	margin-left : -0.7em;
+	font-size : 12pt;
+	font-weight : bold;
+	font-style : normal;
+	font-family : helvetica, sans-serif;
+}
+
+div.taskrelated-custom {
+	margin-top: 1.5em;
+	font-weight : bold;
+    	margin-left : 2.3em; 
+}
+
+div.tasksummary {
+        margin-left : 2.3em;
+}
+
+div.taskprerequisites {
+        margin-left : 2.3em;
+}
+
+
+/****************************************************************/
+/* Ordered and unordered lists 					*/
+/****************************************************************/
+
+OL {
+}
+
+OL OL {
+	margin-left : -1em;
+}
+
+OL OL OL {
+	margin-left : -1.5em;
+}
+
+UL {
+  	list-style-type: disc;
+}
+
+UL UL, 
+OL UL {
+  	list-style-type: square;
+}
+
+UL UL UL, 
+OL UL UL, 
+OL OL UL, 
+UL UL UL {
+	margin-left : -1.5em;
+  	list-style-type: circle;
+}
+
+UL UL UL UL,
+OL UL OL UL,
+UL OL UL UL,
+OL OL OL UL,
+UL UL OL UL,
+OL UL UL UL,
+UL OL OL UL,
+OL OL UL UL
+{
+  	list-style-type: square;
+}
+
+P.list1 {
+	font-weight : normal;
+	list-style : decimal;
+	list-style-position : outside;
+}
+
+P.list2 {
+	font-weight : normal;
+	list-style : lower-alpha;
+	list-style-position : outside;
+}
+
+P.list3 {
+	font-weight : normal;
+	list-style : lower-roman;
+	list-style-position : outside;
+}
+
+.paraindent1 {
+	font-weight : normal;
+}
+
+.paraindent2 {
+	font-weight : normal;
+}
+
+.paraindent3 {
+	font-weight : normal;
+}
+
+/****************************************************************/
+/* glossary 	 					 	*/
+/****************************************************************/
+
+.glossterm {
+	font-weight : bold;
+}
+
+P.GlossTerm {
+	margin : 0 0 0.5em 0;
+	font-size : 115%;
+	font-weight : bold;
+	font-style : normal;
+}
+
+P.GlossText {
+	margin : 0 0 3em 3em;
+}
+
+/****************************************************************/
+/* generated files 					 	*/
+/****************************************************************/
+
+.level1 {
+	margin : 1.25em 0 0 4em;
+	font-size : 14pt;
+	font-weight : bold;
+	font-style : normal;
+	font-family : helvetica, sans-serif;
+}
+
+.level2 {
+	margin : 0.75em 0 0 6em;
+	font-size : 12pt;
+	font-weight : normal;
+	font-style : normal;
+	font-family : helvetica, sans-serif;
+}
+
+.level3 {
+	margin : 0.75em 0 0 8em;
+	font-size : 12pt;
+	font-weight : normal;
+	font-style : normal;
+	font-family : helvetica, sans-serif;
+}
+
+.level4 {
+	margin : 0.75em 0 0 10em;
+	font-size : 12pt;
+	font-weight : normal;
+	font-style : normal;
+	font-family : helvetica, sans-serif;
+}
+
+/* END OF FILE */

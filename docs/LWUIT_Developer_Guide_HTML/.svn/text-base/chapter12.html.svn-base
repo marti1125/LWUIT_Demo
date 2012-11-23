@@ -1,0 +1,166 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en-US">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   <meta http-equiv="Content-Language" content="en-US">
+<title>Using Transitions and Animations</title>
+
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="Generator" content="XSolBook3.5 XML Custom XSLT Filter">
+<meta name="keywords" content="LWUIT">
+<meta name="dc.title" content="Using Transitions and Animations">
+<meta name="description" content="This Developer&#8217;s Guide describes how to use the Lightweight UI toolkit.">
+<meta name="identifier" content="12-11-09">
+<meta name="date" content="">
+<meta name="issued" content="2009-12-11">
+<meta name="revision" content="">
+<meta name="publisher" content="Sun Microsystems, Inc.">
+<meta name="collection" content="reference">
+<meta name="robots" content="index, follow">
+
+<!--Inserts the stylesheet-->
+<link rel="STYLESHEET" href="unx_str_styles.css" charset="ISO-8859-1" type="text/css">
+</head>
+<body class="HlpBdy" leftmargin="10" topmargin="10" marginheight="10" marginwidth="10" bgcolor="#ffffff"><a name="top"></a><div class="navbar" align="center">
+<table dir="LTR" width="100%" cellpadding="0" cellspacing="0" border="0" summary="Navigation bar, includes the book title and navigation buttons"><colgroup span="2"><col id="t1" span="1" width="50%"><col id="t2" span="1" width="50%"></colgroup><tr bgcolor="#cccccc"><td class="navbartitle" align="left" rowspan="1" colspan="1" abbr="ChapTitle"><a name="CEHFEDIH"></a>&nbsp;&nbsp;LWUIT Developer&#8217;s Guide</td><td valign="top" align="right" rowspan="1" colspan="1" abbr="NavButtons"><a href="index.html"><img src="shared/toc01.gif" width="30" height="26" border="0" title="Table Of Contents" alt="Table Of Contents"></a>
+<a href="chapter11.html"><img width="30" height="26" border="0" src="shared/prev01.gif" title="Previous Chapter" alt="Previous Chapter"></a><a href="chapter13.html"><img src="shared/next01.gif" width="30" height="26" border="0" title="Next Chapter" alt="Next Chapter"></a><a href="ix.html"><img src="shared/index01.gif" width="30" height="26" border="0" title="Book Index" alt="Book Index"></a></td></tr></table><br><br></div>
+<table dir="LTR" width="100%" border="0" summary="Chapter Number" abbr="ChapNum"><colgroup span="1"><col id="ch1" span="1"></colgroup><tr><td align="right" class="ChapNumber"><span class="ChapNumPrefix">C H A P T E R</span>&nbsp;
+<span class="ChapNumNum">12</span><span class="ChapNumSuffix"></span></td></tr></table>
+<hr size="7" noshade="1">
+<!-- ============ -->
+<!-- MAIN CONTENT -->
+<!-- ============ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- BEGIN PAGETITLE ONE LINE -->
+<h1 class="ChapTitle" align="right"><a name="d0e5470"></a>Using Transitions and Animations</h1>
+<!-- END PAGETITLE ONE LINE -->
+
+<div class="highlights"><p class="paragraph"><a name="d0e5474"></a>The Lightweight UI Toolkit library implements transitions
+using animation. </p></div>
+<div class="sect1"><a name="CEHCJHCC"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e5478"></a>12.1 Animation</h1>
+<p class="paragraph"><a name="d0e5481"></a><a class="indexterm" name="d0e5482"></a>Animation
+is an interface that allows any object to react to events and draw
+an animation at a fixed interval. All animation methods are executed
+on the EDT. For simplicity&#8217;s sake, all Components can be animated,
+however, no animation appears unless it is explicitly registered
+into the parent form. To stop animation callbacks the animation
+must be explicitly removed from the form (notice that this differs
+from removing the component from the form)! In Lightweight UI Toolkit there
+are few transitions that have been extended from Animation. See <a href="chapter12.html#Z40006f61289435">Transition</a>.</p></div>
+<div class="sect1"><a name="Z40006f61289428"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e5490"></a>12.2 Motion</h1>
+<p class="paragraph"><a name="d0e5493"></a>The <a class="indexterm" name="d0e5495"></a>Motion
+class abstracts the idea of motion over time, from one point to
+another. Motion can be subclassed to implement any motion equation
+for appropriate physics effects. This class relies on the <kbd class="command">System.currentTimeMillis()</kbd> method
+to provide transitions between coordinates. Examples for such movement
+equations can be; parabolic, spline, or even linear motion. Default
+implementation provides a simple physical algorithm giving the feel
+of acceleration and deceleration. In this implementation all animation
+elements (Transition, Scrolling, and so forth) use the same motion
+implementation, so they all have smooth movement.</p></div>
+<div class="sect1"><a name="Z40006f61289435"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e5504"></a>12.3 Transition</h1>
+<p class="paragraph"><a name="d0e5507"></a>Currently a transition refers to the transition between two
+Forms as animate In and Out transition animation. All transitions
+use a physical animation curve calculation to simulate acceleration
+and deceleration while pacing a motion based on the amount of time
+specified. There are three types of transitions:</p>
+<br><table border="1" cellpadding="5" cellspacing="0" dir="LTR" class="untitled" summary="Table that is not numbered or titled">
+
+
+
+<tbody class="tbody">
+<tr>
+<td align="left" valign="top"><kbd class="command">Slide </kbd></td>
+<td align="left" valign="top">Exiting form by sliding out of the screen
+while the new form slides in. </td>
+</tr>
+<tr>
+<td align="left" valign="top"><kbd class="command">Fade </kbd></td>
+<td align="left" valign="top">Components fade into and out of the screen
+at a predefined speed.</td>
+</tr>
+</tbody>
+</table>
+<br>
+<div class="sect2"><a name="Z40006f61289405"></a><h2 class="head2"><a name="d0e5547"></a>12.3.1 Slide Transition</h2>
+<p class="paragraph"><a name="d0e5550"></a><a class="indexterm" name="d0e5551"></a>To create a slide transition,
+that reacts while exiting the first form, use:</p>
+<p class="literallayout"><pre>CommonTransitions.createSlide(int type, boolean forward, int speed) </pre></p>
+<br><table border="1" cellpadding="5" cellspacing="0" dir="LTR" class="untitled" summary="Table that is not numbered or titled">
+
+
+
+<tbody class="tbody">
+<tr>
+<td align="left" valign="top"><kbd class="command">type </kbd></td>
+<td align="left" valign="top">Type can be either <kbd class="command">SLIDE_HORIZONTAL</kbd> or <kbd class="command">SLIDE_VERTICAL</kbd>,
+indicating the movement direction of the forms. </td>
+</tr>
+<tr>
+<td align="left" valign="top"><kbd class="command">forward</kbd></td>
+<td align="left" valign="top">Forward is a boolean value representing
+the directions of switching forms. For example for a horizontal
+type, true means horizontal movement to the right. For a vertical
+type, true means movement towards the bottom.</td>
+</tr>
+<tr>
+<td align="left" valign="top"><kbd class="command">speed</kbd></td>
+<td align="left" valign="top">Speed is an integer representing the
+speed of changing components in milliseconds.</td>
+</tr>
+</tbody>
+</table>
+<br>
+<p class="paragraph"><a name="d0e5616"></a>For example:</p>
+<p class="literallayout"><pre>// Create a horizontal transition that moves to the right
+// and exposes the next form
+
+myForm.setTransitionOutAnimator(CommonTransitions.createSlide(
+&nbsp;&nbsp;&nbsp;CommonTransitions.SLIDE_HORIZONTAL, true, 1000));</p></pre>
+<p class="paragraph"><a name="d0e5633"></a><a href="chapter12.html#Z40006f61289516">FIGURE 12-1</a> shows four snapshots
+of the horizontal transition from a menu to a radio button list.</p>
+<a name="Z40006f61289516"></a><div class="figurebox"><p class="figurecaption"><a name="d0e5638"></a><b>FIGURE 12-1&nbsp;&nbsp;&nbsp;Slide Transition from Form
+to Theme Menu</b></p></div>
+<img alt="Four-Step Transition from Form to Theme Menu" title="Four-Step Transition from Form to Theme Menu" src="figures/slide.jpg"><br><br><br></div>
+<div class="sect2"><a name="d0e5652"></a><h2 class="head2"><a name="d0e5653"></a>12.3.2 Fade Transition</h2>
+<p class="paragraph"><a name="d0e5656"></a>Fade transition<a class="indexterm" name="d0e5658"></a> creates a fade&#8208;in
+effect when switching to the next form. To create this transition
+use:</p>
+<p class="literallayout"><pre>CommonTransitions.createFade(int speed) </pre></p>
+<p class="paragraph"><a name="d0e5669"></a>In the above code <kbd class="command">speed</kbd> is an integer representing
+the speed of changing components, in milliseconds.</p>
+<p class="paragraph"><a name="d0e5675"></a>For example:</p>
+<p class="literallayout"><pre>// Create a fade effect with speed of 400 millisecond, 
+// when entering myform
+
+themeForm.setTransitionInAnimator(CommonTransitions.createFade(400));</p></pre>
+<a name="Z40006f61289592"></a><div class="figurebox"><p class="figurecaption"><a name="d0e5690"></a><b>FIGURE 12-2&nbsp;&nbsp;&nbsp;Fade Transition From Form
+to Theme Menu</b></p></div>
+<img alt="Fade Transition From Form to Theme Menu" title="Fade Transition From Form to Theme Menu" src="figures/fade.jpg"><br><br><br></div></div>
+<!-- =================== -->
+<!-- END OF MAIN CONTENT -->
+<!-- =================== -->
+
+
+
+<div class="navbar" align="center"><br><br>
+<table dir="LTR" width="100%" cellpadding="0" cellspacing="0" border="0" summary="Navigation bar, includes the book title and navigation buttons"><colgroup span="3"><col id="b1" span="1" width="45%"><col id="b2" span="1" width="25%"><col id="b3" span="1" width="30%"></colgroup><tr bgcolor="#cccccc"><td class="navbartitle" align="left" rowspan="1" colspan="1" abbr="ChapTitle">&nbsp;&nbsp;LWUIT Developer&#8217;s Guide</td><td class="navbartitle" align="right" rowspan="1" colspan="1" abbr="PartNum">12-11-09</td><td valign="top" align="right" rowspan="1" colspan="1" abbr="NavButtons"><a href="index.html"><img src="shared/toc01.gif" width="30" height="26" border="0" title="Table Of Contents" alt="Table Of Contents"></a>
+<a href="chapter11.html"><img width="30" height="26" border="0" src="shared/prev01.gif" title="Previous Chapter" alt="Previous Chapter"></a><a href="chapter13.html"><img src="shared/next01.gif" width="30" height="26" border="0" title="Next Chapter" alt="Next Chapter"></a><a href="ix.html"><img src="shared/index01.gif" width="30" height="26" border="0" title="Book Index" alt="Book Index"></a></td></tr></table>
+</div><p class="copyrightlink"><a href="bookinfo.html">Copyright</a> &copy; 2009, Sun Microsystems, Inc.  All rights reserved.</p></body></html>

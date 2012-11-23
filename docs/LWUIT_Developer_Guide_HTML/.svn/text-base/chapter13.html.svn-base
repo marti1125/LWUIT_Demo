@@ -1,0 +1,146 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en-US">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   <meta http-equiv="Content-Language" content="en-US">
+<title>M3G</title>
+
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="Generator" content="XSolBook3.5 XML Custom XSLT Filter">
+<meta name="keywords" content="LWUIT">
+<meta name="dc.title" content="M3G">
+<meta name="description" content="This Developer&#8217;s Guide describes how to use the Lightweight UI toolkit.">
+<meta name="identifier" content="12-11-09">
+<meta name="date" content="">
+<meta name="issued" content="2009-12-11">
+<meta name="revision" content="">
+<meta name="publisher" content="Sun Microsystems, Inc.">
+<meta name="collection" content="reference">
+<meta name="robots" content="index, follow">
+
+<!--Inserts the stylesheet-->
+<link rel="STYLESHEET" href="unx_str_styles.css" charset="ISO-8859-1" type="text/css">
+</head>
+<body class="HlpBdy" leftmargin="10" topmargin="10" marginheight="10" marginwidth="10" bgcolor="#ffffff"><a name="top"></a><div class="navbar" align="center">
+<table dir="LTR" width="100%" cellpadding="0" cellspacing="0" border="0" summary="Navigation bar, includes the book title and navigation buttons"><colgroup span="2"><col id="t1" span="1" width="50%"><col id="t2" span="1" width="50%"></colgroup><tr bgcolor="#cccccc"><td class="navbartitle" align="left" rowspan="1" colspan="1" abbr="ChapTitle"><a name="CJBFJHJB"></a>&nbsp;&nbsp;LWUIT Developer&#8217;s Guide</td><td valign="top" align="right" rowspan="1" colspan="1" abbr="NavButtons"><a href="index.html"><img src="shared/toc01.gif" width="30" height="26" border="0" title="Table Of Contents" alt="Table Of Contents"></a>
+<a href="chapter12.html"><img width="30" height="26" border="0" src="shared/prev01.gif" title="Previous Chapter" alt="Previous Chapter"></a><a href="chapter14.html"><img src="shared/next01.gif" width="30" height="26" border="0" title="Next Chapter" alt="Next Chapter"></a><a href="ix.html"><img src="shared/index01.gif" width="30" height="26" border="0" title="Book Index" alt="Book Index"></a></td></tr></table><br><br></div>
+<table dir="LTR" width="100%" border="0" summary="Chapter Number" abbr="ChapNum"><colgroup span="1"><col id="ch1" span="1"></colgroup><tr><td align="right" class="ChapNumber"><span class="ChapNumPrefix">C H A P T E R</span>&nbsp;
+<span class="ChapNumNum">13</span><span class="ChapNumSuffix"></span></td></tr></table>
+<hr size="7" noshade="1">
+<!-- ============ -->
+<!-- MAIN CONTENT -->
+<!-- ============ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- BEGIN PAGETITLE ONE LINE -->
+<h1 class="ChapTitle" align="right"><a name="d0e5720"></a>M3G</h1>
+<!-- END PAGETITLE ONE LINE -->
+
+<div class="highlights"><p class="paragraph"><a name="d0e5724"></a><a class="indexterm" name="d0e5725"></a>M3G
+is a Scene Graph or Immediate Mode <a class="indexterm" name="d0e5729"></a>3D
+API that supports optional hardware acceleration on mobile devices.
+Some applications and demos might choose to leverage its 3D abilities
+in order to deliver a more compelling user experience by integrating
+3D special effects with the 2D user interface (for example, a cube transition
+effect). The main use case revolves around drawing 3D elements within LWUIT
+applications or using LWUIT drawn widgets in 3D worlds (such as
+LWUIT <kbd class="command">Image</kbd> objects).</p></div>
+<div class="sect1"><a name="Z40011561289492"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e5738"></a>13.1 Using 3D</h1>
+<p class="paragraph"><a name="d0e5741"></a>Normally M3G is bound directly to the graphics or image object
+during the standard rendering (painting) process, however, since
+LWUIT abstracts this process by supplying its own graphics object
+type, this doesn&#8217;t work. </p>
+<p class="paragraph"><a name="d0e5744"></a>M3G integration into LWUIT is built around a callback mechanism
+that allows the developer to bind a LWUIT Graphics object to a M3G
+Graphics3D object. M3G support is designed to work only on devices
+that support M3G. If your device does not support M3G the LWUIT
+implementation avoids activating M3G code. </p>
+<p class="paragraph"><a name="d0e5747"></a>The LWUIT <a class="indexterm" name="d0e5749"></a><kbd class="command">com.sun.lwuit.M3G</kbd> class
+provides support for JSR 184. Within this class LWUIT offers an
+internal interface (<kbd class="command">M3G.Callback</kbd>) that must be
+implemented in order to render the 3D scene. A LWUIT paint method <kbd class="command">M3G.bind(Graphics</kbd>) should
+be invoked in order to bind to M3G (instead of <kbd class="command">Graphics3D.bind</kbd>)
+resulting in a callback invocation containing the appropriate 3D
+object similar to the example shown below: </p>
+<p class="literallayout"><pre>class MyComponent extends Component { 
+  private M3G.Callback myCallbackInstance = new MyCallback();
+  .... 
+   public void paint(Graphics g) { 
+         M3G.getInstance().renderM3G(g, true, 0, myCallbackInstance); 
+         // draw some stuff in 2D 
+         ... 
+   } 
+   .... 
+} 
+class MyCallback implements M3G.Callback { 
+   ....
+   public void paintM3G(Graphics3D g3d) { 
+      g3d.clear(background); 
+      g3d.render(world); 
+   } 
+   ... 
+} </p></pre>
+<p class="paragraph"><a name="d0e5819"></a>Due to the way in which device <a class="indexterm" name="d0e5821"></a>3D
+rendering is implemented and constraints of hardware acceleration,
+it is important to render <a class="indexterm" name="d0e5825"></a>2D
+and 3D on their own. LWUIT handles this seamlessly (flushing the
+3D/2D pipelines as necessary), however, you must <i>not</i> keep
+instances of <kbd class="command">Graphics</kbd> or <kbd class="command">Graphics3D</kbd> and
+invoke them on a separate thread. Furthermore, the <kbd class="command">Graphics</kbd> object
+must <i>NEVER</i> be used in the <kbd class="command">paintM3G</kbd> method
+and the <kbd class="command">Graphics3D</kbd> object must never be used
+outside of that method. This applies to the existence of the <kbd class="command">paintM3G</kbd> method
+in the stack. For example:</p>
+<p class="literallayout"><pre>public void paint(Graphics g) {
+&nbsp;&nbsp;// not allowed to use Graphics3D
+&nbsp;&nbsp;&nbsp;&nbsp;invokeFromPaint();
+}
+public void invokeFromPaint() {
+&nbsp;&nbsp;// not allowed to use Graphics3D
+}
+public void paintM3G(Graphics3D g3d) { 
+&nbsp;&nbsp;// not allowed to use Graphics
+&nbsp;&nbsp;&nbsp;&nbsp;invokeFromPaintM3G();
+}
+public void invokeFromPaintM3G() {
+&nbsp;&nbsp;// not allowed to use Graphics
+}</p></pre>
+<p class="paragraph"><a name="d0e5896"></a>The M3G API makes heavy use of an Image2D object which is
+constructed using the platform native Image object. However, since
+this image type is encapsulated by LWUIT you must construct M3G
+Image2D objects using the <kbd class="command">createImage2D</kbd> method
+within M3G. </p>
+<p class="paragraph"><a name="d0e5902"></a>The normal method of instantiating Image2D objects doesn&#8217;t
+accept LWUIT image objects because they are unrecognized by the
+M3G implementation. </p>
+<p class="paragraph"><a name="d0e5905"></a>Notice that currently only standard LWUIT images are supported
+by M3G. <a class="indexterm" name="d0e5907"></a><kbd class="command">IndexedImage</kbd> and <a class="indexterm" name="d0e5913"></a><kbd class="command">RGBImage</kbd> are
+unsupported in the M3G binding. This might change in future iterations
+of the API.</p>
+<p class="paragraph"><a name="d0e5921"></a></p></div>
+<!-- =================== -->
+<!-- END OF MAIN CONTENT -->
+<!-- =================== -->
+
+
+
+<div class="navbar" align="center"><br><br>
+<table dir="LTR" width="100%" cellpadding="0" cellspacing="0" border="0" summary="Navigation bar, includes the book title and navigation buttons"><colgroup span="3"><col id="b1" span="1" width="45%"><col id="b2" span="1" width="25%"><col id="b3" span="1" width="30%"></colgroup><tr bgcolor="#cccccc"><td class="navbartitle" align="left" rowspan="1" colspan="1" abbr="ChapTitle">&nbsp;&nbsp;LWUIT Developer&#8217;s Guide</td><td class="navbartitle" align="right" rowspan="1" colspan="1" abbr="PartNum">12-11-09</td><td valign="top" align="right" rowspan="1" colspan="1" abbr="NavButtons"><a href="index.html"><img src="shared/toc01.gif" width="30" height="26" border="0" title="Table Of Contents" alt="Table Of Contents"></a>
+<a href="chapter12.html"><img width="30" height="26" border="0" src="shared/prev01.gif" title="Previous Chapter" alt="Previous Chapter"></a><a href="chapter14.html"><img src="shared/next01.gif" width="30" height="26" border="0" title="Next Chapter" alt="Next Chapter"></a><a href="ix.html"><img src="shared/index01.gif" width="30" height="26" border="0" title="Book Index" alt="Book Index"></a></td></tr></table>
+</div><p class="copyrightlink"><a href="bookinfo.html">Copyright</a> &copy; 2009, Sun Microsystems, Inc.  All rights reserved.</p></body></html>

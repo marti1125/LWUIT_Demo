@@ -1,0 +1,169 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en-US">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   <meta http-equiv="Content-Language" content="en-US">
+<title>Painters</title>
+
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="Generator" content="XSolBook3.5 XML Custom XSLT Filter">
+<meta name="keywords" content="LWUIT">
+<meta name="dc.title" content="Painters">
+<meta name="description" content="This Developer&#8217;s Guide describes how to use the Lightweight UI toolkit.">
+<meta name="identifier" content="12-11-09">
+<meta name="date" content="">
+<meta name="issued" content="2009-12-11">
+<meta name="revision" content="">
+<meta name="publisher" content="Sun Microsystems, Inc.">
+<meta name="collection" content="reference">
+<meta name="robots" content="index, follow">
+
+<!--Inserts the stylesheet-->
+<link rel="STYLESHEET" href="unx_str_styles.css" charset="ISO-8859-1" type="text/css">
+</head>
+<body class="HlpBdy" leftmargin="10" topmargin="10" marginheight="10" marginwidth="10" bgcolor="#ffffff"><a name="top"></a><div class="navbar" align="center">
+<table dir="LTR" width="100%" cellpadding="0" cellspacing="0" border="0" summary="Navigation bar, includes the book title and navigation buttons"><colgroup span="2"><col id="t1" span="1" width="50%"><col id="t2" span="1" width="50%"></colgroup><tr bgcolor="#cccccc"><td class="navbartitle" align="left" rowspan="1" colspan="1" abbr="ChapTitle"><a name="CGFDAHFE"></a>&nbsp;&nbsp;LWUIT Developer&#8217;s Guide</td><td valign="top" align="right" rowspan="1" colspan="1" abbr="NavButtons"><a href="index.html"><img src="shared/toc01.gif" width="30" height="26" border="0" title="Table Of Contents" alt="Table Of Contents"></a>
+<a href="chapter6.html"><img width="30" height="26" border="0" src="shared/prev01.gif" title="Previous Chapter" alt="Previous Chapter"></a><a href="chapter8.html"><img src="shared/next01.gif" width="30" height="26" border="0" title="Next Chapter" alt="Next Chapter"></a><a href="ix.html"><img src="shared/index01.gif" width="30" height="26" border="0" title="Book Index" alt="Book Index"></a></td></tr></table><br><br></div>
+<table dir="LTR" width="100%" border="0" summary="Chapter Number" abbr="ChapNum"><colgroup span="1"><col id="ch1" span="1"></colgroup><tr><td align="right" class="ChapNumber"><span class="ChapNumPrefix">C H A P T E R</span>&nbsp;
+<span class="ChapNumNum">7</span><span class="ChapNumSuffix"></span></td></tr></table>
+<hr size="7" noshade="1">
+<!-- ============ -->
+<!-- MAIN CONTENT -->
+<!-- ============ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- BEGIN PAGETITLE ONE LINE -->
+<h1 class="ChapTitle" align="right"><a name="d0e3537"></a>Painters</h1>
+<!-- END PAGETITLE ONE LINE -->
+
+<div class="highlights"><p class="paragraph"><a name="d0e3541"></a>Painter is an interface that can be used to draw
+on a component background. The Painter draws itself and then the
+component draws itself on top within the restrictions of the component
+bounds. One of the biggest advantages of using a painter is that
+you can write arbitrary code to draw the component background. An example
+of such code might be a gradient background for a component, or
+tiling (using an image to tile the component background). Using
+a generic painter allows you to reuse background painters for various
+components.</p>
+<br><hr noshade="1" size="1">
+<table class="tipnote" dir="LTR" width="100%" summary="TipNote"><colgroup span="1"></colgroup><tr align="left" valign="top"><td rowspan="1" colspan="1" abbr="TipNoteText"><p class="TipNote"><a name="d0e3545"></a><b>Note  - </b>To view the painter drawing, a component must have some
+level of transparency.</p></td></tr></table>
+<hr noshade="1" size="1"><br>
+<p class="paragraph"><a name="d0e3548"></a>To clarify these points, assume you want to make a painter
+that draws a diagonal line in the background of a component. This
+kind of painting is vectoring since you are specifying the absolute
+coordinates and dimensions of a component. You can reuse the painter
+for other components.</p></div>
+<div class="sect1"><a name="Z40006f21289792"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e3552"></a>7.1 Using Painter</h1>
+<p class="paragraph"><a name="d0e3555"></a>The Painter code might look like the following <a class="indexterm" name="d0e3557"></a>example:</p>
+<p class="literallayout"><pre>Painter diagonalPainter = new Painter() {
+
+&nbsp;&nbsp;&nbsp;public void paint(Graphics g, Rectangle rect) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;g.drawLine(rect.getX(), 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rect.getY(), 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rect.getX() + rect.getSize().getWidth(),
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rect.getY() + rect.getSize().getHeight());
+&nbsp;&nbsp;&nbsp;}
+};</p></pre>
+<p class="paragraph"><a name="d0e3589"></a>To use the diagonalPainter you created, use it as the component
+background painter:</p>
+<p class="literallayout"><pre>myComponent.getStyle().setBgPainter(diagonalPainter);</pre></p>
+<p class="paragraph"><a name="d0e3595"></a>Let's create a Label, Button and a RadioButton and set their
+background painter with the above diagonalPainter. </p>
+<p class="literallayout"><pre>....
+
+Label myLabel  = new Label(Image.createImage("/images/duke.png"));
+myLabel.setAlignment(Component.CENTER);
+myLabel.getStyle().setBgTransparency(100);            
+myLabel.getStyle().setBgPainter(diagonalPainter);
+
+....
+Button myButton  = new Button("Image and Text Button");
+myButton.setIcon(Image.createImage("/images/duke.png"));
+myButton.setAlignment(Component.CENTER);
+myButton.getStyle().setBgTransparency(100);            
+myButton.getStyle().setBgPainter(diagonalPainter);
+
+....
+RadioButton myRadioButton = new RadioButton("RadioButton");
+myRadioButton.getStyle().setBgTransparency(100);            
+myRadioButton.getStyle().setBgPainter(diagonalPainter);
+
+....</p></pre>
+<p class="paragraph"><a name="d0e3654"></a>The three components are shown in <a href="chapter7.html#Z40006f21290163">FIGURE 7-1</a>.</p>
+<a name="Z40006f21290163"></a><div class="figurebox"><p class="figurecaption"><a name="d0e3660"></a><b>FIGURE 7-1&nbsp;&nbsp;&nbsp;Label, Button, and RadioButton
+With diagonalPainter in Background</b></p></div>
+<img alt="Label, Button, and RadioButton With diagonalPainter&#xA;in Background" title="Label, Button, and RadioButton With diagonalPainter&#xA;in Background" src="figures/painterDiagonal.jpg"><br><br><br>
+<p class="paragraph"><a name="d0e3672"></a>As a result, you see a diagonal line that is painted in the
+components&#8217; background (behind the Duke images and text).</p></div>
+<div class="sect1"><a name="d0e3675"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e3676"></a>7.2 Painter Chain</h1>
+<p class="paragraph"><a name="d0e3679"></a>Sometimes a <a class="indexterm" name="d0e3681"></a>single
+painter is not enough to represent complex drawing logic necessary
+for an application's needs. The painter chain allows you to bind
+together several painters and present them as one. This can be used
+to separate responsibilities. For example, one painter can draw
+a background image while another painter can highlight validation
+errors.</p>
+<p class="paragraph"><a name="d0e3686"></a>To create a painter chain just use:</p><br>
+<table class="code" border="1" cellpadding="5" cellspacing="0" dir="LTR" summary="Table for code examples or code output">
+<tbody><tr><td scope="ROW"><pre class="screentext">
+PainterChain chain = new PainterChain(new Painter[]{painter1, painter2});
+</pre></td></tr>
+</tbody>
+</table>
+<br>
+<p class="paragraph"><a name="d0e3691"></a>The painter chain is very useful with the glass pane.</p></div>
+<div class="sect1"><a name="Z40027511358817"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e3695"></a>7.3 Glass Pane</h1>
+<p class="paragraph"><a name="d0e3698"></a>The <a class="indexterm" name="d0e3700"></a>glass
+pane is a painter that is drawn on top of the form. The form cannot
+paint over the glass panel! This allows creating very unique visual
+effects for an application and allows a developer to implement functionality
+such as validation errors, or special effects such as fading tooltips.A
+glass pane can be installed using a painter chain to prevent a new
+glasspane from overriding the already installed glass pane.</p>
+<p class="paragraph"><a name="d0e3705"></a>To install a glass pane invoke:</p><br>
+<table class="code" border="1" cellpadding="5" cellspacing="0" dir="LTR" summary="Table for code examples or code output">
+<tbody><tr><td scope="ROW"><pre class="screentext">
+Painter glassPane = ...;
+myForm.setGlassPane(glassPane);
+</pre></td></tr>
+</tbody>
+</table>
+<br>
+<p class="paragraph"><a name="d0e3710"></a>Use this code to &nbsp; install a glass pane without overriding
+an existing glass pane (this method works correctly even if a glass
+pane is not installed):</p><br>
+<table class="code" border="1" cellpadding="5" cellspacing="0" dir="LTR" summary="Table for code examples or code output">
+<tbody><tr><td scope="ROW"><pre class="screentext">
+Painter glassPane = ...;
+PainterChain.installGlassPane(myForm, glassPane);
+</pre></td></tr>
+</tbody>
+</table>
+<br></div>
+<!-- =================== -->
+<!-- END OF MAIN CONTENT -->
+<!-- =================== -->
+
+
+
+<div class="navbar" align="center"><br><br>
+<table dir="LTR" width="100%" cellpadding="0" cellspacing="0" border="0" summary="Navigation bar, includes the book title and navigation buttons"><colgroup span="3"><col id="b1" span="1" width="45%"><col id="b2" span="1" width="25%"><col id="b3" span="1" width="30%"></colgroup><tr bgcolor="#cccccc"><td class="navbartitle" align="left" rowspan="1" colspan="1" abbr="ChapTitle">&nbsp;&nbsp;LWUIT Developer&#8217;s Guide</td><td class="navbartitle" align="right" rowspan="1" colspan="1" abbr="PartNum">12-11-09</td><td valign="top" align="right" rowspan="1" colspan="1" abbr="NavButtons"><a href="index.html"><img src="shared/toc01.gif" width="30" height="26" border="0" title="Table Of Contents" alt="Table Of Contents"></a>
+<a href="chapter6.html"><img width="30" height="26" border="0" src="shared/prev01.gif" title="Previous Chapter" alt="Previous Chapter"></a><a href="chapter8.html"><img src="shared/next01.gif" width="30" height="26" border="0" title="Next Chapter" alt="Next Chapter"></a><a href="ix.html"><img src="shared/index01.gif" width="30" height="26" border="0" title="Book Index" alt="Book Index"></a></td></tr></table>
+</div><p class="copyrightlink"><a href="bookinfo.html">Copyright</a> &copy; 2009, Sun Microsystems, Inc.  All rights reserved.</p></body></html>

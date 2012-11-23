@@ -1,0 +1,290 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en-US">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   <meta http-equiv="Content-Language" content="en-US">
+<title>LWUIT Mini FAQ</title>
+
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="Generator" content="XSolBook3.5 XML Custom XSLT Filter">
+<meta name="keywords" content="LWUIT">
+<meta name="dc.title" content="LWUIT Mini FAQ">
+<meta name="description" content="This Developer&#8217;s Guide describes how to use the Lightweight UI toolkit.">
+<meta name="identifier" content="12-11-09">
+<meta name="date" content="">
+<meta name="issued" content="2009-12-11">
+<meta name="revision" content="">
+<meta name="publisher" content="Sun Microsystems, Inc.">
+<meta name="collection" content="reference">
+<meta name="robots" content="index, follow">
+
+<!--Inserts the stylesheet-->
+<link rel="STYLESHEET" href="unx_str_styles.css" charset="ISO-8859-1" type="text/css">
+</head>
+<body class="HlpBdy" leftmargin="10" topmargin="10" marginheight="10" marginwidth="10" bgcolor="#ffffff"><a name="top"></a><div class="navbar" align="center">
+<table dir="LTR" width="100%" cellpadding="0" cellspacing="0" border="0" summary="Navigation bar, includes the book title and navigation buttons"><colgroup span="2"><col id="t1" span="1" width="50%"><col id="t2" span="1" width="50%"></colgroup><tr bgcolor="#cccccc"><td class="navbartitle" align="left" rowspan="1" colspan="1" abbr="ChapTitle"><a name="BBJGJGGH"></a>&nbsp;&nbsp;LWUIT Developer&#8217;s Guide</td><td valign="top" align="right" rowspan="1" colspan="1" abbr="NavButtons"><a href="index.html"><img src="shared/toc01.gif" width="30" height="26" border="0" title="Table Of Contents" alt="Table Of Contents"></a>
+<a href="chapter16.html"><img width="30" height="26" border="0" src="shared/prev01.gif" title="Previous Chapter" alt="Previous Chapter"></a><a href="ix.html"><img src="shared/next01.gif" width="30" height="26" border="0" title="Next Chapter" alt="Next Chapter"></a><a href="ix.html"><img src="shared/index01.gif" width="30" height="26" border="0" title="Book Index" alt="Book Index"></a></td></tr></table><br><br></div>
+<table dir="LTR" width="100%" border="0" summary="Chapter Number" abbr="ChapNum"><colgroup span="1"><col id="ch1" span="1"></colgroup><tr><td align="right" class="ChapNumber"><span class="ChapNumPrefix">A P P E N D I X</span>&nbsp;
+<span class="ChapNumNum">A</span><span class="ChapNumSuffix"></span></td></tr></table>
+<hr size="7" noshade="1">
+<!-- ============ -->
+<!-- MAIN CONTENT -->
+<!-- ============ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- BEGIN PAGETITLE ONE LINE -->
+<h1 class="ChapTitle" align="right"><a name="d0e7084"></a>LWUIT Mini FAQ</h1>
+<!-- END PAGETITLE ONE LINE -->
+
+<p class="paragraph"><a name="d0e7087"></a>This appendix addresses common questions about LWUIT.</p>
+<div class="qanda"><a name="d0e7090"></a><div class="qandaentry"><a name="d0e7091"></a><p class="question"><b>Question: Performance
+on the Wireless Toolkit is very slow, what is the problem?</b></p>
+<p class="answer"><b>Answer: </b>There are documented issues of slow performance due
+to Hyperthreading. </p>
+<ul class="bullet1" type="square"><li class="bullet1"><p class="paragraph"><a name="d0e7102"></a>There are documented
+issues of slow performance due to Hyperthreading. </p></li>
+<li class="bullet1"><p class="paragraph"><a name="d0e7106"></a>Slow loopback in the network interface (often caused
+by miss-configured networking) also impacts performance because
+the toolkit uses network calls to perform all drawing.</p></li>
+<li class="bullet1"><p class="paragraph"><a name="d0e7110"></a>Sprint WirelessToolkit versions 3.2 and higher do
+not have these performance issues because they feature a different
+architecture. </p></li></ul></div>
+<div class="qandaentry"><a name="d0e7113"></a><p class="question"><b>Question: How does <a class="indexterm" name="d0e7117"></a>painting
+in LWUIT differ from Swing/AWT?</b></p>
+<p class="answer"><b>Answer: </b>Generally both are very much alike. There are, however,
+some minor key differences that might &#8220;bite&#8221; an
+unsuspecting Swing/AWT developer:</p>
+<ul class="bullet1" type="square"><li class="bullet1"><p class="paragraph"><a name="d0e7128"></a>LWUIT clears the background &#8211; when
+drawing the component LWUIT makes sure to first clear the background
+for the component using the painters for its parents if necessary.</p></li>
+<li class="bullet1"><p class="paragraph"><a name="d0e7132"></a>LWUIT translates to parent component coordinates &#8211; A
+Swing component always starts at 0, 0. This is because Graphics.translate
+is invoked with the X and Y coordinates of the component. In LWUIT
+this is done only for parent containers, which is why the components
+in LWUIT must be drawn in their X and Y location.
+
+The problem with this approach is that drawing in 0,0 often works
+for the first component in the container and fail for subsequent
+components.</p></li>
+<li class="bullet1"><p class="paragraph"><a name="d0e7136"></a>LWUIT doesn't make a distinction between paintContent
+or paintChildren &#8211; All calls in LWUIT lead to paint and
+paintBorder. There is no separate call for painting the children
+of a container.</p></li></ul></div>
+<div class="qandaentry"><a name="d0e7139"></a><p class="question"><b>Question: Scrolling isn't working like I expect,
+what went wrong?</b></p>
+<p class="answer"><b>Answer: </b>There are several common possibilities.</p>
+<ul class="bullet1" type="square"><li class="bullet1"><p class="paragraph"><a name="d0e7150"></a>You nested a scrollable component
+within another scrollable component (this is technically legal but
+might look odd). By default the form is scrollable so just try invoking
+setScrollableY(false) on the form.</p></li>
+<li class="bullet1"><p class="paragraph"><a name="d0e7154"></a>Scrolling behaves based on the amount of space allocated
+by the layout manager. Some layout managers do everything to prevent
+scrolling (such as grid layout) while the box layout tries to increase
+size as much as possible. Read the documentation for your layout
+manager of choice.</p></li>
+<li class="bullet1"><p class="paragraph"><a name="d0e7158"></a>For group layout components (generated by the UI
+builder) you must make sure to mark components to grow and verify
+that they indeed do so in preview mode. You must size the container
+to match the size of the component boundaries, otherwise the container
+size will be hardcoded.</p></li></ul></div>
+<div class="qandaentry"><a name="d0e7161"></a><p class="question"><b>Question: What is a <a class="indexterm" name="d0e7165"></a>painter?
+Why not just use an image?</b></p>
+<p class="answer"><b>Answer: </b>The idea behind a painter is simple, provide flexibility
+to the developer and allow the developer to define rendering suitable
+for his needs on any device. While images provide decent flexibility
+for artists&#8217; ideas, painters provide limitless flexibility:</p>
+<ul class="bullet1" type="square"><li class="bullet1"><p class="paragraph"><a name="d0e7176"></a>A developer can use a relatively low
+overhead gradient painter to get a very compelling look without
+a single additional image file. Furthermore, the gradient adapts
+nicely to any screen resolution.</p></li>
+<li class="bullet1"><p class="paragraph"><a name="d0e7180"></a>	In high&#8208;end devices that support SVG,
+etcetera, painters can use SVG to render and scale vector graphics
+rather than scale raster graphics. This increases the application
+UI fidelity. </p></li></ul></div>
+<div class="qandaentry"><a name="Z40006881293892"></a><p class="question"><b>Question: Is LWUIT identical
+across all platforms?</b></p>
+<p class="answer"><b>Answer: </b>Yes and No.</p>
+<p class="paragraph"><a name="d0e7192"></a>The basic core API is the same on most tested platforms and
+is binary compatible, allowing MIDP applications to run on Java
+SE (for example, in the Theme Creator actual MIDlet code is running
+in Java SE).</p>
+<p class="paragraph"><a name="d0e7195"></a>The catch is in several details:</p>
+<ul class="bullet1" type="square"><li class="bullet1"><p class="paragraph"><a name="d0e7200"></a>	Some components aren't available
+in other platforms: M3G, Media (sometimes available), and SVG.</p></li>
+<li class="bullet1"><p class="paragraph"><a name="d0e7204"></a>	Rendering might seem different on other platforms
+due to platform issues. For example, in some platforms LWUIT takes
+advantage of anti-aliasing. System fonts look completely different
+between platforms and bitmap fonts look odd in some platforms that
+don't properly support alpha channels.</p></li>
+<li class="bullet1"><p class="paragraph"><a name="d0e7208"></a>	Different platforms have different performance
+characteristics.</p></li></ul>
+<p class="paragraph"><a name="d0e7211"></a>For more details on these issues check out the portability
+chapter.</p></div>
+<div class="qandaentry"><a name="Z40006881294100"></a><p class="question"><b>Question: Does LWUIT support
+3 SoftButton devices?</b></p>
+<p class="answer"><b>Answer: </b>Yes, 3 SoftButton mode is implemented in display.
+However, since there is no reliable way to detect 3 SoftButton phones
+this features can be activated either programmatically or through
+a JAD file attribute.</p></div>
+<div class="qandaentry"><a name="Z40006881294617"></a><p class="question"><b>Question: A device doesn't
+seem to work with LWUIT. What should I do?</b></p>
+<p class="answer"><b>Answer: </b>Is it a MIDP 2.0/CLDC 1.1 device? If it is then please
+mail lwuit@sun.com with the following additional details:</p>
+<ul class="bullet1" type="square"><li class="bullet1"><p class="paragraph"><a name="d0e7234"></a>Does LWUIT hello world work on the
+device?</p></li>
+<li class="bullet1"><p class="paragraph"><a name="d0e7238"></a>Does the LWUIT UIDemo work on the device?</p></li>
+<li class="bullet1"><p class="paragraph"><a name="d0e7242"></a>What is the resolution+color depth of the device,
+and how much memory is allocated for Java?</p></li></ul></div>
+<div class="qandaentry"><a name="Z40006881294796"></a><p class="question"><b>Question: I want my application
+to look "native" on the device. Is there any way to accomplish that?</b></p>
+<p class="answer"><b>Answer: </b>While LWUIT is designed to do the exact opposite (support
+your own look and feel) a native look and feel can be partially
+achieved if you implement a theme or look and feel that resembles
+the native look.</p>
+<p class="paragraph"><a name="d0e7254"></a>This won't work very well on most devices since there is no
+way to detect if the user switched the default theme.</p>
+<p class="paragraph"><a name="d0e7257"></a>Downloadable themes are probably a good approach for a strong
+user community.</p></div>
+<div class="qandaentry"><a name="Z40006881294979"></a><p class="question"><b>Question: The UI for my<a class="indexterm" name="d0e7264"></a> touch screen phone seems
+too small for my fingers. How do I make the UI more appropriate
+for such a device?</b></p>
+<p class="answer"><b>Answer: </b>Use a global padding setting in the theme to increase
+the size of all widgets to a point where they are big enough for
+a finger tip.</p></div>
+<div class="qandaentry"><a name="Z40027371295080"></a><p class="question"><b>Question: Why am I getting
+memory errors in LWUIT? Why is LWUIT is consuming a lot of memory
+in my memory monitor?</b></p>
+<p class="answer"><b>Answer: </b>Check that your application doesn't hold onto pointers
+for components. Because a component references its parent component,
+holding onto a single button can keep an entire form with all its
+content in memory... LWUIT allocates and discards frequently to
+allow for a small memory footprint. This causes the graph of free
+memory to fluctuate but the alternative of caching would be worse
+for highly constrained devices. Check out the LWUIT blog for more
+information on the subject of tracking and identifying memory issues. </p></div>
+<div class="qandaentry"><a name="d0e7283"></a><p class="question"><b>Question: Why won't my list/text area scroll?
+Why does my list/text area jump around?</b></p>
+<p class="answer"><b>Answer: </b>You need to disable the scrolling for the form using myForm.setScrollable(false)
+and you should place the list in the center of a border layout.
+For deeper understanding of why this is required, read the next
+question about scrolling.</p></div>
+<div class="qandaentry"><a name="d0e7292"></a><p class="question"><b>Question: How can I make scrolling more elaborate?
+Does LWUIT only support scrolling based on focus? Why isn't scrolling
+of an element larger than screen size supported?</b></p>
+<p class="answer"><b>Answer: </b>LWUIT features an open interface for scrolling, allowing
+any component to define the way in which it wishes to scroll. This
+interface is used by the TextArea and List components to implement
+their internal scroll functionality.</p>
+<p class="paragraph"><a name="d0e7301"></a>LWUIT doesn't scroll containers. Instead it provides focus
+traversal, which causes scrolling to the focused component. This
+is a very powerful approach (and very common on small devices) since
+it allows easy interaction. However, in some circumstances (mostly
+viewers) LWUIT focus-based scrolling doesn't behave as expected.
+Since the scrolling architecture is exposed, developers can extend container
+and override the scrolling/key handling to behave as expected.</p>
+<p class="paragraph"><a name="d0e7304"></a>Scrolling a single component which is larger than the screen
+isn't supported by LWUIT containers. (This is a very difficult edge
+case for focus based scrolling). Scrolling multiple smaller components
+is not a problem.</p>
+<p class="paragraph"><a name="d0e7307"></a>Community member Elliot Long contributed his own solution
+to "visual scrolling" which allows scrolling without focus. The
+LWUIT blog covers simple image scrolling and explains the details
+here.</p></div>
+<div class="qandaentry"><a name="d0e7310"></a><p class="question"><b>Question: How do I change the appearance of the
+list? Remove the numbers from the side etcetera? Can I nest containers
+in the list?</b></p>
+<p class="answer"><b>Answer: </b>List is designed for a very large number of element
+and fast traversal. You can use its cell renderer facility to customize
+it any way you want as explained here. How the list can scale and
+grow is explained here and additionally here.</p></div>
+<div class="qandaentry"><a name="d0e7319"></a><p class="question"><b>Question: My application freezes or stalls. How
+do I fix this?</b></p>
+<p class="answer"><b>Answer: </b>99% of the problems of this type are related to Event
+Dispatch Thread (EDT) violations. The EDT broadcasts all the events
+in LWUIT. It is also responsible for drawing all elements on the
+screen.The EDT thread is responsible for drawing all screen elements,
+if it is blocked by a long running operation elements won't update
+and key/pointer events won't be received. The solution is to use
+threads for such long running tasks, however interaction with LWUIT
+can only be performed on the EDT. To return into the EDT you can
+use Display.callSerially/callSeriallyAndWait. A different option
+is to use invokeAndBlock.</p></div>
+<div class="qandaentry"><a name="d0e7328"></a><p class="question"><b>Question: I'm not opening any threads, why am
+I having problems? </b></p>
+<p class="answer"><b>Answer: </b>A typical application always uses at least two threads,
+lifecycle and the EDT. The lifecycle thread is the callback thread
+used for the application. For example, in MIDP the startApp method
+is invoked from the MIDP thread which is different from the EDT.</p></div>
+<div class="qandaentry"><a name="d0e7337"></a><p class="question"><b>Question: Does anything work from a separate thread?</b></p>
+<p class="answer"><b>Answer: </b>There are no guarantees, but repaint() should generally
+work from every thread and show() should as well.</p></div>
+<div class="qandaentry"><a name="d0e7346"></a><p class="question"><b>Question: How do I reposition/resize a dialog? </b></p>
+<p class="answer"><b>Answer: </b>Use a Dialog instance and a version of show which
+accepts 4 integer values to position the dialog. You can use the
+set the default dialog position to simplify dialog positioning.</p></div>
+<div class="qandaentry"><a name="d0e7355"></a><p class="question"><b>Question: How do I show Video?</b></p>
+<p class="answer"><b>Answer: </b>Use MMAPI to create a Player object, then submit it
+to the MediaComponent class. </p></div>
+<div class="qandaentry"><a name="d0e7364"></a><p class="question"><b>Question: How do I show SVG/3D?</b></p>
+<p class="answer"><b>Answer: </b>Use the M3G API or the SVGImage API to place such
+elements in the UI.</p></div>
+<div class="qandaentry"><a name="d0e7373"></a><p class="question"><b>Question: Can I create my own components?</b></p>
+<p class="answer"><b>Answer: </b>Everything in LWUIT is fully extensible.You can derive
+from any component and extend it. It is demonstrated in the <a href="chapter15.html#CHECEECE">Chapter 15</a> and it is discussed extensively
+in the blog. </p></div>
+<div class="qandaentry"><a name="d0e7384"></a><p class="question"><b>Question: I'm trying to display an animated gif.
+Why isn't it working? </b></p>
+<p class="answer"><b>Answer: </b>Animated gifs can be shown in MIDP using the MMAPI
+and MediaComponent (see the MMAPI question). LWUIT has special support
+for StaticAnimation which is a LWUIT specific format very similar
+to the animated gif. Both the Theme Creator and the Ant task accept
+animated GIF files to create static animations. </p></div>
+<div class="qandaentry"><a name="d0e7393"></a><p class="question"><b>Question: Why am I having problems on the BlackBerry? </b></p>
+<p class="answer"><b>Answer: </b>The BlackBerry VM has some issues with linking to
+classes that aren't on the device. A BlackBerry-specific version
+built with the BlackBerry VM is necessary. See the LWUIT-incubator
+project for a community built port for the BlackBerry. There is
+another BlackBerry port within the LWUIT project version control
+system.</p></div>
+<div class="qandaentry"><a name="Z40027371358334"></a><p class="question"><b>Question: I'm having issues
+on a Windows Mobile device?</b></p>
+<p class="answer"><b>Answer: </b>Windows mobile VMs vary significantly in their quality.
+If the VM is giving you problems try the Phone ME open source VM
+port for Windows mobile devices.</p></div>
+<div class="qandaentry"><a name="Z40027371358321"></a><p class="question"><b>Question: How do I create
+resource (.res) files? </b></p>
+<p class="answer"><b>Answer: </b>Use the Theme Creator (formerly the Resource Editor)
+or the Ant task.<a class="indexterm" name="d0e7419"></a> </p></div>
+<div class="qandaentry"><a name="Z40027371358308"></a><p class="question"><b>Question: What is the difference
+between the Theme Creator (formerly the Resource Editor) and the
+Ant task?</b></p>
+<p class="answer"><b>Answer: </b>The difference is mainly in the use case, the ant
+tool is designed mostly for developer related resources (locales,
+application images, etcetera). The Theme Creator is designed for
+use by graphics designers. </p></div></div>
+<!-- =================== -->
+<!-- END OF MAIN CONTENT -->
+<!-- =================== -->
+
+
+
+<div class="navbar" align="center"><br><br>
+<table dir="LTR" width="100%" cellpadding="0" cellspacing="0" border="0" summary="Navigation bar, includes the book title and navigation buttons"><colgroup span="3"><col id="b1" span="1" width="45%"><col id="b2" span="1" width="25%"><col id="b3" span="1" width="30%"></colgroup><tr bgcolor="#cccccc"><td class="navbartitle" align="left" rowspan="1" colspan="1" abbr="ChapTitle">&nbsp;&nbsp;LWUIT Developer&#8217;s Guide</td><td class="navbartitle" align="right" rowspan="1" colspan="1" abbr="PartNum">12-11-09</td><td valign="top" align="right" rowspan="1" colspan="1" abbr="NavButtons"><a href="index.html"><img src="shared/toc01.gif" width="30" height="26" border="0" title="Table Of Contents" alt="Table Of Contents"></a>
+<a href="chapter16.html"><img width="30" height="26" border="0" src="shared/prev01.gif" title="Previous Chapter" alt="Previous Chapter"></a><a href="ix.html"><img src="shared/next01.gif" width="30" height="26" border="0" title="Next Chapter" alt="Next Chapter"></a><a href="ix.html"><img src="shared/index01.gif" width="30" height="26" border="0" title="Book Index" alt="Book Index"></a></td></tr></table>
+</div><p class="copyrightlink"><a href="bookinfo.html">Copyright</a> &copy; 2009, Sun Microsystems, Inc.  All rights reserved.</p></body></html>

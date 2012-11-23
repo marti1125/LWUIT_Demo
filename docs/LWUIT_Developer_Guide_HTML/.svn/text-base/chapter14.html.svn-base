@@ -1,0 +1,105 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en-US">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   <meta http-equiv="Content-Language" content="en-US">
+<title>Logging</title>
+
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="Generator" content="XSolBook3.5 XML Custom XSLT Filter">
+<meta name="keywords" content="LWUIT">
+<meta name="dc.title" content="Logging">
+<meta name="description" content="This Developer&#8217;s Guide describes how to use the Lightweight UI toolkit.">
+<meta name="identifier" content="12-11-09">
+<meta name="date" content="">
+<meta name="issued" content="2009-12-11">
+<meta name="revision" content="">
+<meta name="publisher" content="Sun Microsystems, Inc.">
+<meta name="collection" content="reference">
+<meta name="robots" content="index, follow">
+
+<!--Inserts the stylesheet-->
+<link rel="STYLESHEET" href="unx_str_styles.css" charset="ISO-8859-1" type="text/css">
+</head>
+<body class="HlpBdy" leftmargin="10" topmargin="10" marginheight="10" marginwidth="10" bgcolor="#ffffff"><a name="top"></a><div class="navbar" align="center">
+<table dir="LTR" width="100%" cellpadding="0" cellspacing="0" border="0" summary="Navigation bar, includes the book title and navigation buttons"><colgroup span="2"><col id="t1" span="1" width="50%"><col id="t2" span="1" width="50%"></colgroup><tr bgcolor="#cccccc"><td class="navbartitle" align="left" rowspan="1" colspan="1" abbr="ChapTitle"><a name="CEHDFGFF"></a>&nbsp;&nbsp;LWUIT Developer&#8217;s Guide</td><td valign="top" align="right" rowspan="1" colspan="1" abbr="NavButtons"><a href="index.html"><img src="shared/toc01.gif" width="30" height="26" border="0" title="Table Of Contents" alt="Table Of Contents"></a>
+<a href="chapter13.html"><img width="30" height="26" border="0" src="shared/prev01.gif" title="Previous Chapter" alt="Previous Chapter"></a><a href="chapter15.html"><img src="shared/next01.gif" width="30" height="26" border="0" title="Next Chapter" alt="Next Chapter"></a><a href="ix.html"><img src="shared/index01.gif" width="30" height="26" border="0" title="Book Index" alt="Book Index"></a></td></tr></table><br><br></div>
+<table dir="LTR" width="100%" border="0" summary="Chapter Number" abbr="ChapNum"><colgroup span="1"><col id="ch1" span="1"></colgroup><tr><td align="right" class="ChapNumber"><span class="ChapNumPrefix">C H A P T E R</span>&nbsp;
+<span class="ChapNumNum">14</span><span class="ChapNumSuffix"></span></td></tr></table>
+<hr size="7" noshade="1">
+<!-- ============ -->
+<!-- MAIN CONTENT -->
+<!-- ============ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- BEGIN PAGETITLE ONE LINE -->
+<h1 class="ChapTitle" align="right"><a name="d0e5941"></a>Logging</h1>
+<!-- END PAGETITLE ONE LINE -->
+
+<div class="highlights"><p class="paragraph"><a name="d0e5945"></a>Adding <a class="indexterm" name="d0e5947"></a>logging
+statements into your code is the simplest debugging method. The logging
+framework allows you to log into storage (RMS) or your file system
+at runtime without changing your binary. There are four <a class="indexterm" name="d0e5951"></a>debugging levels
+to help you better monitor your code: DEBUG, INFO, WARNING and ERROR. </p>
+<table class="simplelist" summary="Simple list" border="0"><tr><td class="simplelist-cell"><kbd class="command">DEBUG</kbd></td><td class="simplelist-cell"><kbd class="command">WARNING</kbd></td></tr><tr><td class="simplelist-cell">Default and the
+lowest level.</td><td class="simplelist-cell">Third
+level</td></tr><tr><td class="simplelist-cell"><kbd class="command">INFO</kbd></td><td class="simplelist-cell">Error</td></tr><tr><td class="simplelist-cell">Second
+level</td><td class="simplelist-cell">Highest level debugging</td></tr></table>
+<p class="paragraph"><a name="d0e5979"></a>You should use the Log class coupled with NetBeans preprocessing
+tags to reduce its overhead completely in runtime. For information
+on the Log class, see <kbd class="command">com.sun.lwuit.util.Log</kbd> in
+the LWUIT API documentation.</p></div>
+<div class="sect1"><a name="Z40000061289326"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e5986"></a>14.1 Writing to a Log</h1>
+<p class="paragraph"><a name="d0e5989"></a>To write into a <a class="indexterm" name="d0e5991"></a>log, you use the <kbd class="command">static p(String text)</kbd> or <kbd class="command">p(String text, int level)</kbd> methods.
+For example:</p>
+<p class="literallayout"><pre>Log.p(&#8220;Finish loading images&#8221;).</pre></p></div>
+<div class="sect1"><a name="Z40000061289334"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e6009"></a>14.2 Showing the Log</h1>
+<p class="paragraph"><a name="d0e6012"></a>To print out the log, <a class="indexterm" name="d0e6014"></a>use the static <a class="indexterm" name="d0e6021"></a><kbd class="command">showLog()</kbd> method.
+If you are using <kbd class="command">microedition.io.file.FileConnection</kbd>,
+the log is written to the root location as the file <var class="replaceable">file</var><kbd class="command">.log</kbd>.
+If you don't use a file connection, a new Form appears with the log
+text inside.</p>
+<p class="paragraph"><a name="d0e6037"></a>The following example shows how to work with NetBeans preprocessing
+tags:</p>
+<p class="literallayout"><pre>// In case you are in debug mode, import Log class
+// #debug
+import com.sun.lwuit.util.Log;
+
+// Here is how to surround a log method, inside your code
+// #mdebug
+
+if(keyCode == Canvas.KEY_POUND) {
+&nbsp;&nbsp;&nbsp;Log.showLog();
+}
+//#enddebug</p></pre>
+<p class="paragraph"><a name="d0e6071"></a>Using preprocessing tags reduces the size of the source code,
+which is an important issue in mobile development. For more information,
+please refer to <kbd class="url"><a href="http://www.netbeans.org">NetBeans</a></kbd> information
+on preprocessing tags.</p>
+<p class="paragraph"><a name="d0e6077"></a></p></div>
+<!-- =================== -->
+<!-- END OF MAIN CONTENT -->
+<!-- =================== -->
+
+
+
+<div class="navbar" align="center"><br><br>
+<table dir="LTR" width="100%" cellpadding="0" cellspacing="0" border="0" summary="Navigation bar, includes the book title and navigation buttons"><colgroup span="3"><col id="b1" span="1" width="45%"><col id="b2" span="1" width="25%"><col id="b3" span="1" width="30%"></colgroup><tr bgcolor="#cccccc"><td class="navbartitle" align="left" rowspan="1" colspan="1" abbr="ChapTitle">&nbsp;&nbsp;LWUIT Developer&#8217;s Guide</td><td class="navbartitle" align="right" rowspan="1" colspan="1" abbr="PartNum">12-11-09</td><td valign="top" align="right" rowspan="1" colspan="1" abbr="NavButtons"><a href="index.html"><img src="shared/toc01.gif" width="30" height="26" border="0" title="Table Of Contents" alt="Table Of Contents"></a>
+<a href="chapter13.html"><img width="30" height="26" border="0" src="shared/prev01.gif" title="Previous Chapter" alt="Previous Chapter"></a><a href="chapter15.html"><img src="shared/next01.gif" width="30" height="26" border="0" title="Next Chapter" alt="Next Chapter"></a><a href="ix.html"><img src="shared/index01.gif" width="30" height="26" border="0" title="Book Index" alt="Book Index"></a></td></tr></table>
+</div><p class="copyrightlink"><a href="bookinfo.html">Copyright</a> &copy; 2009, Sun Microsystems, Inc.  All rights reserved.</p></body></html>

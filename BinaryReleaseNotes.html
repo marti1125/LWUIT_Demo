@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+
+	<head>
+  <title>Release Notes - Lightweight User Interface Toolkit</title>
+  <link rel="stylesheet" href="document.css" type="text/css">
+</head>
+
+	<body>
+		<a name="_top"></a>
+		<table summary="This table is for formatting purposes only." border="0" cellpadding="0" cellspacing="0" width="100%">
+			<tbody>
+				<tr>
+					<td class="sun-darkblue">&nbsp;</td>
+				</tr>
+				<tr>
+					<td class="sun-darkblue">
+						<h1>Release Notes</h1>
+						<h2>Lightweight User Interface Toolkit - 1.3</h2>
+						<h4>December 2009</h4>
+					</td>
+				</tr>
+				<tr>
+					<td class="sun-lightblue">&nbsp;</td>
+				</tr>
+			</tbody>
+		</table>
+		<h2>Table of Contents</h2>
+		<dl>
+			<dt><a href="#overview">1. Overview</a>
+			<dt><a href="#systemrequirements">2. Prerequisites</a>
+			<dt><a href="#installation">3. Installation Instructions</a>
+			<dt><a href="#running">4. Using the Toolkit</a>
+			<dt><a href="#knownbugs">5. Known Bugs</a>
+			<dt><a href="#useful">6. Useful Information</a>
+			<dt>
+		</dl>
+		<a name="overview"></a><a name="_maincontent"></a>
+		<h2>1. Overview</h2>
+		<p>The Lightweight User Interface Toolkit (LWUIT) is a widget library that you can  bundle with your application. Inspired by Swing, it 
+                runs on top of MIDP 2.0 and implements a peer-less graphics and UI model in a compact package with small footprint and moderate device 
+                requirements.  The lightweight characteristic makes it possible for resource-constrained devices to have a rich look and feel.</p>
+		<p>LWUIT has two components, the library itself, <tt>LWUIT.jar</tt> and the Resource Editor, <tt>ResourceEdit.exe</tt>.</p>
+				<p class="nav-link">[<a href="#_top">Top</a>]</p>
+		<a name="systemrequirements"></a>
+		<h2>2. Prerequisites</h2>
+		<p>In general you will use the library with an IDE or a toolkit such as the Sun Java&trade; Wireless Toolkit for CLDC. If you have a 
+                recent version of the toolkit installed, its environment will support the addition of the LWUIT toolkit.</p>
+		<p>A minimal environment is:</p>
+		<ul>
+		<li>Microsoft Windows XP or Windows Vista.</li>
+			<li>Java Platform, Standard Edition Software Development Kit (Java SE SDK) version 1.6 update 4 or higher. 
+                        To download the SDK software, go to <a href="http://java.sun.com/javase/downloads/index.html">http://java.sun.com/javase/downloads/index.html.</a>
+			</li>
+			<li>Sun&nbsp;Java Wireless&nbsp;Toolkit 2.5.2 for CLDC.  To download the wireless toolkit, go to <a href="http://java.sun.com/products/sjwtoolkit/download.html">http://java.sun.com/products/sjwtoolkit/download.html</a>. Provide the environment described in the wireless toolkit <a href="http://java.sun.com/products/sjwtoolkit/wtk2.5.2/docs/BinaryReleaseNotes.html">Release Notes</a>.		</ul>
+                <p class="nav-link">[<a href="#_top">Top</a></p>
+		<a name="installation"></a>
+		<h2>3. Installation Instructions</h2>
+		<p>Download the LWUIT distribution zip file and extract it.</p>
+		<p>The release contains the following:</p>
+		<ol>
+			<li>UIDemo - a NB 6.x project that demonstrates the library key features</li>
+			<li>ResourceEditor.exe - a GUI utility to generate resource files and themes.</li>
+			<li>docs - the release contains the API javadocs and a detailed developer guide</li>
+		</ol>
+		<p></p>
+		<h2><b>4. Using the Toolkit</b></h2>
+		<p>With NetBeans: add the LWUIT.jar to your project(open [project properties]->[libraries & Resources] )</p>
+		<p>With the Sprint toolkit: create a LWUIT project.</p>
+		<p>With the wireless toolkit add the LWUIT.jar to [wtk_install_dir]\lib\ext and make sure the project bundles the 
+                LWUIT.jar (see Settings->External APIs in the WTK)</p>
+		<p>Create a project . At least MIDP 2.0 and CLDC 1.1.</p>
+		<ol>
+			<li>Open the project.
+			<li>Click the Settings Button.
+			<li>Click the External APIs  icon. 
+			<li>For <tt>LWUIT.jar</tt>, check the Use and Bundle boxes.</ol>
+		<p class="nav-link"><b>[<a href="#_top">Top</a>]</b></p>
+		<a name="knownbugs"></a>
+		<h2><b>5. Known Bugs/Issues</b></h2>
+		<p>This is not an exhaustive list of known bugs. It includes those bugs that developers are most 
+                likely to encounter when using LWUIT.<b><b> </b></b></p>
+
+		<ol>
+		<li>
+			Known issues can be seen in the public <a href="https://lwuit.dev.java.net/issues/">lwuit issue tracker</a>, to
+            file additional issues you can ask to join the project as an Observer role. Make sure to check the
+            <a href="http://forums.java.net/jive/forum.jspa?forumID=139">LWUIT forum</a> before filing issues.
+		</li>
+		<li>
+			The ResourceBuilder Ant task was removed for this version and replaced with an Ant task integrated with the
+            LWUIT Designer code base. This also required changes to the syntax of the Ant task/conf files to support
+            the new style structure in LWUIT, the documentation wasn't updated in time for this release you can refer to
+            the LWUIT Demo for usage examples and to the <a href="http://lwuit.blogspot.com/">LWUIT blog</a> where we will post some more documentation.
+		</li>
+		<li>
+			When opening older resource files with the new LWUIT designer all bitmap fonts will need
+            to be recreated since information related to bitmap fonts is lost due to deficiencies in the
+            older format.
+		</li>
+		<li>
+			The new LWUIT designer behaves differently with images and doesn't reencode them, hence if a JPEG is
+            added to the new LWUIT designer it would remain as a JPEG on the device unless it is scaled.
+            Previous versions of this tool always reencoded the added images.
+		</li>
+		<li>
+			Styles in LWUIT were changed significantly since the last drop, LWUIT no longer supports fgSelection/bgSelection
+            and instead uses selected/unselected styles. When loading a resource file created with the older version of LWUIT
+            a special compatibility mode is triggered which disables some of the features related to the new styles and is not
+            100% compatible with the older LWUIT. Further details on the reasoning and features related to the style
+            change are within the <a href="http://lwuit.blogspot.com/2009/03/breaking-to-make-things-better.html">LWUIT blog</a>.
+		</li>
+		<li>
+			Proguard 3.7 that ships by default with NB6.0 has issues with LWUIT – download version 4.x and replace 
+                        the Proguard version in NB - under [NB 6.0 install dir]\mobility8\external\proguard
+		</li>
+		<li>Default Commands collide with combo box popups, text components etc... - when a default command is assigned to a form 
+                it will receive an actionPerformed event as well as the component that has focus. There is no 
+                workaround for this issue other than avoiding the default command functionality in such cases, this functionality exists
+                for use cases where component based interaction isn't necessary such as navigation based on lists.
+		</li>
+		<li>
+			FlowLayout is buggy in complex layouts/scenarios - issue #72 (refrence numbers are from java.net issue tracker)
+		</li>		
+		<li>
+			GroupLayout has bugs and is not recommended to be used until a matisse plugin is available - issue #21 (refrence numbers are from java.net issue tracker)
+		</li>		
+		</ol>
+
+
+		<p class="nav-link"><b><b>[<a href="#_top">Top</a>]</b></b></p>
+		<b><b><a name="useful"></a></b></b>
+		<h2><b><b>6. Useful Information</b></b></h2>
+		<p>The LWUIT library was designed to run on any MIDP2.0 CLDC1.1, but there might be some broken devices that would fail to run a LWUIT based app.
+		<br>For a more concrete devices DB see this <a href="http://wiki.java.net/bin/view/Mobileandembedded/DeviceDB">link</a> which is based on community reports.
+		<br>Feel Free to edit this and report status on new devices
+		
+		</p>
+		<p></p>
+		<p class="nav-link"><b><b>[<a href="#_top">Top</a>]</b></b></p>
+		<hr class="pHr">
+		<p class="copyright"><a href="copyright.html">Copyright &copy; 2008</a> Sun Microsystems, Inc. All rights reserved. Use is subject to the license terms.</p>
+	</body>
+
+</html>

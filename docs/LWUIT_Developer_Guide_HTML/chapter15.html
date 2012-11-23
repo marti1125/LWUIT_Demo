@@ -1,0 +1,568 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en-US">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   <meta http-equiv="Content-Language" content="en-US">
+<title>Authoring Components</title>
+
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="Generator" content="XSolBook3.5 XML Custom XSLT Filter">
+<meta name="keywords" content="LWUIT">
+<meta name="dc.title" content="Authoring Components">
+<meta name="description" content="This Developer&#8217;s Guide describes how to use the Lightweight UI toolkit.">
+<meta name="identifier" content="12-11-09">
+<meta name="date" content="">
+<meta name="issued" content="2009-12-11">
+<meta name="revision" content="">
+<meta name="publisher" content="Sun Microsystems, Inc.">
+<meta name="collection" content="reference">
+<meta name="robots" content="index, follow">
+
+<!--Inserts the stylesheet-->
+<link rel="STYLESHEET" href="unx_str_styles.css" charset="ISO-8859-1" type="text/css">
+</head>
+<body class="HlpBdy" leftmargin="10" topmargin="10" marginheight="10" marginwidth="10" bgcolor="#ffffff"><a name="top"></a><div class="navbar" align="center">
+<table dir="LTR" width="100%" cellpadding="0" cellspacing="0" border="0" summary="Navigation bar, includes the book title and navigation buttons"><colgroup span="2"><col id="t1" span="1" width="50%"><col id="t2" span="1" width="50%"></colgroup><tr bgcolor="#cccccc"><td class="navbartitle" align="left" rowspan="1" colspan="1" abbr="ChapTitle"><a name="CHECEECE"></a>&nbsp;&nbsp;LWUIT Developer&#8217;s Guide</td><td valign="top" align="right" rowspan="1" colspan="1" abbr="NavButtons"><a href="index.html"><img src="shared/toc01.gif" width="30" height="26" border="0" title="Table Of Contents" alt="Table Of Contents"></a>
+<a href="chapter14.html"><img width="30" height="26" border="0" src="shared/prev01.gif" title="Previous Chapter" alt="Previous Chapter"></a><a href="chapter16.html"><img src="shared/next01.gif" width="30" height="26" border="0" title="Next Chapter" alt="Next Chapter"></a><a href="ix.html"><img src="shared/index01.gif" width="30" height="26" border="0" title="Book Index" alt="Book Index"></a></td></tr></table><br><br></div>
+<table dir="LTR" width="100%" border="0" summary="Chapter Number" abbr="ChapNum"><colgroup span="1"><col id="ch1" span="1"></colgroup><tr><td align="right" class="ChapNumber"><span class="ChapNumPrefix">C H A P T E R</span>&nbsp;
+<span class="ChapNumNum">15</span><span class="ChapNumSuffix"></span></td></tr></table>
+<hr size="7" noshade="1">
+<!-- ============ -->
+<!-- MAIN CONTENT -->
+<!-- ============ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- BEGIN PAGETITLE ONE LINE -->
+<h1 class="ChapTitle" align="right"><a name="d0e6097"></a>Authoring Components</h1>
+<!-- END PAGETITLE ONE LINE -->
+
+<div class="highlights"><p class="paragraph"><a name="d0e6101"></a>LWUIT is designed to be as extensible and modular
+as possible. A developer can replace or extend almost every component
+within LWUIT (as of this writing none of the LWUIT components are
+defined as final). In the spirit of Swing, a third&#8208;party developer
+can write an LWUIT component from scratch by implementing painting and
+event handling.</p>
+<p class="paragraph"><a name="d0e6104"></a>Furthermore, thanks to the composite pattern used by LWUIT
+(and Swing with AWT), small custom and preexisting components can
+be combined to form a single component. </p>
+<p class="paragraph"><a name="d0e6107"></a>The composite approach is mentioned in <a href="chapter2.html#CEHGAEFC">Chapter 2</a>. This chapter focuses on writing a
+component from scratch and plugging it into the LWUIT features such
+as the theme engine, painters, etcetera. This chapter discusses
+direct derivation from the Component, but you can derive from any
+existing LWUIT component to produce similar results. For example,
+ComboBox derives from List, Button from Label, CheckBox from Button,
+Dialog from Form, and so forth.</p></div>
+<div class="sect1"><a name="d0e6112"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e6113"></a>15.1 Painting</h1>
+<p class="paragraph"><a name="d0e6116"></a><a class="indexterm" name="d0e6117"></a>Writing
+a custom component should be immediately familiar to Swing/AWT developers.
+The following example derives from <a class="indexterm" name="d0e6121"></a>Component
+and overrides paint in order to draw on the screen:</p><br>
+<table class="code" border="1" cellpadding="5" cellspacing="0" dir="LTR" summary="Table for code examples or code output">
+<tbody><tr><td scope="ROW"><pre class="screentext">
+public class MyComponent extends Component {
+&nbsp;&nbsp;&nbsp;public void paint(Graphics g) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;g.setColor(0xffffff);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;g.fillRect(getX(), getY(), getWidth(), getHeight());
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;g.setColor(0);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;g.drawString("Hello World", getX(), getY());
+&nbsp;&nbsp;&nbsp;}
+}
+</pre></td></tr>
+</tbody>
+</table>
+<br>
+<p class="paragraph"><a name="d0e6128"></a>This component writes <kbd class="command">Hello World</kbd> in black
+text on a white background. To show it we can use the following
+code, resulting in <a href="chapter15.html#Z40000ad1293483">FIGURE 15-1</a>.
+As mentioned earlier, you can also derive from an appropriate subclass
+of Component; overriding <kbd class="command">paint</kbd> is optional.</p><br>
+<table class="code" border="1" cellpadding="5" cellspacing="0" dir="LTR" summary="Table for code examples or code output">
+<tbody><tr><td scope="ROW"><pre class="screentext">
+Form testForm = new Form();
+testForm.setLayout(new BorderLayout());
+testForm.addComponent(BorderLayout.CENTER, new MyComponent());
+testForm.show();
+</pre></td></tr>
+</tbody>
+</table>
+<br>
+<a name="Z40000ad1293483"></a><div class="figurebox"><p class="figurecaption"><a name="d0e6142"></a><b>FIGURE 15-1&nbsp;&nbsp;&nbsp;Hello World</b></p></div>
+<img alt="Hello World" title="Hello World" src="figures/HelloWorld.jpg"><br><br><br>
+<p class="paragraph"><a name="d0e6154"></a>Notice several interesting things that might not be obvious
+in the example:</p>
+<ul class="bullet1" type="square"><li class="bullet1"><p class="paragraph"><a name="d0e6159"></a>Setting the <a class="indexterm" name="d0e6161"></a>color
+ignores the alpha component of the color. All colors are presumed
+to be opaque RGB colors.</p></li>
+<li class="bullet1"><p class="paragraph"><a name="d0e6167"></a>The rectangle is filled and the text is drawn in
+the X coordinate of the component. Unlike Swing, which &#8220;translates&#8221; for
+every component coordinate, LWUIT only translates to the parent
+container&#8217;s coordinates, so it is necessary to draw in the right
+X/Y position (rather than 0,0) because the component position might
+not be the same as the parent&#8217;s. For example, to draw a point a
+the top left of the component, you must draw it from <kbd class="command">getX()</kbd> and <kbd class="command">getY()</kbd>.</p></li></ul></div>
+<div class="sect1"><a name="d0e6176"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e6177"></a>15.2 Sizing In Layout</h1>
+<p class="paragraph"><a name="d0e6180"></a>In most cases the example above won't work properly because
+the layout manager doesn't &#8220;know&#8221; how much space
+to allocate. To fix this you must define a preferred size.</p>
+<p class="paragraph"><a name="d0e6183"></a>A <a class="indexterm" name="d0e6185"></a>preferred
+size is the <a class="indexterm" name="d0e6189"></a>size which
+the component requests from the layout manager. It might take more
+(or less) but the size should be sufficient to support rendering. The
+preferred size is calculated based on images used and font sizes
+used. The component developer (or look and feel author) is responsible
+for calculating the proper size.</p>
+<p class="paragraph"><a name="d0e6194"></a>The <a class="indexterm" name="d0e6196"></a><kbd class="command">calcPreferredSize()</kbd> method
+is invoked when laying out the component initially (and later when
+changing themes). It allows you to determine the size you want for
+the component as follows:</p><br>
+<table class="code" border="1" cellpadding="5" cellspacing="0" dir="LTR" summary="Table for code examples or code output">
+<tbody><tr><td scope="ROW"><pre class="screentext">
+protected Dimension calcPreferredSize() {
+&nbsp;&nbsp;&nbsp;Font fnt = Font.getDefaultFont();
+&nbsp;&nbsp;&nbsp;int width = fnt.stringWidth(&#8220;99999-9999&#8221;)
+    int height = fnt.getHeight();
+    return new Dimension(width, height); 
+}
+</pre></td></tr>
+</tbody>
+</table>
+<br>
+<p class="paragraph"><a name="d0e6205"></a>Unlike Swing/AWT, LWUIT doesn't have minimum or maximum size
+methods, thus your job as a component developer is simpler. Components
+grow based on the layout manager choices rather than component developer
+choices</p>
+<p class="paragraph"><a name="d0e6208"></a>This example uses a hardcoded text for sizing rather than
+the input string, so the component won't constantly resize itself
+in the layout as the user inputs characters.</p>
+<p class="paragraph"><a name="d0e6211"></a>After making these changes you no longer need to use the border
+layout to place the component and it now occupies the correct size,
+so you can show the component using the following code (default
+layout if FlowLayout):</p><br>
+<table class="code" border="1" cellpadding="5" cellspacing="0" dir="LTR" summary="Table for code examples or code output">
+<tbody><tr><td scope="ROW"><pre class="screentext">
+Form testForm = new Form();
+testForm.addComponent(new MyComponent());
+testForm.show();
+</pre></td></tr>
+</tbody>
+</table>
+<br></div>
+<div class="sect1"><a name="d0e6216"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e6217"></a>15.3 Event Handling</h1>
+<p class="paragraph"><a name="d0e6220"></a>So <a class="indexterm" name="d0e6222"></a>far
+the component doesn't have any interactivity or react to user events.
+To improve the component, we can build a simple input area that
+accepts only numeric values (for simplicity&#8217;s sake we do not support
+cursor navigation).</p>
+<p class="paragraph"><a name="d0e6227"></a>Event handling in LWUIT is very similar to MIDP event handling
+(which is designed for small devices) in which we receive the calls
+from the platform in methods of the subclass. To accept user key
+presses, override the appropriate key released method as follows:</p><br>
+<table class="code" border="1" cellpadding="5" cellspacing="0" dir="LTR" summary="Table for code examples or code output">
+<tbody><tr><td scope="ROW"><pre class="screentext">
+public void keyReleased(int keyCode) {
+&nbsp;&nbsp;&nbsp;if(keyCode &gt;= '0' &amp;&amp; keyCode &lt;= '9') {
+&nbsp;&nbsp;&nbsp;    char c = (char)keyCode;
+ inputString += c;
+ repaint();
+ }
+}
+</pre></td></tr>
+</tbody>
+</table>
+<br>
+<p class="paragraph"><a name="d0e6232"></a>Note, it is an LWUIT convention to place actions in the key
+released event rather than the key press event (except for special
+cases). This is important from a UI perspective, because navigation
+triggered by a key press event might send the key release event
+to a new form, causing odd behavior.</p></div>
+<div class="sect1"><a name="d0e6235"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e6236"></a>15.4 Focus</h1>
+<p class="paragraph"><a name="d0e6239"></a>If you run the event handing code above, you can see the event
+never <a class="indexterm" name="d0e6241"></a>actually occurs. This is
+because the component must accept focus in order to handle events. By
+default, components are not focusable and you must activate <a class="indexterm" name="d0e6248"></a>focus support as follows:</p><br>
+<table class="code" border="1" cellpadding="5" cellspacing="0" dir="LTR" summary="Table for code examples or code output">
+<tbody><tr><td scope="ROW"><pre class="screentext">
+setFocusable(true);
+</pre></td></tr>
+</tbody>
+</table>
+<br>
+<p class="paragraph"><a name="d0e6256"></a>Once activated, focus works as you would expect and the behavior
+is correct. It makes sense to detect focus within the <kbd class="command">paint(Graphics)</kbd> method
+(or <kbd class="command">paintBorder</kbd>) and draw the component differently
+in order to visually indicate to the user that focus has reached
+the given component. </p></div>
+<div class="sect1"><a name="d0e6265"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e6266"></a>15.5 The Painting Pipeline</h1>
+<p class="paragraph"><a name="d0e6269"></a>This section discuss <a class="indexterm" name="d0e6271"></a>painting the component
+with regard to styles and focus. To understand styling and proper
+painting process it&#8217;s necessary to understand the basics of how
+painting occurs in LWUIT. </p>
+<p class="paragraph"><a name="d0e6279"></a>Painting operations are performed in order by the rendering
+pipeline, and all painting is performed in order on the event dispatch
+thread (<a class="indexterm" name="d0e6281"></a>EDT):</p>
+<ol class="list1" type="1"><li class="list1"><p class="paragraph"><a name="d0e6288"></a>First the background
+is painted using the appropriate painter (see the background painters
+section). This makes sure the background is properly &#8220;cleared&#8221; to
+draw. </p></li>
+<li class="list1"><p class="paragraph"><a name="d0e6292"></a>The <kbd class="command">paint</kbd> method is invoked with
+the coordinates translated to its parent container.</p></li>
+<li class="list1"><p class="paragraph"><a name="d0e6299"></a>The <kbd class="command">paintBorder</kbd> method is invoked
+with the same translation.</p></li>
+<li class="list1"><p class="paragraph"><a name="d0e6306"></a>Both <kbd class="command">paint</kbd> and <kbd class="command">paintBorder</kbd> delegate
+their work to the <kbd class="command">LookAndFeel</kbd> and <kbd class="command">Border</kbd> classes
+respectively to decouple the drawing code. For example, Button's paint
+method looks something like this:</p><br>
+<table class="code" border="1" cellpadding="5" cellspacing="0" dir="LTR" summary="Table for code examples or code output">
+<tbody><tr><td scope="ROW"><pre class="screentext">
+public void paint(Graphics g) {
+ UIManager.getInstance().getLookAndFeel().drawButton(g, this);
+}
+</pre></td></tr>
+</tbody>
+</table>
+<br></li></ol>
+<p class="paragraph"><a name="d0e6323"></a>Paint border from component defaults to a reasonable value
+as well:</p><br>
+<table class="code" border="1" cellpadding="5" cellspacing="0" dir="LTR" summary="Table for code examples or code output">
+<tbody><tr><td scope="ROW"><pre class="screentext">
+Border b = getBorder();
+if(b != null){
+&nbsp;&nbsp;g.setColor(getStyle().getFgColor());
+&nbsp;&nbsp;b.paint(g, this);
+}
+</pre></td></tr>
+</tbody>
+</table>
+<br></div>
+<div class="sect1"><a name="d0e6328"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e6329"></a>15.6 Styling</h1>
+<p class="paragraph"><a name="d0e6332"></a>In the beginning we painted the component using simple drawing
+methods, completely disregarding the style. While this is perfectly
+legal it fails to take advantage of LWUIT's theming functionality. </p>
+<p class="paragraph"><a name="d0e6335"></a>The &#8220;right way&#8221; to paint in LWUIT regards
+the Style object and ideally delegates work to the <a class="indexterm" name="d0e6337"></a><kbd class="command">LookAndFeel</kbd> class.
+Notice that you can subclass <kbd class="command">DefaultLookAndFeel</kbd> and
+add any method you want, such as <kbd class="command">paintMyComponent()</kbd>.
+This allows you to implement component painting &#8220;correctly&#8221; within
+the look and feel. However, for custom&#8208;made components
+this might not be the best approach since it blocks other third
+parties from using your components if they have already created
+a look and feel of their own.</p>
+<p class="paragraph"><a name="d0e6350"></a>For simplicity, this example does all the painting within
+the component itself.</p>
+<p class="paragraph"><a name="d0e6353"></a>To paint the input component correctly, implement the <kbd class="command">paint</kbd> method
+as follows:</p><br>
+<table class="code" border="1" cellpadding="5" cellspacing="0" dir="LTR" summary="Table for code examples or code output">
+<tbody><tr><td scope="ROW"><pre class="screentext">
+public void paint(Graphics g) {
+&nbsp;&nbsp;&nbsp;UIManager.getInstance().getLookAndFeel().setFG(g, this);
+&nbsp;&nbsp;&nbsp;Style style = getStyle();
+&nbsp;&nbsp;&nbsp;g.drawString(inputString,&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;getX() + style.getPadding(LEFT), 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;getY() + style.getPadding(TOP));
+}
+</pre></td></tr>
+</tbody>
+</table>
+<br>
+<p class="paragraph"><a name="d0e6361"></a>There are several things of interest in the code above:</p>
+<ul class="bullet1" type="square"><li class="bullet1"><p class="paragraph"><a name="d0e6366"></a><a class="indexterm" name="d0e6367"></a><kbd class="command">setFG</kbd> sets
+the foreground color and font based on the state of the component (enabled,
+hasFocus). </p></li>
+<li class="bullet1"><p class="paragraph"><a name="d0e6375"></a>Style padding positions the text. Notice it ignores
+the margins, which are already in the translated coordinates of
+the paint (margins work without any change in the code).</p></li>
+<li class="bullet1"><p class="paragraph"><a name="d0e6379"></a>There&#8217;s no need to paint the background, draw a
+border or check for focus. These things are all handled implicitly
+by LWUIT! </p></li></ul>
+<p class="paragraph"><a name="d0e6382"></a>This isn't enough though, the implementation of <kbd class="command">calcPreferredSize</kbd> must
+take all of these things into account, including the possibility
+of user installed fonts.</p><br>
+<table class="code" border="1" cellpadding="5" cellspacing="0" dir="LTR" summary="Table for code examples or code output">
+<tbody><tr><td scope="ROW"><pre class="screentext">
+protected Dimension calcPreferredSize() {
+&nbsp;&nbsp;&nbsp;Style style = getStyle();
+&nbsp;&nbsp;&nbsp;Font fnt = style.getFont();
+&nbsp;&nbsp;&nbsp;int width = fnt.stringWidth(inputString);
+&nbsp;&nbsp;&nbsp;int height = fnt.getHeight();
+&nbsp;&nbsp;&nbsp;height += style.getPadding(Component.TOP) + &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;style.getPadding(Component.BOTTOM);
+&nbsp;&nbsp;&nbsp;width += style.getPadding(Component.LEFT) +	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;style.getPadding(Component.RIGHT);
+&nbsp;&nbsp;&nbsp;return new Dimension(width, height);
+}
+</pre></td></tr>
+</tbody>
+</table>
+<br>
+<p class="paragraph"><a name="d0e6390"></a>With these two things in order our component is functional
+and works with the existing theme!</p>
+<a name="Z40000ad1294022"></a><div class="figurebox"><p class="figurecaption"><a name="d0e6394"></a><b>FIGURE 15-2&nbsp;&nbsp;&nbsp;Original Component Theme</b></p></div>
+<img alt="Original Component Theme" title="Original Component Theme" src="figures/675789.jpg"><br><br><br>
+<p class="paragraph"><a name="d0e6406"></a>If we change the theme to the Java theme from the UI demo,
+the same code produces <a href="chapter15.html#Z40000ad1294069">FIGURE 15-3</a>.</p>
+<a name="Z40000ad1294069"></a><div class="figurebox"><p class="figurecaption"><a name="d0e6412"></a><b>FIGURE 15-3&nbsp;&nbsp;&nbsp;New Theme</b></p></div>
+<img alt="UI Demo Theme" title="UI Demo Theme" src="figures/2434.jpg"><br><br><br>
+<p class="paragraph"><a name="d0e6424"></a>However, there is one last thing for styles to work correctly.
+Currently the component uses the default color scheme and font and
+doesn't allow the designer to specify a style specific to this component.
+To allow this functionality you must allow the component to be identified
+in the theme editor, even in obfuscated code and in case of subclasses.
+To do this, override <a class="indexterm" name="d0e6426"></a><kbd class="command">getUIID()</kbd> and
+return the name you want for the component:</p><br>
+<table class="code" border="1" cellpadding="5" cellspacing="0" dir="LTR" summary="Table for code examples or code output">
+<tbody><tr><td scope="ROW"><pre class="screentext">
+public String getUIID() {
+ return &#8220;NumericInput&#8221;;
+}
+</pre></td></tr>
+</tbody>
+</table>
+<br>
+<p class="paragraph"><a name="d0e6435"></a>This allows a designer to specify <kbd class="command">NumericInput</kbd> within
+the Theme Creator's theme builder (in the Component combo box) in
+order to customize this component. Note, currently the Theme Creator
+doesn't support previews for custom-built components.</p></div>
+<div class="sect1"><a name="d0e6441"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e6442"></a>15.7 Background</h1>
+<p class="paragraph"><a name="d0e6445"></a>Up until now we&#8217;ve assumed that LWUIT takes care of the background
+handling for us. However, it is important to understand how this
+works, otherwise performance might be impacted.</p>
+<p class="paragraph"><a name="d0e6448"></a>The background of a component is managed by a Painter (see
+the API documentation for <kbd class="command">Painter</kbd> for further
+details). A Painter can draw any arbitrary graphics in the background
+and can be translucent or opaque. LWUIT creates painters implicitly
+based on background image or color in the style. Furthermore you
+can customize them either by creating your own special painter or
+by manipulating the style. </p>
+<p class="paragraph"><a name="d0e6454"></a>Since a painter can be translucent or transparent LWUIT recurses
+to the top&#8208;most component, starts drawing its painter,
+then recurses down the paint hierarchy until the background is properly
+drawn. If your component is completely opaque (a square that draws
+all of its data) this extra work is redundant. To improve performance,
+define background transparency (in the style) to be 255 (0xff).
+This indicates your background is opaque.</p>
+<p class="paragraph"><a name="d0e6457"></a>Painters are designed for general pluggability. They work
+with your customized component without any effort on your part.</p></div>
+<div class="sect1"><a name="d0e6460"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e6461"></a>15.8 Animating The Component</h1>
+<p class="paragraph"><a name="d0e6464"></a>We briefly discussed the animation framework in <a href="chapter12.html#CEHCJHCC">Animation</a>. However, with a custom component
+the features are far more powerful. </p>
+<p class="paragraph"><a name="d0e6469"></a>First you must register the component as interested in animation.
+You cannot perform this registration during construction since there
+is no parent form at this stage. The component has an <kbd class="command">initComponent</kbd> method
+that is guaranteed to invoke before the component is visible to
+the user and after the parent form is available.</p><br>
+<table class="code" border="1" cellpadding="5" cellspacing="0" dir="LTR" summary="Table for code examples or code output">
+<tbody><tr><td scope="ROW"><pre class="screentext">
+protected void initComponent() {
+&nbsp;&nbsp;&nbsp;getComponentForm().registerAnimated(this);
+}
+</pre></td></tr>
+</tbody>
+</table>
+<br>
+<p class="paragraph"><a name="d0e6477"></a>The code above registers the animation, essentially triggering
+the animate method. The animate method can change the state of the
+component and optionally trigger a repaint when it returns true. </p>
+<p class="paragraph"><a name="d0e6480"></a>It is relatively easily to implement a &#8220;blinking
+cursor&#8220; using the animate method:</p><br>
+<table class="code" border="1" cellpadding="5" cellspacing="0" dir="LTR" summary="Table for code examples or code output">
+<tbody><tr><td scope="ROW"><pre class="screentext">
+private boolean drawCursor = true;
+private long time = System.currentTimeMillis();
+public boolean animate() {
+&nbsp;&nbsp;&nbsp;boolean ani = super.animate();
+&nbsp;&nbsp;&nbsp;long currentTime = System.currentTimeMillis();
+&nbsp;&nbsp;&nbsp;if(drawCursor) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if((currentTime - time) &gt; 800) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;time = currentTime;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;drawCursor = false;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return true;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;} else {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if((currentTime - time) &gt; 200) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;time = currentTime;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;drawCursor = true;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return true;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;return ani;
+}
+</pre></td></tr>
+</tbody>
+</table>
+<br>
+<p class="paragraph"><a name="d0e6485"></a>Notice that all this code really does is change the <kbd class="command">drawCursor</kbd> state
+in which case it returns true, indicating the need for a repaint.
+Now implementing a cursor within our paint method requires only
+the following lines:</p><br>
+<table class="code" border="1" cellpadding="5" cellspacing="0" dir="LTR" summary="Table for code examples or code output">
+<tbody><tr><td scope="ROW"><pre class="screentext">
+public void paint(Graphics g) {
+&nbsp;&nbsp;&nbsp;UIManager.getInstance().getLookAndFeel().setFG(g, this);
+&nbsp;&nbsp;&nbsp;Style style = getStyle();
+&nbsp;&nbsp;&nbsp;g.drawString(inputString,&nbsp;getX() + style.getPadding(LEFT), 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;getY() + style.getPadding(TOP));
+&nbsp;&nbsp;&nbsp;if(drawCursor) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int w = style.getFont().stringWidth(inputString);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int cursorX = getX() + style.getPadding(LEFT) + w;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int cursorY = getY() + style.getPadding(TOP);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int cursorY = getY() + style.getPadding(TOP);
+&nbsp;&nbsp;&nbsp;}
+}
+</pre></td></tr>
+</tbody>
+</table>
+<br></div>
+<div class="sect1"><a name="d0e6493"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e6494"></a>15.9 The Custom Component</h1>
+<p class="paragraph"><a name="d0e6497"></a><a href="#Z40000ad1291247">EXAMPLE 15-1</a> shows the MIDlet Code
+with a theme. </p>
+<p class="paragraph"><a name="d0e6501"></a><a href="#Z40000ad1295637">EXAMPLE 15-2</a> shows the <a class="indexterm" name="d0e6504"></a>component code.</p><a name="Z40000ad1291247"></a><br>
+<table class="code" cellpadding="5" cellspacing="0" dir="LTR" summary="Table for code examples or code output" border="1"><a name="d0e6511"></a><caption class="codecaption"><b>EXAMPLE 15-1&nbsp;&nbsp;&nbsp;</b></caption>
+<tbody><tr><td scope="ROW"><pre class="screentext">import java.io.IOException;
+import javax.microedition.midlet.MIDlet;
+import com.sun.lwuit.Display;
+import com.sun.lwuit.Form;
+import com.sun.lwuit.plaf.UIManager;
+import com.sun.lwuit.util.Resources;
+&nbsp;
+public class LWUITMIDlet extends MIDlet {
+&nbsp;
+    private boolean started;
+    protected void startApp() {
+        try {
+            Display.init(this);
+            Resources r1 = Resources.open("/javaTheme.res");
+            UIManager.getInstance().setThemeProps(r1.getTheme("javaTheme"));
+&nbsp;
+            // distinguish between start and resume from pause
+&nbsp;
+            if (!started) {
+                started = true;
+                Form testForm = new Form();
+                testForm.addComponent(new MyComponent());
+                testForm.show();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+    protected void pauseApp() {
+    }
+    protected void destroyApp(boolean arg0) {
+    }
+}
+&nbsp;
+</pre>
+</td></tr></tbody>
+</table>
+<br><a name="Z40000ad1295637"></a><br>
+<table class="code" cellpadding="5" cellspacing="0" dir="LTR" summary="Table for code examples or code output" border="1"><a name="d0e6517"></a><caption class="codecaption"><b>EXAMPLE 15-2&nbsp;&nbsp;&nbsp;Component Code</b></caption>
+<tbody><tr><td scope="ROW"><pre class="screentext">import com.sun.lwuit.Component;
+import com.sun.lwuit.Font;
+import com.sun.lwuit.Graphics;
+import com.sun.lwuit.geom.Dimension;
+import com.sun.lwuit.plaf.Style;
+import com.sun.lwuit.plaf.UIManager;
+&nbsp;
+public class MyComponent extends Component {
+&nbsp;
+    private boolean drawCursor = true;
+    private long time = System.currentTimeMillis();
+    private String inputString = "";
+&nbsp;
+    public MyComponent() {
+        setFocusable(true);
+    }
+&nbsp;
+    public void paint(Graphics g) {
+&nbsp;
+        UIManager.getInstance().getLookAndFeel().setFG(g, this);
+        Style style = getStyle();
+        g.drawString(inputString, getX() + style.getPadding(LEFT), getY() +
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;style.getPadding(TOP));
+&nbsp;
+        if (drawCursor) {
+            int w = style.getFont().stringWidth(inputString);
+            int cursorX = getX() + style.getPadding(LEFT) + w;
+            int cursorY = getY() + style.getPadding(TOP);
+            g.drawLine(cursorX, cursorY, cursorX, cursorY +
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;style.getFont().getHeight());
+        }
+    }
+&nbsp;
+    protected Dimension calcPreferredSize() {
+        Style style = getStyle();
+        Font fnt = style.getFont();
+        int width = fnt.stringWidth("99999-9999");
+        int height = fnt.getHeight();
+        height += style.getPadding(Component.TOP) +
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;style.getPadding(Component.BOTTOM);
+        width += style.getPadding(Component.LEFT) +
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;style.getPadding(Component.RIGHT);
+        return new Dimension(width, height);
+    }
+&nbsp;
+    public String getUIID() {
+        return "NumericInput";
+    }
+&nbsp;
+    public void keyReleased(int keyCode) {
+&nbsp;
+        if (keyCode &gt;= '0' &amp;&amp; keyCode &lt;= '9') {
+            char c = (char) keyCode;
+            inputString += c;
+            repaint();
+        }
+    }
+&nbsp;
+    protected void initComponent() {
+        getComponentForm().registerAnimated(this);
+    }
+&nbsp;
+    public boolean animate() {
+&nbsp;
+        boolean ani = super.animate();
+        long currentTime = System.currentTimeMillis();
+        if (drawCursor) {
+            if ((currentTime - time) &gt; 800) {
+                time = currentTime;
+                drawCursor = false;
+                return true;
+            }
+        } else {
+            if ((currentTime - time) &gt; 200) {
+                time = currentTime;
+                drawCursor = true;
+                return true;
+            }
+        }
+        return ani;
+    }
+}
+</pre>
+</td></tr></tbody>
+</table>
+<br></div>
+<!-- =================== -->
+<!-- END OF MAIN CONTENT -->
+<!-- =================== -->
+
+
+
+<div class="navbar" align="center"><br><br>
+<table dir="LTR" width="100%" cellpadding="0" cellspacing="0" border="0" summary="Navigation bar, includes the book title and navigation buttons"><colgroup span="3"><col id="b1" span="1" width="45%"><col id="b2" span="1" width="25%"><col id="b3" span="1" width="30%"></colgroup><tr bgcolor="#cccccc"><td class="navbartitle" align="left" rowspan="1" colspan="1" abbr="ChapTitle">&nbsp;&nbsp;LWUIT Developer&#8217;s Guide</td><td class="navbartitle" align="right" rowspan="1" colspan="1" abbr="PartNum">12-11-09</td><td valign="top" align="right" rowspan="1" colspan="1" abbr="NavButtons"><a href="index.html"><img src="shared/toc01.gif" width="30" height="26" border="0" title="Table Of Contents" alt="Table Of Contents"></a>
+<a href="chapter14.html"><img width="30" height="26" border="0" src="shared/prev01.gif" title="Previous Chapter" alt="Previous Chapter"></a><a href="chapter16.html"><img src="shared/next01.gif" width="30" height="26" border="0" title="Next Chapter" alt="Next Chapter"></a><a href="ix.html"><img src="shared/index01.gif" width="30" height="26" border="0" title="Book Index" alt="Book Index"></a></td></tr></table>
+</div><p class="copyrightlink"><a href="bookinfo.html">Copyright</a> &copy; 2009, Sun Microsystems, Inc.  All rights reserved.</p></body></html>

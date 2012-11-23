@@ -1,0 +1,187 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en-US">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   <meta http-equiv="Content-Language" content="en-US">
+<title>Introducing the Lightweight UI Toolkit Library</title>
+
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="Generator" content="XSolBook3.5 XML Custom XSLT Filter">
+<meta name="keywords" content="LWUIT">
+<meta name="dc.title" content="Introducing the Lightweight UI Toolkit Library">
+<meta name="description" content="This Developer&#8217;s Guide describes how to use the Lightweight UI toolkit.">
+<meta name="identifier" content="12-11-09">
+<meta name="date" content="">
+<meta name="issued" content="2009-12-11">
+<meta name="revision" content="">
+<meta name="publisher" content="Sun Microsystems, Inc.">
+<meta name="collection" content="reference">
+<meta name="robots" content="index, follow">
+
+<!--Inserts the stylesheet-->
+<link rel="STYLESHEET" href="unx_str_styles.css" charset="ISO-8859-1" type="text/css">
+</head>
+<body class="HlpBdy" leftmargin="10" topmargin="10" marginheight="10" marginwidth="10" bgcolor="#ffffff"><a name="top"></a><div class="navbar" align="center">
+<table dir="LTR" width="100%" cellpadding="0" cellspacing="0" border="0" summary="Navigation bar, includes the book title and navigation buttons"><colgroup span="2"><col id="t1" span="1" width="50%"><col id="t2" span="1" width="50%"></colgroup><tr bgcolor="#cccccc"><td class="navbartitle" align="left" rowspan="1" colspan="1" abbr="ChapTitle"><a name="CEFIEGJH"></a>&nbsp;&nbsp;LWUIT Developer&#8217;s Guide</td><td valign="top" align="right" rowspan="1" colspan="1" abbr="NavButtons"><a href="index.html"><img src="shared/toc01.gif" width="30" height="26" border="0" title="Table Of Contents" alt="Table Of Contents"></a>
+<a href="preface1.html"><img width="30" height="26" border="0" src="shared/prev01.gif" title="Previous Chapter" alt="Previous Chapter"></a><a href="chapter2.html"><img src="shared/next01.gif" width="30" height="26" border="0" title="Next Chapter" alt="Next Chapter"></a><a href="ix.html"><img src="shared/index01.gif" width="30" height="26" border="0" title="Book Index" alt="Book Index"></a></td></tr></table><br><br></div>
+<table dir="LTR" width="100%" border="0" summary="Chapter Number" abbr="ChapNum"><colgroup span="1"><col id="ch1" span="1"></colgroup><tr><td align="right" class="ChapNumber"><span class="ChapNumPrefix">C H A P T E R</span>&nbsp;
+<span class="ChapNumNum">1</span><span class="ChapNumSuffix"></span></td></tr></table>
+<hr size="7" noshade="1">
+<!-- ============ -->
+<!-- MAIN CONTENT -->
+<!-- ============ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- BEGIN PAGETITLE ONE LINE -->
+<h1 class="ChapTitle" align="right"><a name="d0e638"></a>Introducing the Lightweight UI Toolkit Library</h1>
+<!-- END PAGETITLE ONE LINE -->
+
+<div class="highlights"><p class="paragraph"><a name="d0e642"></a>This book describes how to use the Lightweight UI Toolkit (LWUIT)
+library. The Lightweight UI Toolkit library helps you create appealing graphical
+user interface (GUI) applications for mobile phones and other devices
+that support MIDP 2.0. Lightweight UI Toolkit supports visual components and
+other user interface (UI) ingredients such as theming, transitions,
+animation and more. </p>
+<p class="paragraph"><a name="d0e645"></a>After covering the basics of the Lightweight UI Toolkit, this
+book provides a walk through of the various widgets and uses of
+the LWUIT packages.</p></div>
+<div class="sect1"><a name="d0e648"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e649"></a>1.1 API Overview</h1>
+<p class="paragraph"><a name="d0e652"></a>The Lightweight UI Toolkit is a lightweight widget library
+inspired by Swing but designed for constrained devices such as mobile
+phones and set-top boxes. Lightweight UI Toolkit supports pluggable
+theme-ability, a component and container hierarchy, and abstraction
+of the underlying GUI toolkit. The term lightweight indicates that
+the widgets in the library draw their state in Java source without native
+peer rendering.</p>
+<p class="paragraph"><a name="d0e655"></a>Internal interfaces and abstract classes provide abstraction
+of interfaces and APIs in the underlying profile. This allows portability
+and a migration path for both current and future devices and profiles.
+For example, Graphics would be an abstraction of the graphics object
+in the underlying profile.</p>
+<p class="paragraph"><a name="d0e658"></a>The Lightweight UI Toolkit library tries to avoid the "lowest common denominator"
+mentality by implementing some features missing in the low&#8208;end platforms
+and taking better advantage of high-end platforms. <a href="chapter1.html#CEFCFICG">FIGURE 1-1</a> shows the widget class <a class="indexterm" name="d0e662"></a>hierarchy.</p>
+<a name="CEFCFICG"></a><div class="figurebox"><p class="figurecaption"><a name="d0e669"></a><b>FIGURE 1-1&nbsp;&nbsp;&nbsp;Simplified Widget Class Hierarchy</b></p></div>
+<img alt="Simplified Widget Class Hierarchy" title="Simplified Widget Class Hierarchy" src="figures/hierarchy.jpg"><br><br><br>
+<div class="sect2"><a name="d0e681"></a><h2 class="head2"><a name="d0e682"></a>1.1.1 Scope and Portability</h2>
+<p class="paragraph"><a name="d0e685"></a>The Lightweight UI Toolkit library is strictly a widget UI library and
+does not try to abstract the underlying system services such as
+networking or storage. It also doesn't try to solve other UI issues
+related to native graphics, etcetera. </p>
+<p class="paragraph"><a name="d0e688"></a>To enable <a class="indexterm" name="d0e690"></a>portability,
+the Lightweight UI Toolkit library implements its own thin layer on top of the
+native system canvas and provides a widget abstraction. This abstraction
+is achieved using several key classes that hide the system specific equivalents
+to said classes, such as Graphics, Image and Font.</p>
+<p class="paragraph"><a name="d0e695"></a>When working with the Lightweight UI Toolkit library it is critical to
+use the <a class="indexterm" name="d0e697"></a>abstract
+classes for everything. To avoid corruption, there is no way to
+access the "real" underlying instances of these classes (for example, <kbd class="command">javax.microedition.lwuit.Graphics</kbd>). </p>
+<p class="paragraph"><a name="d0e705"></a>LWUIT strives to enable great functionality on small devices
+that might be incapable of anti-aliasing at runtime, or might choke
+under the weight of many images. To solve these problems the LWUIT
+library ships with an optional <a class="indexterm" name="d0e707"></a>resource file format that improves resource
+utilization. For more details, see <a href="chapter11.html#CJBCGCDD">Chapter 11</a>.</p>
+<a name="Z40006ec1289691"></a><div class="sect3"><h3 class="head3"><a name="d0e715"></a>1.1.1.1 Hello World Example for MIDP</h3>
+<p class="paragraph"><a name="d0e718"></a>This is a simple hello world example written on top of MIDP.
+All UI code making use of the Lightweight UI Toolkit is compatible
+to other platforms such as CDC.<sup>[<a name="d0e720" href="#ftn-d0e720">1</a>]</sup></p>
+<p class="paragraph"><a name="d0e724"></a>However, this example is specifically for MIDP. For MIDP the
+application management system (AMS) requires a MIDlet class to exist,
+where in a CDC environment an Xlet would be expected (and in Java
+SE you would expect a main class, and so forth). </p><a name="Z40008521289104"></a><br>
+<table class="code" cellpadding="5" cellspacing="0" dir="LTR" summary="Table for code examples or code output" border="1"><a name="d0e728"></a><caption class="codecaption"><b>EXAMPLE 1-1&nbsp;&nbsp;&nbsp;Hello World</b></caption>
+<tbody><tr><td scope="ROW"><pre class="screentext">
+import com.sun.lwuit.Display;
+import com.sun.lwuit.Form;
+import com.sun.lwuit.Label;
+import com.sun.lwuit.layouts.BorderLayout;
+import com.sun.lwuit.plaf.UIManager;
+import com.sun.lwuit.util.Resources;
+&nbsp;
+public class HelloMidlet extends javax.microedition.midlet.MIDlet {
+&nbsp;
+   public void startApp() {
+       //init the LWUIT Display
+       Display.init(this);
+&nbsp;
+       // Setting the application theme is discussed
+       // later in the theme chapter and the resources chapter
+       try {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Resources r = Resources.open("/myresources.res");
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UIManager.getInstance().setThemeProps(r.getTheme(
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;r.getThemeResourceNames()[0])
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} catch (java.io.IOException e) {
+       }
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Form f = new Form();
+       f.setTitle("Hello World");
+       f.setLayout(new BorderLayout());
+       f.addComponent("Center", new Label("I am a Label"));
+       f.show();
+   }
+&nbsp;
+   public void pauseApp() {
+   }
+&nbsp;
+   public void destroyApp(boolean unconditional) {
+   }
+} 
+
+</pre>
+</td></tr></tbody>
+</table>
+<br>
+<p class="paragraph"><a name="d0e734"></a>Hello world looks like <a href="chapter1.html#Z40008521290439">FIGURE 1-2</a>.</p>
+<a name="Z40008521290439"></a><div class="figurebox"><p class="figurecaption"><a name="d0e740"></a><b>FIGURE 1-2&nbsp;&nbsp;&nbsp;Hello World</b></p></div>
+<img alt="Hello world page with I am Label text." title="Hello world page with I am Label text." src="figures/hello_world.jpg"><br><br><br>
+<p class="paragraph"><a name="d0e752"></a>Notice in <a href="#Z40008521289104">EXAMPLE 1-1</a> that
+the very first line of code for any application using the Lightweight UI Toolkit library
+must register the main class with the display. This behavior is
+tool&#8208;specific. In MIDP there is not much you can do without
+a reference to the parent MIDlet, so this operation must be performed
+in the beginning of the application. </p>
+<p class="paragraph"><a name="d0e757"></a>The creation of the <a class="indexterm" name="d0e759"></a>UI
+code is left within the MIDlet for simplicity but it could be separated
+to any class to allow full portability in any future platform to
+which the Lightweight UI Toolkit library would be ported. </p></div></div>
+<div class="sect2"><a name="d0e764"></a><h2 class="head2"><a name="d0e765"></a>1.1.2 Events and Threading</h2>
+<p class="paragraph"><a name="d0e768"></a>For increased compatibility, the Lightweight UI Toolkit library completely
+handles and encapsulates UI threading. It has a single main <a class="indexterm" name="d0e770"></a>thread referred to as
+the "EDT" (inspired by the Event Dispatch Thread in Swing and AWT). <a class="indexterm" name="d0e775"></a>All events and paint<a class="indexterm" name="d0e780"></a> calls are dispatched
+using this thread. This guarantees that event and paint calls are serialized
+and do not risk causing a threading issue. It also enables portability
+for profiles that might have minor threading model inconsistencies.
+See the <a class="indexterm" name="d0e785"></a>Display class
+(<kbd class="command">com.sun.lwuit.Display</kbd> in the API documentation)
+for further details about integrating with the <a class="indexterm" name="d0e792"></a>EDT
+and serializing calls on it.</p></div></div>
+<!-- =================== -->
+<!-- END OF MAIN CONTENT -->
+<!-- =================== -->
+
+
+<hr><div class="footnotes">
+<div class="footnote"><sup class="Footnote"><span class="footnoteNumber">1</span> <b><a name="ftn-d0e720" href="#d0e720">(Footnote)</a> </b>As of this writing
+the CDC version of LWUIT required for this compatibility hasn't
+been released to the public.</sup></div></div>
+<div class="navbar" align="center"><br><br>
+<table dir="LTR" width="100%" cellpadding="0" cellspacing="0" border="0" summary="Navigation bar, includes the book title and navigation buttons"><colgroup span="3"><col id="b1" span="1" width="45%"><col id="b2" span="1" width="25%"><col id="b3" span="1" width="30%"></colgroup><tr bgcolor="#cccccc"><td class="navbartitle" align="left" rowspan="1" colspan="1" abbr="ChapTitle">&nbsp;&nbsp;LWUIT Developer&#8217;s Guide</td><td class="navbartitle" align="right" rowspan="1" colspan="1" abbr="PartNum">12-11-09</td><td valign="top" align="right" rowspan="1" colspan="1" abbr="NavButtons"><a href="index.html"><img src="shared/toc01.gif" width="30" height="26" border="0" title="Table Of Contents" alt="Table Of Contents"></a>
+<a href="preface1.html"><img width="30" height="26" border="0" src="shared/prev01.gif" title="Previous Chapter" alt="Previous Chapter"></a><a href="chapter2.html"><img src="shared/next01.gif" width="30" height="26" border="0" title="Next Chapter" alt="Next Chapter"></a><a href="ix.html"><img src="shared/index01.gif" width="30" height="26" border="0" title="Book Index" alt="Book Index"></a></td></tr></table>
+</div><p class="copyrightlink"><a href="bookinfo.html">Copyright</a> &copy; 2009, Sun Microsystems, Inc.  All rights reserved.</p></body></html>

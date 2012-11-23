@@ -1,0 +1,141 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en-US">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   <meta http-equiv="Content-Language" content="en-US">
+<title>Copyright</title>
+
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="Generator" content="XSolBook3.5 XML Custom XSLT Filter">
+<meta name="keywords" content="LWUIT">
+<meta name="dc.title" content="">
+<meta name="description" content="This Developer&#8217;s Guide describes how to use the Lightweight UI toolkit.">
+<meta name="identifier" content="12-11-09">
+<meta name="date" content="">
+<meta name="issued" content="2009-12-11">
+<meta name="revision" content="">
+<meta name="publisher" content="Sun Microsystems, Inc.">
+<meta name="collection" content="reference">
+<meta name="robots" content="noindex, follow">
+
+<!--Inserts the stylesheet-->
+<link rel="STYLESHEET" href="unx_str_styles.css" charset="ISO-8859-1" type="text/css">
+</head>
+<body class="HlpBdy" leftmargin="10" topmargin="10" marginheight="10" marginwidth="10" bgcolor="#ffffff"><a name="top"></a><div class="navbar" align="center">
+<table dir="LTR" width="100%" cellpadding="0" cellspacing="0" border="0" summary="Navigation bar, includes the book title and navigation buttons"><colgroup span="2"><col id="t1" span="1" width="50%"><col id="t2" span="1" width="50%"></colgroup><tr bgcolor="#cccccc"><td class="navbartitle" align="left" rowspan="1" colspan="1" abbr="ChapTitle"><a name="d0e45"></a>&nbsp;&nbsp;LWUIT Developer&#8217;s Guide</td><td valign="top" align="right" rowspan="1" colspan="1" abbr="NavButtons"><a href="index.html"><img src="shared/toc01.gif" width="30" height="26" border="0" title="Table Of Contents" alt="Table Of Contents"></a>
+<a href="bookinfo.html"><img width="30" height="26" border="0" src="shared/prev02.gif" title="No Previous Chapter" alt="No Previous Chapter"></a><a href="index.html"><img src="shared/next01.gif" width="30" height="26" border="0" title="Next Chapter" alt="Next Chapter"></a><a href="ix.html"><img src="shared/index01.gif" width="30" height="26" border="0" title="Book Index" alt="Book Index"></a></td></tr></table><br><br></div>
+<!-- ============ -->
+<!-- MAIN CONTENT -->
+<!-- ============ -->
+<p class="titletext">
+
+
+
+
+
+
+LWUIT Developer&#8217;s Guide</p><p class="subtitletext">
+
+
+
+
+
+
+Lightweight UI Toolkit</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p class="pubsnumber">12-11-09</p>
+<p class="pubdate">December 2009<br></p>
+<p class="publisher"><br><a href="http://www.sun.com">www.sun.com</a><br></p>
+
+<div class="abstract"><p class="paragraph"><a name="d0e88"></a>This Developer&#8217;s Guide describes how to use the
+Lightweight UI toolkit.</p></div><p class="copyright">2009 Sun Microsystems, Inc., 4150
+Network Circle, Santa Clara, California 95054, U.S.A. All rights
+reserved.</p>
+<p class="paragraph"><a name="d0e93"></a>Sun Microsystems, Inc. has intellectual property
+rights relating to technology that is described in this document.
+In particular, and without limitation, these intellectual property
+rights may include one or more of the U.S. patents listed at <kbd class="literal">http://www.sun.com/patents</kbd> and
+one or more additional patents or pending patent applications in
+the U.S. and in other countries.</p>
+<p class="paragraph"><a name="d0e99"></a>This document and the product to which it pertains are distributed
+under licenses restricting their use, copying, distribution, and decompilation.
+No part of the product or of this document may be reproduced in
+any form by any means without prior written authorization of Sun
+and its licensors, if any.</p>
+<p class="paragraph"><a name="d0e102"></a>Third-party software, including font technology, is copyrighted
+and licensed from Sun suppliers.</p>
+<p class="paragraph"><a name="d0e105"></a>Sun, Sun Microsystems, the Sun logo, Java, JAR, Java SE, Java
+ME, NetBeans, java, and the Java Coffee Cup logo are trademarks
+or registered trademarks of Sun Microsystems Inc. in the U.S. and
+in other countries. </p>
+<p class="paragraph"><a name="d0e108"></a>U.S. Government Rights&#8212;Commercial use. Government
+users are subject to the Sun Microsystems, Inc. standard license
+agreement and applicable provisions of the FAR and its supplements.</p>
+<p class="paragraph">DOCUMENTATION IS PROVIDED "AS
+IS" AND ALL EXPRESS OR IMPLIED CONDITIONS, REPRESENTATIONS AND WARRANTIES, INCLUDING
+ANY IMPLIED WARRANTY OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+PURPOSE OR NON-INFRINGEMENT, ARE DISCLAIMED, EXCEPT TO THE EXTENT
+THAT SUCH DISCLAIMERS ARE HELD TO BE LEGALLY INVALID.</p><br><hr size="2" noshade="1">
+<p class="paragraph"><a name="d0e114"></a>Copyright &copy; 2009 Sun Microsystems, Inc.,
+4150 Network Circle, Santa Clara, Californie 95054, &Eacute;tats-Unis.
+Tous droits r&eacute;serv&eacute;s.</p>
+<p class="paragraph"><a name="d0e117"></a>Sun Microsystems, Inc. poss&egrave;de les droits
+de propri&eacute;t&eacute; intellectuels relatifs &agrave; la
+technologie d&eacute;crite dans ce document. En particulier, et
+sans limitation, ces droits de propri&eacute;t&eacute; intellectuels
+peuvent inclure un ou plusieurs des brevets am&eacute;ricains
+list&eacute;s sur le site <kbd class="literal">http://www.sun.com/patents</kbd>,
+un ou les plusieurs brevets suppl&eacute;mentaires ainsi que les
+demandes de brevet en attente aux les &Eacute;tats-Unis et dans
+d&#8217;autres pays.</p>
+<p class="paragraph"><a name="d0e123"></a>Ce document et le produit auquel il se rapporte
+sont prot&eacute;g&eacute;s par un copyright et distribu&eacute;s
+sous licences, celles-ci en restreignent l&#8217;utilisation, la copie,
+la distribution, et la d&eacute;compilation. Aucune partie de
+ce produit ou document ne peut &ecirc;tre reproduite sous aucune
+forme, par quelque moyen que ce soit, sans l&#8217;autorisation pr&eacute;alable
+et &eacute;crite de Sun et de ses bailleurs de licence, s&#8217;il y
+en a.</p>
+<p class="paragraph"><a name="d0e126"></a>Tout logiciel tiers, sa technologie relative aux
+polices de caract&egrave;res, comprise, est prot&eacute;g&eacute; par
+un copyright et licenci&eacute; par des fournisseurs de Sun.</p>
+<p class="paragraph"><a name="d0e129"></a>Sun, Sun Microsystems, le logo Sun, Java, JAR,
+Java SE, Java ME, NetBeans, java, et le logo Java Coffee Cup sont
+des marques de fabrique ou des marques d&eacute;pos&eacute;es
+de Sun Microsystems, Inc., ou ses filiales, aux &Eacute;tats-Unis
+et dans d&#8217;autres pays.</p>
+<p class="paragraph"><a name="d0e132"></a>LA DOCUMENTATION EST FOURNIE "EN L&#8217;&Eacute;TAT"
+ET TOUTES AUTRES CONDITIONS, D&Eacute;CLARATIONS ET GARANTIES
+EXPRESSES OU TACITES SONT FORMELLEMENT EXCLUES DANS LA LIMITE DE
+LA LOI APPLICABLE, Y COMPRIS NOTAMMENT TOUTE GARANTIE IMPLICITE
+RELATIVE &Agrave; LA QUALIT&Eacute; MARCHANDE, &Agrave; L&#8217;APTITUDE &Agrave; UNE
+UTILISATION PARTICULI&Egrave;RE OU &Agrave; L&#8217;ABSENCE DE CONTREFA&Ccedil;ON.</p>
+
+<!-- =================== -->
+<!-- END OF MAIN CONTENT -->
+<!-- =================== -->
+
+
+
+<div class="navbar" align="center"><br><br>
+<table dir="LTR" width="100%" cellpadding="0" cellspacing="0" border="0" summary="Navigation bar, includes the book title and navigation buttons"><colgroup span="3"><col id="b1" span="1" width="45%"><col id="b2" span="1" width="25%"><col id="b3" span="1" width="30%"></colgroup><tr bgcolor="#cccccc"><td class="navbartitle" align="left" rowspan="1" colspan="1" abbr="ChapTitle">&nbsp;&nbsp;LWUIT Developer&#8217;s Guide</td><td class="navbartitle" align="right" rowspan="1" colspan="1" abbr="PartNum">12-11-09</td><td valign="top" align="right" rowspan="1" colspan="1" abbr="NavButtons"><a href="index.html"><img src="shared/toc01.gif" width="30" height="26" border="0" title="Table Of Contents" alt="Table Of Contents"></a>
+<a href="bookinfo.html"><img width="30" height="26" border="0" src="shared/prev02.gif" title="No Previous Chapter" alt="No Previous Chapter"></a><a href="index.html"><img src="shared/next01.gif" width="30" height="26" border="0" title="Next Chapter" alt="Next Chapter"></a><a href="ix.html"><img src="shared/index01.gif" width="30" height="26" border="0" title="Book Index" alt="Book Index"></a></td></tr></table>
+</div></body></html>

@@ -1,0 +1,97 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en-US">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   <meta http-equiv="Content-Language" content="en-US">
+<title>LWUIT Implementation</title>
+
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="Generator" content="XSolBook3.5 XML Custom XSLT Filter">
+<meta name="keywords" content="LWUIT">
+<meta name="dc.title" content="LWUIT Implementation">
+<meta name="description" content="This Developer&#8217;s Guide describes how to use the Lightweight UI toolkit.">
+<meta name="identifier" content="12-11-09">
+<meta name="date" content="">
+<meta name="issued" content="2009-12-11">
+<meta name="revision" content="">
+<meta name="publisher" content="Sun Microsystems, Inc.">
+<meta name="collection" content="reference">
+<meta name="robots" content="index, follow">
+
+<!--Inserts the stylesheet-->
+<link rel="STYLESHEET" href="unx_str_styles.css" charset="ISO-8859-1" type="text/css">
+</head>
+<body class="HlpBdy" leftmargin="10" topmargin="10" marginheight="10" marginwidth="10" bgcolor="#ffffff"><a name="top"></a><div class="navbar" align="center">
+<table dir="LTR" width="100%" cellpadding="0" cellspacing="0" border="0" summary="Navigation bar, includes the book title and navigation buttons"><colgroup span="2"><col id="t1" span="1" width="50%"><col id="t2" span="1" width="50%"></colgroup><tr bgcolor="#cccccc"><td class="navbartitle" align="left" rowspan="1" colspan="1" abbr="ChapTitle"><a name="Z4002e6d1292041"></a>&nbsp;&nbsp;LWUIT Developer&#8217;s Guide</td><td valign="top" align="right" rowspan="1" colspan="1" abbr="NavButtons"><a href="index.html"><img src="shared/toc01.gif" width="30" height="26" border="0" title="Table Of Contents" alt="Table Of Contents"></a>
+<a href="chapter8.html"><img width="30" height="26" border="0" src="shared/prev01.gif" title="Previous Chapter" alt="Previous Chapter"></a><a href="chapter10.html"><img src="shared/next01.gif" width="30" height="26" border="0" title="Next Chapter" alt="Next Chapter"></a><a href="ix.html"><img src="shared/index01.gif" width="30" height="26" border="0" title="Book Index" alt="Book Index"></a></td></tr></table><br><br></div>
+<table dir="LTR" width="100%" border="0" summary="Chapter Number" abbr="ChapNum"><colgroup span="1"><col id="ch1" span="1"></colgroup><tr><td align="right" class="ChapNumber"><span class="ChapNumPrefix">C H A P T E R</span>&nbsp;
+<span class="ChapNumNum">9</span><span class="ChapNumSuffix"></span></td></tr></table>
+<hr size="7" noshade="1">
+<!-- ============ -->
+<!-- MAIN CONTENT -->
+<!-- ============ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- BEGIN PAGETITLE ONE LINE -->
+<h1 class="ChapTitle" align="right"><a name="d0e4015"></a>LWUIT Implementation</h1>
+<!-- END PAGETITLE ONE LINE -->
+
+<div class="highlights"><p class="paragraph"><a name="d0e4019"></a>The LWUIT implementation is the foundation of
+LWUIT and its portability. It is a single huge class representing
+a hardware abstraction layer (HAL) that contains all the platform-specific
+code within LWUIT. <a class="indexterm" name="d0e4021"></a></p>
+<p class="paragraph"><a name="d0e4025"></a><strong>WARNING:</strong></p>
+<p class="paragraph"><a name="d0e4029"></a>The LWUIT implementation is a mechanism for the use of LWUIT
+developers and "deep hacking." It won't maintain compatibility between
+versions since it is not generally exposed for developers.</p></div>
+<div class="sect1"><a name="d0e4032"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e4033"></a>9.1 LWUIT Class</h1>
+<p class="paragraph"><a name="d0e4036"></a>The underlying implementation is often replaced implicitly
+by using things like the CDC port of LWUIT, which is mostly an implementation
+class that delegates its calls to the appropriate CDC APIs rather
+than MIDP's APIs.</p>
+<p class="paragraph"><a name="d0e4039"></a>Developers should be aware that the LWUIT implementation can
+be replaced. That is, a developer relying on MIDP API's such as
+Canvas might run into errors when running on different platforms.</p>
+<p class="paragraph"><a name="d0e4042"></a>LWUIT ships with an SVGImplementation that can be installed
+by invoking:</p><br>
+<table class="code" border="1" cellpadding="5" cellspacing="0" dir="LTR" summary="Table for code examples or code output">
+<tbody><tr><td scope="ROW"><pre class="screentext">
+SVGImplementationFactory.init();
+</pre></td></tr>
+</tbody>
+</table>
+<br>
+<p class="paragraph"><a name="d0e4047"></a>Notice that this method must be invoked before <kbd class="command">Display.init()</kbd> is
+invoked! The implementation cannot be replaced at runtime.</p>
+<p class="paragraph"><a name="d0e4053"></a>The SVGImplementation allows LWUIT to treat SVG image files
+as if they were standard LWUIT images.</p>
+<p class="paragraph"><a name="d0e4056"></a>LWUIT also features a VKBImplementation that allows binding
+a virtual keyboard for touch devices. There are several 3rd-party
+and LWUIT team implementations mostly designed for porting LWUIT
+to various platforms.</p></div>
+<!-- =================== -->
+<!-- END OF MAIN CONTENT -->
+<!-- =================== -->
+
+
+
+<div class="navbar" align="center"><br><br>
+<table dir="LTR" width="100%" cellpadding="0" cellspacing="0" border="0" summary="Navigation bar, includes the book title and navigation buttons"><colgroup span="3"><col id="b1" span="1" width="45%"><col id="b2" span="1" width="25%"><col id="b3" span="1" width="30%"></colgroup><tr bgcolor="#cccccc"><td class="navbartitle" align="left" rowspan="1" colspan="1" abbr="ChapTitle">&nbsp;&nbsp;LWUIT Developer&#8217;s Guide</td><td class="navbartitle" align="right" rowspan="1" colspan="1" abbr="PartNum">12-11-09</td><td valign="top" align="right" rowspan="1" colspan="1" abbr="NavButtons"><a href="index.html"><img src="shared/toc01.gif" width="30" height="26" border="0" title="Table Of Contents" alt="Table Of Contents"></a>
+<a href="chapter8.html"><img width="30" height="26" border="0" src="shared/prev01.gif" title="Previous Chapter" alt="Previous Chapter"></a><a href="chapter10.html"><img src="shared/next01.gif" width="30" height="26" border="0" title="Next Chapter" alt="Next Chapter"></a><a href="ix.html"><img src="shared/index01.gif" width="30" height="26" border="0" title="Book Index" alt="Book Index"></a></td></tr></table>
+</div><p class="copyrightlink"><a href="bookinfo.html">Copyright</a> &copy; 2009, Sun Microsystems, Inc.  All rights reserved.</p></body></html>

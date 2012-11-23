@@ -1,0 +1,725 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml/DTD/xhtml-transitional.dtd">
+
+<html>
+
+	<head><meta name="collection" content="reference"> 
+		<title>What's new in this release - LWUIT</title>
+		<link href="document.css" type="text/css" rel="stylesheet">
+	</head>
+
+	<body>
+		<a name="_top"></a>
+		<table summary="This table is for formatting purposes only." width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tbody>
+				<tr valign="top">
+					<td class="sun-darkblue">&nbsp;</td>
+				</tr>
+				<tr valign="top">
+					<td class="sun-darkblue">
+						<h1>What's New In This Release</h1>
+                                                <h2>Lightweight User Interface Toolkit 1.3</h2>
+						<h4>December 2009</h4>
+					</td>
+				</tr>
+				<tr valign="top">
+					<td class="sun-lightblue">&nbsp;</td>
+				</tr>
+			</tbody>
+		</table>
+		<h2><p>This document summarizes new features in this release.</p></h2>
+		<h3>Overview</h3>
+
+               
+		<h3>Highlights</h3>
+		<b>
+            <ul>
+			<li>
+                Bidi support (contributed by Telmap) - allows using LWUIT with Right To Left languages such as Arabic, Hebrew
+			</li>
+			<li>
+                Lightweight Virtual keyboard support, allowing for customizable touch screen input
+			</li>
+			<li>
+                Pixel based scrolling allowing scroll to work as expected even when components/containers exceed screen bounds and not just for focusable components
+			</li>
+		    <li>
+                Table layout and table component allowing complex tabular UI's including support for features such as spanning
+                rows/columns
+			</li>
+		    <li>
+                Tree component supporting nested elements and expanding
+			</li>
+			<li>
+                Spinner component for date, time and numeric input within a range
+			</li>
+			<li>
+                Reimplementation of the ComboBox widget
+			</li>
+			<li>
+                SVG Support Integrated Into The Theme Creator (Formerly LWUIT Designer/Resource Editor)
+			</li>
+			<li>
+                Touch device improvements: button menus, improved kinetic scrolling, tactile touch (vibration on touch)
+			</li>
+			<li>
+			Resource file specification
+			</li>
+			<li>
+            Redesigned the list renderer "rendering" logic so it paints the backgrounds of the renderers first and only then the
+            selection and foreground.
+			</li>
+			
+			</ul>
+                </b>
+		
+		<h3>Full List</h3>
+
+        <ul>
+        <li>
+        Removed the need for the startTicker to be invoked after adding the container
+
+        <li>
+        Prevent an exception when an illegal number is written into the spinner
+
+        <li>
+        Block RTL from the spinner which is a numeric component thus always LTR
+
+        <li>
+        Fix for the "then issue" number 228
+
+        <li>
+        scrollRectToVisible can be called while a smooth animation is in progress and might incorrectly "assume" that nothing needs doing. It should see the current destination view as the "actual" view and not the true actual view.
+
+        <li>
+        Fix for the ComboBox cancel soft button not actually canceling the combo box.
+
+        <li>
+        Fixed a minor issue with touch commands
+
+        <li>
+        Another rewrite to Calendar - added a focus concept that allows to browse in the Calendar Component without changing the selectedDay
+
+        <li>
+        Reimplemented scrolling behavior, scrolling on large components focusable/non focusable should work as expected now.
+
+        <li>
+        Fixed the List animate method - the animation got unregistered too soon.
+
+
+        <li>
+        Avoid a very unlikely NullPointerException in case current is null
+
+
+        <li>
+        Fixes for the table border rendering which worked correctly on the Sprint WTK but not on WTK and some other devices due to a clipping issue in the Sprint toolkit.
+
+
+        <li>
+        Initial implementation of the new Spinner component allowing faster numeric, date and time input in LWUIT.
+
+
+        <li>
+        Minor fix to Form and requestFocus, if the Form hasn't initialized the focus and a Component requested a focus the focus traversal became corrupted.
+
+
+        <li>
+        Minor fix for the Container scrolling feature
+
+
+        <li>
+        Improved scrollTowards functionality to take into consideration up, down, left, right navigation
+
+        <li>
+        Added scroll increment based support, this allows large Components to scroll in small chunks if the Component is bigger then the parent container
+
+
+        <li>
+        Fixed dialog resizing for packed dialogs when screen sizes change which occurs quite often with phones that support orientation flipping.
+
+
+        <li>
+        Improved the list scroll rect to visible preventing a bug where we scroll to the last component of a large list and instead reach the top of the component. This is caused when a component has a large size and scrollRectToVisible is invoked with the full size of the component. Instead a component can now override getVisibleBounds() (which List now overrides) and indicate the bounds within this component that should be scrolled to (e.g. internal selection).
+
+
+        <li>
+        Additional Blackberry related fixes mostly related to the menu button and plain blackberry (not Storm).
+
+
+        <li>
+        Multiple fixes for the BlackBerry storm device allowing scrolling and selection of components to work more intuitively as well as virtual keyboard input.
+
+        <li>
+        Fix for issue 86: Deinitialize method for Dispaly
+
+        <li>
+        Multiple improvements for drag behavior in the storm device, hover didn't behave as it should. Selection on hover was too aggressive and shouldn't occur during drag, the motion flicking effect didn't occur on hover due to several separate bugs.
+
+
+        <li>
+        Fixed a regression in horizontal scrolling due to applying a previous horizontal scrolling commit only to the Y axis
+
+
+        <li>
+        Fix for a regression in virtual keyboard painting
+
+
+
+        <li>
+        Improved virtual keyboard glasspane painting
+
+
+
+        <li>
+        Fixed a focus issue in table
+
+
+        <li>
+        Fix for table issue when editing an individual entry
+
+
+        <li>
+        Fix for potential border issue triggered by complex style changes
+
+
+        <li>
+        Fix for scrolling issues to be more uniform with the API
+
+
+        <li>
+        Moved ComboBox renderer ui init to the constructor
+
+
+        <li>
+        Fix for issue 223: ComboBox desn't send the source correctly to actionPerformed
+
+
+        <li>
+        Fixed cursor position in TextField when the input mode is not painted
+
+
+        <li>
+        Fixed getComponentAt to return focusable Containers
+
+
+        <li>
+        Improved keyboard detection code on newer symbian devices
+
+
+        <li>
+        Fixed a potential NPE in ComboBox
+
+
+        <li>
+        Fixed touch menu to fire the event properly
+
+
+        <li>
+        Removed a redundant while loop in sizeChangedInternal in Dialog
+
+
+        <li>
+        Minor combo box renderer fix from Ohad
+
+
+        <li>
+        Fix for minimize functionality so LWUIT doesn't inadvertently restore itself from minimized state.
+
+
+        <li>
+        Improved widestChar detection in the text area component
+
+
+        <li>
+        Fix for issue 224: unnecessary import of log in RunnableWrapper
+
+
+        <li>
+        Fixed a combo box issue when moving from the combo box to a different form, this happened since the combo dialog folded returning to the original form after the action event was fired.
+
+
+        <li>
+        Fixed packed dialogs on blackberry devices where getSoftbutton(0) doesn't work.
+
+
+        <li>
+        Improved the size calculation of the text area component
+
+        <li>
+        Fixed a minor padding issue in scrollRectToVisible
+
+
+        <li>
+        Fixed getComponentAt to take into consideration a focusable Container
+
+
+        <li>
+        Fixed Dialog sizeChangedInternal to interate over all the previous Forms and call sizeChangedInternal
+
+
+        <li>
+        Removed setSelectedIndex from laidOut, because this method can trigger a dataChanged - the intention was
+        simply to scroll the List to the selected item.
+        
+        <li>
+        Fixed Style to not firePropertyChanged if the value wasn't changed - this is important because a change to
+        the style can trigger redundant revalidates on the Form
+
+
+        <li>
+        A fix to TextField that retrives the originalClearCommand to the Form
+
+
+        <li>
+        Fixed setShouldCalcPreferredSize in List to not cause NullPointerException (may happen in custom renderers)
+
+
+        <li>
+        Margin between elements is now used within the list methods in a more uniform way
+
+
+        <li>
+        Disabled ends with 3 points for the VKB buttons by default since they don't normally "focus" in the same way as regular buttons.
+
+
+        <li>
+        Fixed an initalization issue in List laidOut
+
+
+        <li>
+        Reduced revalidate triggers when focus is changed
+
+        <li>
+        Fix for text field removing the commands of the form in the table. This issue was triggered since the table removes the
+        text field before it had the time to restore the removed commands.
+
+        <li>
+        Fixes for scrolling issue with incorrect clipping that caused the scroll to "peek" from behind
+
+        <li>
+        Fix for table editing that caused the previous focus component to still get painted despite its replacement.
+
+
+        <li>
+        Fixed an issue reported by comverse - longKeyPressed can't show new Form
+
+
+        <li>
+        Making sure to set scrolling to 0 if the Component is not scrollable - this situation can happen when a sizechanged occured
+
+
+        <li>
+        Fixed several painting issues in TabbedPane and ComboBox
+
+
+        <li>
+        Fixed an animation issue - the EDT needs to be notified when a new animation is added to the Form
+
+
+        <li>
+        Fixed a dialog issue - the dialog had to be revalidated after the margins were changed
+
+
+        <li>
+        Fixed the tactile touch support to work in menus/dialogs correctly
+
+
+        <li>
+        Fix for using a Container as a list renderer in screens that support rotation the renderer doesn't revalidate correctly.
+
+        <li>
+        Minor fix for vibrate touch support
+
+
+        <li>
+        Performance enhancement for Nokia devices whose charsWidth is REALLY slow, instead String width is much faster.
+        This is noticeable for text areas with large bodies of text. Reported by emoze.
+
+
+        <li>
+        Minor fix for tree's preferred size.
+
+
+        <li>
+        Moved the scroll x to right in rtl
+
+
+
+        <li>
+        Fixed a few rtl related issues
+
+
+
+        <li>
+        Fixed a calendar bug issue #222 - Incorrect start of month in calendar Nov 2009
+
+
+        <li>
+        Fixed a device bug in the Sony Ericsson Aino device that send key events for open/close without sending the corresponding keyReleased event
+
+
+        <li>
+        Fix for minor issue in tabbed pane that caused recursive layouts and eventually an out of memory by colliding with the list
+        revalidation
+
+        <li>
+        Added tactile feedback touch support to LWUIT components allowing a component to vibrate the phone when the user presses on
+        it as is common in several touch screen devices.
+
+
+        <li>
+        Fixed a scrolling thumb size regression
+
+
+        <li>
+        Fixed an animation regression which caused the EDT to sleep when there where internal animations running
+
+
+        <li>
+        Exposed the laidOut method
+
+
+        <li>
+        Minor fix for the List offset calculation
+
+
+        <li>
+        Minor correction for the tree component, the margin for the pushed state of the button wasn't updated as well.
+
+
+        <li>
+        Fixed the table layout/table to work better with horizontal scrolling and row spanning
+
+
+        <li>
+        Added to table the ability to query the cells row/column
+
+
+
+        <li>
+        Slightly incompatible change for LWUIT requested by Daniel B, components will no longer be implicitly animated unless the have an
+        actual static animation (or animated SVG etc) associated with them.
+
+        <li>
+        Added support for linear motion in common transition to provide a smoother feel on weaker devices.
+
+
+        <li>
+        Minor optimization for form layout behavior in Display.java
+
+        <li>
+        Fix for touch menus sending the action performed event twice
+
+
+        <li>
+        The default behavior of list scrolling to selection was incorrectly set to false
+
+
+        <li>
+        Improved textarea painting
+
+
+        <li>
+        Bidi RTL language commit contributed by Telmap and implemented mostly by Ofir Leitner, added support for right to left languages for all
+        components
+        
+        <li>
+        Reimplemented Scroll drawing allowing two styles: Scroll/ScrollThumb and HorizontalScroll/Thumb. The new approach now allows complex scroll
+        UI's based on images/borders etc. without the need for deriving/replacing the look and feel.
+
+        <li>
+        Fix allowing to override the combobox popup without breaking the action listener code.
+
+
+        <li>
+        Fixed a "casing" issue: setUnselectedStyle was spelled setUnSelectedStyle
+
+        <li>
+        Fix issue 90 allowing a global LWUITImplementation based getResourceAsStream for portability to
+        Android and possible future enhancements such as fetching resources lazily over the network, file system resources etc.
+
+
+        <li>
+        Fix for issue 217 where the lists preferred size is incorrect since the margin of the renderer wasn't added to the result.
+
+
+        <li>
+        Fixed the default input mode to be affected by the input mode order
+
+
+        <li>
+        Tree nodes now have a default UIID of TreeNode
+
+
+        <li>
+        Fixed a performance issue in Form, where focus change triggered a repaint on the Form
+
+
+
+        <li>
+        Added a default table model class to simplify the creation of tables
+
+
+        <li>
+        A few improvements to the VirtualKeyboard API
+
+
+
+        <li>
+        Extended virtual keyboard support to be more flexible
+
+
+        <li>
+        Fixed couple of issues in Dialog to allow reuse of dialogs
+
+
+        <li>
+        Added setScrollToSelected method
+
+
+        <li>
+        Added line breaks to log
+
+
+
+        <li>
+        Fixed issue 213 listing various contributed scrolling improvements from Thorsten
+
+
+        <li>
+        Integrated scrolling calculations from thorsten code into the implementation layer
+
+
+        <li>
+        Fixed a bug when a virtual keyboard is open it should be disposed when a dialog disposed
+
+
+        <li>
+        Moved look and feel refreshTheme to be called after the theme has changed.
+
+
+        <li>
+        Fix for minor log synchronization issue
+
+
+        <li>
+        Incorporated font picking logic from Thorstens Blackberry port which makes allot more sense than our original hardcoded sizes
+
+
+        <li>
+        Removed some constants from Calendar that shouldn't have been public to begin with
+        Text box now updates the UI of LWUIT if a size changed occurred when the text box is showing
+
+
+        <li>
+        Fix for regression due to recent optimization to invokeAndBlock.
+
+
+        <li>
+        Invoke and block will now act more like a thread "pool" rather than as a single thread allowing nested dialog to behave as they did before.
+
+
+        <li>
+        Fix for item gap missing from combo box popup issue from Daniel
+
+
+        <li>
+        Added thread name to invoke and block thread
+
+
+        <li>
+        Fix for editing a text area in 3 softbutton mode on series 40 devices
+
+
+        <li>
+        Fix for the text field symbol dialog's cancel softkey which just wrote cancel into the textfield...
+
+
+        <li>
+        Fix for issue 197: KeyRepeat error when app loses focus
+
+
+        <li>
+        Fix for issue 210: Button with animated gif is sometimes not animated
+
+        <li>
+        Fix for issue 211: Touch Screen Non-Editable Text Field Bug
+
+        <li>
+        Initial implementation of the table component based on the table layout
+
+        <li>
+        Fix for issue 209, action events weren't dispatched correctly from the new combo box implementation
+
+        <li>
+        Fix for invoke and block to use a thread pool sort of approach
+
+        <li>
+        Tree widget component initial implementation.
+
+
+        <li>
+        Added a new implementation that features a light weight virtual keyboard
+
+
+        <li>
+        Fix for issue 207 Calendar constructor doesn't do localization of months
+
+        <li>
+        Fix for long pointer press from Allon, removed dead code no longer used in Display
+
+        <li>
+        Added the ability to monitor pointer events externally by adding action listeners to pointer
+        pressed/released/dragged and adding X/Y information into action event.
+
+
+        <li>
+        Added the ability to create touch oriented menus almost any type of menu user interface, touch menus
+        would currently appear as buttons in a grid more suitable for human finger usage.
+
+        <li>
+        Added a flag to optionally disable an optimization in the new list renderer behavior mutableRendererBackgrounds
+        which indicates that the background of a cell renderer might mutate between one entry and the next
+
+
+        <li>
+        A fix for issue 206: repaints adding up on repeated menu open/close until paint queue overflow
+
+
+        <li>
+        Added dispatchCommand for Allon
+
+
+        <li>
+        Redesigned the list renderer "rendering" logic so it paints the backgrounds of the renderers first and only then the
+        selection and foreground.
+
+        <li>
+        Added command focus style allowing us to customize the focus behavior of menu commands rather than globally for all the lists.
+
+
+        <li>
+        Removed a redundant print stack trace that occurs frequently and just confuses.
+
+
+        <li>
+        Fix for game canvas implementation issue in some unknown device from the community
+
+
+        <li>
+        Implemented minor enhancement to list event handling from Allon of Comverse
+
+
+        <li>
+        List painting should mark shouldBreak = true on selected as well
+
+
+        <li>
+        Improved overlaying components drawing to not create redundant Rectangles.
+
+
+        <li>
+        Fixed a minor regression in the selection code caused by the compatibility changes
+
+
+        <li>
+        Workaround for Samsung pointer dragged bug
+
+
+
+        <li>
+        Added disposeWhenPointerOutOfBounds to the Dialog which is true for menu and combo
+
+
+        <li>
+        disposing dialog if pointerReleased occurred out of the contentPane
+
+
+        <li>
+        Fixed a margin bug in combo
+
+
+        <li>        
+        Removed some code from auto adjust in Dialog that caused the dialogs to lose their margins
+
+
+        <li>
+        Removed textfield virtual keyboard toggle command, which seems redundant.
+
+
+        <li>
+        Removed deprecated "compatibility mode" and the old ways of handling styles specifically bg/fgSelection and scaled image support.
+
+
+        <li>        
+        Removed popup and radically changed the implementation of combo box to base it around the dialog architecture opening
+        up a way to make it more modular.
+
+
+        <li>
+        Initial implementation of the table layout as the groundswork for a table component.
+
+
+        <li>
+        Reduced code size significantly and limited usages of classes
+
+
+        <li>        
+        Incorporated fixes from Comverse specifically to the TextField qwerty detection code, for event consumption loops and
+        for command firing logic in the list.
+
+
+        <li>
+        Removed the system font class and unified its logic into the Font class
+
+
+        <li>
+        Minor improvement to the Log class making it more useful for common use cases.
+
+
+        <li>
+        Updated Dialog to allow reuse of showPacked method.
+
+
+        <li>
+        Minor fix to Form to allow override paintBackground
+
+
+        <li>
+        Fix for issue 204: IllegalArgumentException margin cannot be negative in dialog
+
+
+        <li>        
+        Fix for issues from Allon of Comverse: size changed should use the internal size change method and should
+        invoke the background form size change method as well.
+
+
+        <li>
+        Fixed a minor issue with dialog title margins
+
+
+        <li>
+        Fixed long pointer pressed in Lists, to apply the selection
+
+
+        <li>
+        Fixed TabbedPane refreshTheme method to set the correct bgPainter on the contentPane
+
+
+        <li>        
+        Changed the caching logic for the gradients and shifted it into the implementation so caching can be optimized globally and
+        determined by the implementation.
+
+
+        <li>
+        Fix for issue 201, allowing the implementation to determine 3 softbutton mode.
+
+                </ul>
+
+
+        <p>
+			<hr class="pHr">
+		</p>
+		<p class="copyright"><a href="copyright.html">Copyright &copy; 2008</a> Sun Microsystems, Inc. All rights reserved. Use is subject to the license terms.</p>
+	</body>
+
+</html>

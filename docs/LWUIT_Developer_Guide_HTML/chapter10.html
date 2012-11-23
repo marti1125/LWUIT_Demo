@@ -1,0 +1,225 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en-US">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   <meta http-equiv="Content-Language" content="en-US">
+<title>Theming</title>
+
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="Generator" content="XSolBook3.5 XML Custom XSLT Filter">
+<meta name="keywords" content="LWUIT">
+<meta name="dc.title" content="Theming">
+<meta name="description" content="This Developer&#8217;s Guide describes how to use the Lightweight UI toolkit.">
+<meta name="identifier" content="12-11-09">
+<meta name="date" content="">
+<meta name="issued" content="2009-12-11">
+<meta name="revision" content="">
+<meta name="publisher" content="Sun Microsystems, Inc.">
+<meta name="collection" content="reference">
+<meta name="robots" content="index, follow">
+
+<!--Inserts the stylesheet-->
+<link rel="STYLESHEET" href="unx_str_styles.css" charset="ISO-8859-1" type="text/css">
+</head>
+<body class="HlpBdy" leftmargin="10" topmargin="10" marginheight="10" marginwidth="10" bgcolor="#ffffff"><a name="top"></a><div class="navbar" align="center">
+<table dir="LTR" width="100%" cellpadding="0" cellspacing="0" border="0" summary="Navigation bar, includes the book title and navigation buttons"><colgroup span="2"><col id="t1" span="1" width="50%"><col id="t2" span="1" width="50%"></colgroup><tr bgcolor="#cccccc"><td class="navbartitle" align="left" rowspan="1" colspan="1" abbr="ChapTitle"><a name="BADBCIEI"></a>&nbsp;&nbsp;LWUIT Developer&#8217;s Guide</td><td valign="top" align="right" rowspan="1" colspan="1" abbr="NavButtons"><a href="index.html"><img src="shared/toc01.gif" width="30" height="26" border="0" title="Table Of Contents" alt="Table Of Contents"></a>
+<a href="chapter9.html"><img width="30" height="26" border="0" src="shared/prev01.gif" title="Previous Chapter" alt="Previous Chapter"></a><a href="chapter11.html"><img src="shared/next01.gif" width="30" height="26" border="0" title="Next Chapter" alt="Next Chapter"></a><a href="ix.html"><img src="shared/index01.gif" width="30" height="26" border="0" title="Book Index" alt="Book Index"></a></td></tr></table><br><br></div>
+<table dir="LTR" width="100%" border="0" summary="Chapter Number" abbr="ChapNum"><colgroup span="1"><col id="ch1" span="1"></colgroup><tr><td align="right" class="ChapNumber"><span class="ChapNumPrefix">C H A P T E R</span>&nbsp;
+<span class="ChapNumNum">10</span><span class="ChapNumSuffix"></span></td></tr></table>
+<hr size="7" noshade="1">
+<!-- ============ -->
+<!-- MAIN CONTENT -->
+<!-- ============ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- BEGIN PAGETITLE ONE LINE -->
+<h1 class="ChapTitle" align="right"><a name="d0e4077"></a>Theming</h1>
+<!-- END PAGETITLE ONE LINE -->
+
+<div class="highlights"><p class="paragraph"><a name="d0e4081"></a>The Lightweight UI Toolkit library
+supports <a class="indexterm" name="d0e4083"></a>pluggable
+themes similar to CSS and somewhat simpler than Swing's pluggable
+Look And Feel. </p></div>
+<div class="sect1"><a name="d0e4088"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e4089"></a>10.1 Basic Theming</h1>
+<p class="paragraph"><a name="d0e4092"></a>Every LWUIT component has a style associated with it (see <a href="chapter8.html#BADGGABB">Chapter 8</a>). This style can be manipulated
+manually and can be customized using a set of definitions for a specific
+component type. For example, in order to make the backgrounds for
+all the buttons red you can use the following theme:</p>
+<p class="literallayout"><pre>Button.bgColor=ff0000</pre></p>
+<p class="paragraph"><a name="d0e4100"></a>This theme sets the background in the style object within
+the button object to red. A theme can be packaged into a resource
+file (see <a href="chapter11.html#CJBCGCDD">Chapter 11</a>) and it can be loaded or switched
+in runtime. In order to update a theme after switching you must
+refresh the root component (the Form/Dialog containing our component
+tree) using the <kbd class="command">refreshTheme</kbd> method to update
+all styles. </p>
+<br><hr noshade="1" size="1">
+<table class="tipnote" dir="LTR" width="100%" summary="TipNote"><colgroup span="1"></colgroup><tr align="left" valign="top"><td rowspan="1" colspan="1" abbr="TipNoteText"><p class="TipNote"><a name="d0e4109"></a><b>Note  - </b>Manually modified style elements are not updated when
+switching a theme.</p></td></tr></table>
+<hr noshade="1" size="1"><br>
+<p class="paragraph"><a name="d0e4112"></a>For example, if you have a button whose background is customized
+to blue, and you load or refresh a theme with a different background
+color for buttons, the new theme affects all button instances except
+for the one you have modified manually.</p>
+<p class="paragraph"><a name="d0e4115"></a>This allows you to determine styles for specific components
+yet still be able to use themes for the general look of the application
+without worrying about how they affect your changes.</p>
+<p class="paragraph"><a name="d0e4118"></a>A <a class="indexterm" name="d0e4120"></a>theme
+file is very similar in spirit to CSS, yet it is much simpler and
+it is structured like a Java properties file. A theme file is comprised
+of key value pairs. The key acts in a similar way to a CSS selector
+that indicates the component or attribute affected by the theme
+value. For example:</p>
+<ul class="bullet1" type="square"><li class="bullet1"><p class="paragraph"><a name="d0e4127"></a><kbd class="command">Button.font</kbd> &#8211; font
+for all buttons</p></li>
+<li class="bullet1"><p class="paragraph"><a name="d0e4133"></a><kbd class="command">font</kbd> &#8211; default application
+font applied to all components where no default is defined</p></li></ul>
+<p class="paragraph"><a name="d0e4138"></a>The key element is comprised of an optional unique identifier
+ID for the component (the <a class="indexterm" name="d0e4140"></a>UIID)
+and a required attribute type. Unlike CSS, themes do not support elements
+such as hierarchy or more complex selectors.</p>
+<p class="paragraph"><a name="d0e4145"></a>Component UIIDs correspond to the component class name by
+convention. For example.: <kbd class="command">Button</kbd>, <kbd class="command">Label</kbd>, <kbd class="command">CheckBox</kbd>, <kbd class="command">RadioButton</kbd>, <kbd class="command">Form</kbd>,
+etcetera.</p>
+<p class="paragraph"><a name="d0e4163"></a>The supported <a class="indexterm" name="d0e4165"></a>attributes
+and their value syntax are illustrated in <a href="chapter10.html#Z4000f6d1290012">TABLE 10-1</a>: </p>
+<a name="Z4000f6d1290012"></a><br>
+<table border="1" cellpadding="5" cellspacing="0" dir="LTR" class="titled" summary="Table that is numbered and titled">
+<a name="d0e4174"></a><caption class="tablecaption"><b>TABLE 10-1&nbsp;&nbsp;&nbsp;Attributes&nbsp;</b></caption>
+
+
+
+<thead>
+<tr bgcolor="#CCCCCC">
+<th scope="col" align="left" valign="top">Attribute</th>
+<th scope="col" align="left" valign="top">Value</th>
+</tr>
+</thead>
+<tbody class="tbody">
+<tr>
+<td align="left" valign="top"><a class="indexterm" name="d0e4203"></a>bgAlign</td>
+<td align="left" valign="top">Allows determining the alignment of a
+background image, only effective for non-scaled background images.
+Valid values include: BACKGROUND_IMAGE_ALIGN_TOP, BACKGROUND_IMAGE_ALIGN_BOTTOM, BACKGROUND_IMAGE_ALIGN_LEFT, BACKGROUND_IMAGE_ALIGN_RIGHT, BACKGROUND_IMAGE_ALIGN_CENTER</td>
+</tr>
+<tr>
+<td align="left" valign="top"><a class="indexterm" name="d0e4217"></a>bgGradient</td>
+<td align="left" valign="top">Determines the values for the gradient
+of the image. Accepts source/destination color as well as X/Y of
+the center of a radial gradient.</td>
+</tr>
+<tr>
+<td align="left" valign="top"><a class="indexterm" name="d0e4231"></a><kbd class="command">bgColor</kbd></td>
+<td align="left" valign="top">Hexadecimal number representing the background
+color for the component in an unselected widget. For example, blue
+would be: <kbd class="command">ff</kbd></td>
+</tr>
+<tr>
+<td align="left" valign="top"><a class="indexterm" name="d0e4248"></a>bgImage</td>
+<td align="left" valign="top">Name of an image from within the resource
+that should be used as the background for this component. The image
+referenced must exist within the resource using the same name mentioned
+here. See the resources chapter for further details about resources
+and theme files.</td>
+</tr>
+<tr>
+<td align="left" valign="top"><a class="indexterm" name="d0e4262"></a>bgType</td>
+<td align="left" valign="top">Allows determining the type of the background
+whether it is an image, color, or gradient. Valid values are: BACKGROUND_IMAGE_SCALED, BACKGROUND_IMAGE_TILE_BOTH, BACKGROUND_IMAGE_TILE_VERTICAL, BACKGROUND_IMAGE_TILE_HORIZONTAL, BACKGROUND_IMAGE_ALIGNED, BACKGROUND_GRADIENT_LINEAR_HORIZONTAL, BACKGROUND_GRADIENT_LINEAR_VERTICAL, BACKGROUUND_GRADIENT_RADIAL</td>
+</tr>
+<tr>
+<td align="left" valign="top"><a class="indexterm" name="d0e4276"></a><kbd class="command">fgColor</kbd></td>
+<td align="left" valign="top">Hexadecimal number representing the foreground
+color for the component usually used to draw the font in an unselected
+widget. For example, red would be: <kbd class="command">ff0000</kbd></td>
+</tr>
+<tr>
+<td align="left" valign="top"><a class="indexterm" name="d0e4293"></a><kbd class="command">font</kbd></td>
+<td align="left" valign="top">The name of the bitmap or system font
+from the build XML file.</td>
+</tr>
+<tr>
+<td align="left" valign="top"><a class="indexterm" name="d0e4308"></a><kbd class="command">margin</kbd></td>
+<td align="left" valign="top">The amount of margin for the component
+defined as 4 comma&#8208;separated integer values representing
+top, bottom, left, and right. For example, <kbd class="command">1, 2, 3, 4</kbd> results
+in 1 pixel margin top, 2 pixels margin bottom, 3 pixels margin left
+and 4 pixels margin right.</td>
+</tr>
+<tr>
+<td align="left" valign="top"><a class="indexterm" name="d0e4326"></a><kbd class="command">padding</kbd></td>
+<td align="left" valign="top">Padding is identical to margin in terms
+of format but it updates the padding property of the component.
+To understand padding versus margin further please refer to the
+box model explanation in <a href="chapter8.html#BADIFJEI">Margin and Padding</a>.</td>
+</tr>
+<tr>
+<td align="left" valign="top"><a class="indexterm" name="d0e4343"></a><kbd class="command">transparency</kbd></td>
+<td align="left" valign="top">A number between 0 and 255 representing
+the opacity of a component&#8217;s background. 0 means the background
+of the component doesn&#8217;t draw at all (fully transparent) while 255
+represents a completely opaque background. Notice that this value
+currently has no effect on background images (although this behavior
+might change in a future release).</td>
+</tr>
+</tbody>
+</table>
+<br>
+<p class="paragraph"><a name="d0e4356"></a>To install a theme you must load it from the Resources class
+(see <a href="chapter11.html#CJBCGCDD">Chapter 11</a>), from which you receive the
+already parsed hashtable containing the selectors (keys) and their
+appropriate values. You then submit this class to the UI manager's <kbd class="command">setThemeProps</kbd> method
+in order to update the current theme. It is a good practice to call <kbd class="command">refreshTheme</kbd> on
+all components in memory (even those that are not visible) otherwise
+behavior is unpredictable.</p></div>
+<div class="sect1"><a name="d0e4367"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e4368"></a>10.2 Look and Feel</h1>
+<p class="paragraph"><a name="d0e4371"></a>While a theme is remarkably powerful and relatively simple,
+it doesn't allow the deep type of customization some applications
+require. Developers would often like the ability to control the
+drawing of all widgets from a single location, relieving them of
+the need to subclass widgets and manipulate their paint behavior. </p>
+<p class="paragraph"><a name="d0e4374"></a>LWUIT delegates all drawing to a single abstract base class
+called <a class="indexterm" name="d0e4376"></a><kbd class="command">LookAndFeel</kbd>,
+an instance of which may be obtained from the <kbd class="command">UIManager</kbd>.
+This class has a concrete subclass which provides the default LWUIT
+look called <kbd class="command">DefaultLookAndFeel</kbd>. Both <kbd class="command">LookAndFeel</kbd> and <kbd class="command">DefaultLookAndFeel</kbd> may
+be subclassed in order to extend/replace their functionality.</p>
+<p class="paragraph"><a name="d0e4395"></a>The <a class="indexterm" name="d0e4397"></a>look
+and feel class has methods for determining the boundaries (preferred
+size) of component types and for painting all components. In addition
+it has some special methods that allow you to bind special logic
+to components and manually draw widgets such as scroll bars. It
+is the responsibility of the Look and Feel developer to properly
+use the Style objects delivered by the theme. If you replace the
+look and feel class, you must make sure to extract values appropriately
+from component styles of the theming functionality or LWUIT can
+break.</p>
+<p class="paragraph"><a name="d0e4402"></a>For further details about the look and feel classes, please
+consult the API documentation.</p>
+<p class="paragraph"><a name="d0e4405"></a></p></div>
+<!-- =================== -->
+<!-- END OF MAIN CONTENT -->
+<!-- =================== -->
+
+
+
+<div class="navbar" align="center"><br><br>
+<table dir="LTR" width="100%" cellpadding="0" cellspacing="0" border="0" summary="Navigation bar, includes the book title and navigation buttons"><colgroup span="3"><col id="b1" span="1" width="45%"><col id="b2" span="1" width="25%"><col id="b3" span="1" width="30%"></colgroup><tr bgcolor="#cccccc"><td class="navbartitle" align="left" rowspan="1" colspan="1" abbr="ChapTitle">&nbsp;&nbsp;LWUIT Developer&#8217;s Guide</td><td class="navbartitle" align="right" rowspan="1" colspan="1" abbr="PartNum">12-11-09</td><td valign="top" align="right" rowspan="1" colspan="1" abbr="NavButtons"><a href="index.html"><img src="shared/toc01.gif" width="30" height="26" border="0" title="Table Of Contents" alt="Table Of Contents"></a>
+<a href="chapter9.html"><img width="30" height="26" border="0" src="shared/prev01.gif" title="Previous Chapter" alt="Previous Chapter"></a><a href="chapter11.html"><img src="shared/next01.gif" width="30" height="26" border="0" title="Next Chapter" alt="Next Chapter"></a><a href="ix.html"><img src="shared/index01.gif" width="30" height="26" border="0" title="Book Index" alt="Book Index"></a></td></tr></table>
+</div><p class="copyrightlink"><a href="bookinfo.html">Copyright</a> &copy; 2009, Sun Microsystems, Inc.  All rights reserved.</p></body></html>

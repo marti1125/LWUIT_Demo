@@ -1,0 +1,344 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en-US">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   <meta http-equiv="Content-Language" content="en-US">
+<title>Using Lists</title>
+
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="Generator" content="XSolBook3.5 XML Custom XSLT Filter">
+<meta name="keywords" content="LWUIT">
+<meta name="dc.title" content="Using Lists">
+<meta name="description" content="This Developer&#8217;s Guide describes how to use the Lightweight UI toolkit.">
+<meta name="identifier" content="12-11-09">
+<meta name="date" content="">
+<meta name="issued" content="2009-12-11">
+<meta name="revision" content="">
+<meta name="publisher" content="Sun Microsystems, Inc.">
+<meta name="collection" content="reference">
+<meta name="robots" content="index, follow">
+
+<!--Inserts the stylesheet-->
+<link rel="STYLESHEET" href="unx_str_styles.css" charset="ISO-8859-1" type="text/css">
+</head>
+<body class="HlpBdy" leftmargin="10" topmargin="10" marginheight="10" marginwidth="10" bgcolor="#ffffff"><a name="top"></a><div class="navbar" align="center">
+<table dir="LTR" width="100%" cellpadding="0" cellspacing="0" border="0" summary="Navigation bar, includes the book title and navigation buttons"><colgroup span="2"><col id="t1" span="1" width="50%"><col id="t2" span="1" width="50%"></colgroup><tr bgcolor="#cccccc"><td class="navbartitle" align="left" rowspan="1" colspan="1" abbr="ChapTitle"><a name="CJBIDAJA"></a>&nbsp;&nbsp;LWUIT Developer&#8217;s Guide</td><td valign="top" align="right" rowspan="1" colspan="1" abbr="NavButtons"><a href="index.html"><img src="shared/toc01.gif" width="30" height="26" border="0" title="Table Of Contents" alt="Table Of Contents"></a>
+<a href="chapter2.html"><img width="30" height="26" border="0" src="shared/prev01.gif" title="Previous Chapter" alt="Previous Chapter"></a><a href="chapter4.html"><img src="shared/next01.gif" width="30" height="26" border="0" title="Next Chapter" alt="Next Chapter"></a><a href="ix.html"><img src="shared/index01.gif" width="30" height="26" border="0" title="Book Index" alt="Book Index"></a></td></tr></table><br><br></div>
+<table dir="LTR" width="100%" border="0" summary="Chapter Number" abbr="ChapNum"><colgroup span="1"><col id="ch1" span="1"></colgroup><tr><td align="right" class="ChapNumber"><span class="ChapNumPrefix">C H A P T E R</span>&nbsp;
+<span class="ChapNumNum">3</span><span class="ChapNumSuffix"></span></td></tr></table>
+<hr size="7" noshade="1">
+<!-- ============ -->
+<!-- MAIN CONTENT -->
+<!-- ============ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- BEGIN PAGETITLE ONE LINE -->
+<h1 class="ChapTitle" align="right"><a name="d0e1849"></a>Using Lists</h1>
+<!-- END PAGETITLE ONE LINE -->
+
+<div class="highlights"><p class="paragraph"><a name="d0e1853"></a>Because screen size is limited, lists
+are the most common basic UI widget on devices. A <a class="indexterm" name="d0e1855"></a>List
+presents the user with a group of items displayed in a single column.
+The set of elements is rendered using a ListCellRenderer and is
+extracted using the ListModel. Swing&#8217;s Model/View/Controller architecture
+(MVC) makes it possible for a list to represent many UI concepts
+ranging from a carousel to a To-Do checklist. A list component is
+relatively simple. It invokes the model in order to extract the displayed
+or selected information and invokes the cell renderer to show it
+to the user. The list class itself is completely decoupled from
+everything, so you can extract its content from any source (for
+example, the network, storage etcetera) and display the information
+in any form (for example, Checkboxes, Strings, Icons, and so forth).</p></div>
+<div class="sect1"><a name="d0e1860"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e1861"></a>3.1 Initializing a List</h1>
+<p class="paragraph"><a name="d0e1864"></a>You can create a list in one of four way<a class="indexterm" name="d0e1866"></a>s:</p>
+<br><table border="1" cellpadding="5" cellspacing="0" dir="LTR" class="untitled" summary="Table that is not numbered or titled">
+
+
+
+<tbody class="tbody">
+<tr>
+<td align="left" valign="top"><kbd class="command">List()</kbd> </td>
+<td align="left" valign="top">Creates a new instance of List with an
+empty default model.</td>
+</tr>
+<tr>
+<td align="left" valign="top"><kbd class="command">List(ListModel model)</kbd> </td>
+<td align="left" valign="top">Creates a new instance of List with the
+given model.</td>
+</tr>
+<tr>
+<td align="left" valign="top"><kbd class="command">List(Object[] items)</kbd> </td>
+<td align="left" valign="top">Creates a new instance of List with an
+array of Objects that are placed into the list model.</td>
+</tr>
+<tr>
+<td align="left" valign="top"><kbd class="command">List(Vector items)</kbd> </td>
+<td align="left" valign="top">Creates a new instance of List where
+a set of items are placed into the list model.</td>
+</tr>
+</tbody>
+</table>
+<br></div>
+<div class="sect1"><a name="d0e1938"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e1939"></a>3.2 Creating a Model</h1>
+<p class="paragraph"><a name="d0e1942"></a>There are two ways to create a list model: </p>
+<br><table border="1" cellpadding="5" cellspacing="0" dir="LTR" class="untitled" summary="Table that is not numbered or titled">
+
+
+
+<tbody class="tbody">
+<tr>
+<td align="left" valign="top"><kbd class="command">ListModel</kbd></td>
+<td align="left" valign="top">Implement the list model interface (use
+a general purpose implementation of the list model interface derived
+from the DefaultListModel)</td>
+</tr>
+<tr>
+<td align="left" valign="top"><kbd class="command">DefaultListModel </kbd></td>
+<td align="left" valign="top">Everything is taken care of for you.</td>
+</tr>
+</tbody>
+</table>
+<br>
+<div class="sect2"><a name="d0e1981"></a><h2 class="head2"><a name="d0e1982"></a>3.2.1 ListModel</h2>
+<p class="paragraph"><a name="d0e1985"></a>Represents <a class="indexterm" name="d0e1987"></a>the
+data structure of the list, thus allowing a list to represent any potential
+data source by referencing different implementations of this interface.
+For example, a list model can be implemented in such a way that
+it retrieves data directly from storage (although caching is recommended).
+It is the responsibility of the list to notify observers (specifically
+the view List of any changes to its state (items removed, added,
+or changed, and so forth) thus the data is updated on the view.</p></div>
+<div class="sect2"><a name="d0e1992"></a><h2 class="head2"><a name="d0e1993"></a>3.2.2 DefaultListModel</h2>
+<p class="paragraph"><a name="d0e1996"></a><a class="indexterm" name="d0e1997"></a>The
+following code demonstrates using the DefaultListModel class with
+a vector of elements.</p>
+<p class="literallayout"><pre>// Create a set of items
+String[] items = { "Red", "Blue", "Green", "Yellow" };
+
+// Initialize a default list model with &#8220;item&#8221; inside
+DefaultListModel myListModel = new DefaultListModel(items);
+
+// Creating a List with &#8220;myListModel&#8221;</p></pre></div></div>
+<div class="sect1"><a name="CJBJCFGJ"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e2022"></a>3.3 List Cell Renderer</h1>
+<p class="paragraph"><a name="d0e2025"></a>A list uses an object called a cell renderer to display each
+of its items. The default cell renderer knows how to display strings
+and icons and it displays Objects by invoking toString. If you want
+to change the way the default renderer display icons or strings,
+or if you want behavior different than what is provided by toString,
+you can implement a custom cell renderer. You can create a list
+renderer using ListCellRenderer or DefaultListCellRenderer:</p>
+<ul class="bullet1" type="square"><li class="bullet1"><p class="paragraph"><a name="d0e2030"></a><a href="chapter3.html#CJBCDHDJ">ListCellRenderer</a></p></li>
+<li class="bullet1"><p class="paragraph"><a name="d0e2034"></a><a href="chapter3.html#CJBDFHCB">DefaultListCellRenderer</a></p></li></ul>
+<div class="sect2"><a name="CJBCDHDJ"></a><h2 class="head2"><a name="d0e2038"></a>3.3.1 ListCellRenderer</h2>
+<p class="paragraph"><a name="d0e2041"></a><a class="indexterm" name="d0e2042"></a>ListCellRenderer
+is a "rubber stamp" tool that allows you to extract a renderer instance
+(often the same component instance for all invocations) that is
+initialized to the value of the current item. The renderer instance
+is used to paint the list and is discarded when the list is complete.</p>
+<p class="paragraph"><a name="d0e2047"></a>An instance of a renderer can be developed as follows: </p>
+<p class="literallayout"><pre>public class MyYesNoRenderer extends Label implements ListCellRenderer {
+&nbsp;&nbsp;&nbsp;public Component getListCellRendererComponent(List list, 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object value, int index, boolean isSelected) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if( ((Boolean)value).booleanValue() ) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;setText("Yes");
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} else {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;setText("No");
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return this;
+&nbsp;&nbsp;&nbsp;}
+
+&nbsp;&nbsp;&nbsp;public Component getListFocusComponent(List list) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Label label = new label("");
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;label.getStyle().setBgTransparency(100);
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return label;
+&nbsp;&nbsp;&nbsp;}
+}</p></pre>
+<p class="paragraph"><a name="d0e2099"></a>It is best that the component whose values are manipulated
+does not support features such as <a class="indexterm" name="d0e2101"></a><kbd class="command">repaint()</kbd>.
+This is accomplished by overriding repaint in the subclass with
+an empty implementation. This is advised for performance reasons, otherwise
+every change made to the component might trigger a repaint that wouldn't
+do anything but still cost in terms of processing. </p></div>
+<div class="sect2"><a name="CJBDFHCB"></a><h2 class="head2"><a name="d0e2109"></a>3.3.2 DefaultListCellRenderer</h2>
+<p class="paragraph"><a name="d0e2112"></a>The DefaultListCellRender is the default implementation of
+the renderer based on a Label and the ListCellRenderer interface.</p>
+<br><table border="1" cellpadding="5" cellspacing="0" dir="LTR" class="untitled" summary="Table that is not numbered or titled">
+
+
+
+<tbody class="tbody">
+<tr>
+<td align="left" valign="top"><a class="indexterm" name="d0e2129"></a><kbd class="command">getListCellRendererComponent()</kbd></td>
+<td align="left" valign="top">Returns a component instance that is
+already set to renderer "value". While it is not a requirement,
+many renderers often derive from a component (such as a label) and
+return "this".</td>
+</tr>
+<tr>
+<td align="left" valign="top"><a class="indexterm" name="d0e2144"></a><kbd class="command">getListFocusComponent()</kbd></td>
+<td align="left" valign="top">Returns a component instance that paints
+the list focus item. When the selection moves, this component is
+drawn above the list items. It&#8217;s best to give some level of transparency
+(see code example in <a href="chapter3.html#CJBCDHDJ">ListCellRenderer</a>). Once
+the focused item reaches the cell location then this Component is
+drawn under the selected item. 
+<div class="tipnote"><p class="TipNote"><a name="d0e2157"></a><b>Note  - </b>To emulate this animation, call <kbd class="command">List.setSmoothScrolling(true)</kbd>.
+This method is optional an implementation can choose to return null</p></div></td>
+</tr>
+</tbody>
+</table>
+<br></div></div>
+<div class="sect1"><a name="d0e2166"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e2167"></a>3.4 Adding Items to and Removing Items From a List</h1>
+<p class="paragraph"><a name="d0e2170"></a>You can add items to a list in one of two ways. The first
+way is to create a ListModel and add it to the list, either when
+initiating a List or using the method <a class="indexterm" name="d0e2172"></a><kbd class="command">setModel(ListModel model</kbd>).
+To remove an item or all items from a List, use <kbd class="command">removeItem(int index)</kbd> or <a class="indexterm" name="d0e2181"></a><kbd class="command">removeAll()</kbd> methods.</p>
+<p class="paragraph"><a name="d0e2189"></a>For example: </p>
+<p class="literallayout"><pre>// Adding to a list either by the above DefaultListModel
+// snipped code or
+....
+myListModel.addItem(&#8220;New Item&#8221;);
+
+// Removing is done by
+....
+myListModel.removeItem(index);
+// or
+myListModel.removeAll();</p></pre></div>
+<div class="sect1"><a name="d0e2218"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e2219"></a>3.5 List Events</h1>
+<p class="paragraph"><a name="d0e2222"></a>Two types of events are supported here, ActionEvent and SelectionsListener
+in addition to <a class="indexterm" name="d0e2224"></a><kbd class="command">addFocusListener(FocusListener l)</kbd> that
+is inherited from Component. ActionEvent binds a listener to the
+user selection action, and the SelectionListener is bound to the
+List model selection listener. The listener bindings mean you can
+track changes in values inside the Model.</p>
+<div class="sect2"><a name="d0e2231"></a><h2 class="head2"><a name="d0e2232"></a>3.5.1 Fixed Selection Feature</h2>
+<p class="paragraph"><a name="d0e2235"></a>The fixed selection feature supports a dynamic versus static
+item movement in a List. In a Java SE environment the list items
+are typically static and the selection indicator travels up and
+down the list, highlighting the currently selected item. The Lightweight UI Toolkit introduces
+a new animation feature that lets the selection be static while
+the items move dynamically up and down. To indicate the fixed selection
+type, use <a class="indexterm" name="d0e2237"></a><kbd class="command">setFixedSelection(int fixedSelection)</kbd> where <kbd class="command">fixedSelection</kbd> can
+be one of the following:</p>
+<br><table border="1" cellpadding="5" cellspacing="0" dir="LTR" class="untitled" summary="Table that is not numbered or titled">
+
+
+
+<tbody class="tbody">
+<tr>
+<td align="left" valign="top"><kbd class="command">FIXED_NONE</kbd></td>
+<td align="left" valign="top">Behave as the normal (Java SE) List behaves.
+List items are static and the selection indicator travels up and
+down the list, highlighting the currently selected item.</td>
+</tr>
+<tr>
+<td align="left" valign="top"><kbd class="command">FIXED_TRAIL</kbd></td>
+<td align="left" valign="top">The last visible item in the list is
+static and list items move up and down.</td>
+</tr>
+<tr>
+<td align="left" valign="top"><kbd class="command">FIXED_LEAD</kbd></td>
+<td align="left" valign="top">The first item in the list is static
+and list items move up and down.</td>
+</tr>
+<tr>
+<td align="left" valign="top"><kbd class="command">FIXED_CENTER</kbd></td>
+<td align="left" valign="top">The middle item in the list is static
+and list items are move up and down.</td>
+</tr>
+</tbody>
+</table>
+<br></div></div>
+<div class="sect1"><a name="Z4000dea1292260"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e2308"></a>3.6 Tickers in List</h1>
+<p class="paragraph"><a name="d0e2311"></a>Because list items are essentially rendered as a rubber stamp
+they can't be treated as typical LWUIT components. Things such as
+binding event listeners to the components in the list won't work
+since the list reuses the same component to draw all the entries.</p>
+<p class="paragraph"><a name="d0e2314"></a>Features such as tickering an individual cell are often requested
+and the solution isn't trivial because what we need to do is essentially
+"ticker the List" <a class="indexterm" name="d0e2316"></a>not
+the renderer.</p>
+<p class="paragraph"><a name="d0e2321"></a>The sample below tickers a renderer by registering itself
+as an animation in the parent form and calling the list's repaint
+method to ticker. Notice that it has a separate entry for the selected
+list item otherwise the entire content of the list would constantly
+ticker.</p><a name="Z40022e81356127"></a><br>
+<table class="code" cellpadding="5" cellspacing="0" dir="LTR" summary="Table for code examples or code output" border="1"><a name="d0e2325"></a><caption class="codecaption"><b>EXAMPLE 3-1&nbsp;&nbsp;&nbsp;Tickering a Renderer</b></caption>
+<tbody><tr><td scope="ROW"><pre class="screentext">class TickerRenderer extends DefaultListCellRenderer {
+&nbsp;&nbsp;&nbsp;private DefaultListCellRenderer selectedRenderer = new
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DefaultListCellRenderer(false);
+&nbsp;&nbsp; private List parentList;
+&nbsp;&nbsp; public TickerRenderer() 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; super(false);
+&nbsp;&nbsp; }
+&nbsp;
+&nbsp;&nbsp; public boolean animate() {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(parentList != null &amp;&amp; parentList.getComponentForm() != null) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(selectedRenderer.isTickerRunning()) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(selectedRenderer.animate()) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parentList.repaint();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return super.animate()
+&nbsp; }
+&nbsp;&nbsp;&nbsp;public Component getListCellRendererComponent(List list, Object value, int
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; index, boolean isSelected) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if(isSelected) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; selectedRenderer.getListCellRendererComponent(list, value, index,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;isSelected);
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // sometimes the list asks for a dummy selected value for size 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // calculations and this might break the tickering state
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if(index == list.getSelectedIndex()) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if(selectedRenderer.shouldTickerStart()) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if(!selectedRenderer.isTickerRunning()) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; parentList = list;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; list.getComponentForm().registerAnimated(this);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; selectedRenderer.startTicker(UIManager.getInstance().
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; getLookAndFeel().getTickerSpeed(), true);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } else {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if(selectedRenderer.isTickerRunning()) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; selectedRenderer.stopTicker();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return selectedRenderer;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } else {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return super.getListCellRendererComponent(list,value,index, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;isSelected);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
+&nbsp;&nbsp;&nbsp;}
+}
+</pre>
+</td></tr></tbody>
+</table>
+<br>
+<p class="paragraph"><a name="d0e2331"></a></p></div>
+<!-- =================== -->
+<!-- END OF MAIN CONTENT -->
+<!-- =================== -->
+
+
+
+<div class="navbar" align="center"><br><br>
+<table dir="LTR" width="100%" cellpadding="0" cellspacing="0" border="0" summary="Navigation bar, includes the book title and navigation buttons"><colgroup span="3"><col id="b1" span="1" width="45%"><col id="b2" span="1" width="25%"><col id="b3" span="1" width="30%"></colgroup><tr bgcolor="#cccccc"><td class="navbartitle" align="left" rowspan="1" colspan="1" abbr="ChapTitle">&nbsp;&nbsp;LWUIT Developer&#8217;s Guide</td><td class="navbartitle" align="right" rowspan="1" colspan="1" abbr="PartNum">12-11-09</td><td valign="top" align="right" rowspan="1" colspan="1" abbr="NavButtons"><a href="index.html"><img src="shared/toc01.gif" width="30" height="26" border="0" title="Table Of Contents" alt="Table Of Contents"></a>
+<a href="chapter2.html"><img width="30" height="26" border="0" src="shared/prev01.gif" title="Previous Chapter" alt="Previous Chapter"></a><a href="chapter4.html"><img src="shared/next01.gif" width="30" height="26" border="0" title="Next Chapter" alt="Next Chapter"></a><a href="ix.html"><img src="shared/index01.gif" width="30" height="26" border="0" title="Book Index" alt="Book Index"></a></td></tr></table>
+</div><p class="copyrightlink"><a href="bookinfo.html">Copyright</a> &copy; 2009, Sun Microsystems, Inc.  All rights reserved.</p></body></html>

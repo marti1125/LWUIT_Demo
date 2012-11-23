@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="UIDemo" default="jar" basedir=".">
+    <description>Builds, tests, and runs the project .</description>
+    <import file="nbproject/build-impl.xml"/>
+    <target name="post-compile">
+        <delete dir="build" includes="**/Thumbs.db" />
+        <taskdef classpath="editor.jar" classname="com.sun.lwuit.tools.resourcebuilder.LWUITTask" name="build" />
+        <build dest="${build.classes.dir}/resources.res">
+            <l10n name="localize">
+                <locale name="en" file="images/l10n/localize.properties" />
+            </l10n>
+            <font logicalName="SansSerif" size="20" charset=" ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-02" />
+            <font logicalName="Monospaced" size="10" />
+            <font logicalName="DialogInput" />
+            <font logicalName="Dialog" />
+            <image file="images/icons/Animations_sel.png" indexed="true" />
+            <image file="images/icons/Buttons_sel.png" indexed="true" />
+            <image file="images/icons/Dialogs_sel.png" indexed="true" />
+            <image file="images/icons/Layouts_sel.png" indexed="true" />
+            <image file="images/icons/Fonts_sel.png" indexed="true" />
+            <image file="images/icons/Rendering_sel.png" indexed="true" />
+            <image file="images/icons/Scrolling_sel.png" indexed="true" />
+            <image file="images/icons/Tabs_sel.png" indexed="true" />
+            <image file="images/icons/Themes_sel.png" indexed="true" />
+            <image file="images/icons/Transitions_sel.png" indexed="true" />
+            <image file="images/icons/Table_sel.png" />
+            <image file="images/icons/Tree_sel.png" />
+
+            <image file="images/icons/Animations_unsel.png" indexed="true" />
+            <image file="images/icons/Buttons_unsel.png" indexed="true" />
+            <image file="images/icons/Dialogs_unsel.png" indexed="true" />
+            <image file="images/icons/Fonts_unsel.png" indexed="true" />
+            <image file="images/icons/Layouts_unsel.png" indexed="true" />
+            <image file="images/icons/Rendering_unsel.png" indexed="true" />
+            <image file="images/icons/Scrolling_unsel.png" indexed="true" />
+            <image file="images/icons/Tabs_unsel.png" indexed="true" />
+            <image file="images/icons/Themes_unsel.png" indexed="true" />
+            <image file="images/icons/Transitions_unsel.png" indexed="true" />
+            <image file="images/icons/Table_unsel.png" />
+            <image file="images/icons/Tree_unsel.png" />
+        </build>
+        <build dest="${build.classes.dir}/duke.res">
+            <animation file="images/duke3_1.gif" />
+        </build>
+        <build dest="${build.classes.dir}/businessTheme.res">
+            <font createBitmap="false" name="boldMonospace" system="FACE_MONOSPACE; STYLE_BOLD ; SIZE_MEIDUM" />
+            <font createBitmap="false" name="proportionalSmall" system="FACE_PROPORTIONAL ; STYLE_PLAIN; SIZE_SMALL" />
+            <image file="images/themes/business_bar.jpg" indexed="true" />
+            <image file="images/themes/business_bg.jpg" indexed="true" />
+            <theme file="images/themes/business.conf" name="businessTheme" />
+        </build>
+        <build dest="${build.classes.dir}/oceanfishTheme.res">
+            <font createBitmap="false" name="systemSmall" system="FACE_SYSTEM ; STYLE_PLAIN; SIZE_SMALL" />
+            <font createBitmap="false" name="systemMedium" system="FACE_SYSTEM ; STYLE_PLAIN; SIZE_MEIDUM" />
+            <font createBitmap="false" name="systemSmallBold" system="FACE_SYSTEM ; STYLE_BOLD; SIZE_SMALL" />
+            <font createBitmap="false" name="systemMediumBold" system="FACE_SYSTEM ; STYLE_BOLD; SIZE_MEIDUM" />
+            <animation file="images/themes/OceanFish.gif" />
+            <theme file="images/themes/OceanFish.conf" name="oceanfishTheme" />
+        </build>
+        <build dest="${build.classes.dir}/images.res">
+            <image file="images/images/people.jpg" />
+            <image file="images/images/progress0.png" />
+            <image file="images/images/progress1.png" />
+            <image file="images/images/progress2.png" />
+            <image file="images/images/sady.png" indexed="true" />
+            <image file="images/images/smily.png" indexed="true" />
+        </build>
+    </target>
+
+</project>

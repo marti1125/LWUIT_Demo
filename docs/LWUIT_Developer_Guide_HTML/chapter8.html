@@ -1,0 +1,167 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en-US">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   <meta http-equiv="Content-Language" content="en-US">
+<title>Using the Style Object</title>
+
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="Generator" content="XSolBook3.5 XML Custom XSLT Filter">
+<meta name="keywords" content="LWUIT">
+<meta name="dc.title" content="Using the Style Object">
+<meta name="description" content="This Developer&#8217;s Guide describes how to use the Lightweight UI toolkit.">
+<meta name="identifier" content="12-11-09">
+<meta name="date" content="">
+<meta name="issued" content="2009-12-11">
+<meta name="revision" content="">
+<meta name="publisher" content="Sun Microsystems, Inc.">
+<meta name="collection" content="reference">
+<meta name="robots" content="index, follow">
+
+<!--Inserts the stylesheet-->
+<link rel="STYLESHEET" href="unx_str_styles.css" charset="ISO-8859-1" type="text/css">
+</head>
+<body class="HlpBdy" leftmargin="10" topmargin="10" marginheight="10" marginwidth="10" bgcolor="#ffffff"><a name="top"></a><div class="navbar" align="center">
+<table dir="LTR" width="100%" cellpadding="0" cellspacing="0" border="0" summary="Navigation bar, includes the book title and navigation buttons"><colgroup span="2"><col id="t1" span="1" width="50%"><col id="t2" span="1" width="50%"></colgroup><tr bgcolor="#cccccc"><td class="navbartitle" align="left" rowspan="1" colspan="1" abbr="ChapTitle"><a name="BADGGABB"></a>&nbsp;&nbsp;LWUIT Developer&#8217;s Guide</td><td valign="top" align="right" rowspan="1" colspan="1" abbr="NavButtons"><a href="index.html"><img src="shared/toc01.gif" width="30" height="26" border="0" title="Table Of Contents" alt="Table Of Contents"></a>
+<a href="chapter7.html"><img width="30" height="26" border="0" src="shared/prev01.gif" title="Previous Chapter" alt="Previous Chapter"></a><a href="chapter9.html"><img src="shared/next01.gif" width="30" height="26" border="0" title="Next Chapter" alt="Next Chapter"></a><a href="ix.html"><img src="shared/index01.gif" width="30" height="26" border="0" title="Book Index" alt="Book Index"></a></td></tr></table><br><br></div>
+<table dir="LTR" width="100%" border="0" summary="Chapter Number" abbr="ChapNum"><colgroup span="1"><col id="ch1" span="1"></colgroup><tr><td align="right" class="ChapNumber"><span class="ChapNumPrefix">C H A P T E R</span>&nbsp;
+<span class="ChapNumNum">8</span><span class="ChapNumSuffix"></span></td></tr></table>
+<hr size="7" noshade="1">
+<!-- ============ -->
+<!-- MAIN CONTENT -->
+<!-- ============ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- BEGIN PAGETITLE ONE LINE -->
+<h1 class="ChapTitle" align="right"><a name="d0e3733"></a>Using the Style Object</h1>
+<!-- END PAGETITLE ONE LINE -->
+
+<div class="highlights"><p class="paragraph"><a name="d0e3737"></a>The <a class="indexterm" name="d0e3739"></a>Style
+object sets colors, fonts, transparency, margin, padding, images,
+and borders to define the style for a given component. Each Component
+contains a selected Style Object and allows Style modification at
+runtime using <a class="indexterm" name="d0e3743"></a><kbd class="command">component.getSelectedStyle()</kbd> and <a class="indexterm" name="d0e3749"></a><kbd class="command">component.getUnselectedStyle()</kbd>. The
+style is also used in Theming (<a href="chapter10.html#BADBCIEI">Chapter 10</a>). When
+a Theme is changed, the Style objects are updated automatically. </p></div>
+<div class="sect1"><a name="d0e3759"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e3760"></a>8.1 Color</h1>
+<p class="paragraph"><a name="d0e3763"></a>Each Component has two adjustable <a class="indexterm" name="d0e3765"></a>colors:</p>
+<br><table border="1" cellpadding="5" cellspacing="0" dir="LTR" class="untitled" summary="Table that is not numbered or titled">
+
+
+
+<tbody class="tbody">
+<tr>
+<td align="left" valign="top">Foreground color </td>
+<td align="left" valign="top">The component <a class="indexterm" name="d0e3789"></a>foreground color that usually refers
+to the component text color. For example, for a Button it's the
+text color.</td>
+</tr>
+<tr>
+<td align="left" valign="top">Background color </td>
+<td align="left" valign="top">The component <a class="indexterm" name="d0e3804"></a>background color.</td>
+</tr>
+</tbody>
+</table>
+<br>
+<p class="paragraph"><a name="d0e3812"></a>The color specification is RGB. There is no alpha channel
+within the color (the background transparency is separate).</p>
+<p class="paragraph"><a name="d0e3815"></a>Valid values are integers ranging from 0x000000 to 0xffffff
+(black to white respectively) or a decimal number. </p></div>
+<div class="sect1"><a name="d0e3818"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e3819"></a>8.2 Font</h1>
+<p class="paragraph"><a name="d0e3822"></a>Fonts are set with the Font object (see the Font API in the
+API documentation located in <var class="replaceable">install&#8208;dir</var><kbd class="command">/docs/api/lwuit</kbd>. Lightweight UI Toolkit supports
+both for Bitmap <a class="indexterm" name="d0e3829"></a>fonts
+and for system fonts, similar to common MIDP fonts. Fonts are discussed
+in <a href="chapter11.html#CJBCGCDD">Chapter 11</a>.</p></div>
+<div class="sect1"><a name="d0e3836"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e3837"></a>8.3 Transparency</h1>
+<p class="paragraph"><a name="d0e3840"></a>Lightweight UI Toolkit style supports background component transparency,
+to add flexibility and appeal to the UI. To set a component <a class="indexterm" name="d0e3842"></a>transparency level, call <a class="indexterm" name="d0e3847"></a>setBgTransparency
+and specify an integer or a byte. The integer value must range between
+0 to 255, where 255 (the default) is opaque. </p></div>
+<div class="sect1"><a name="BADIFJEI"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e3854"></a>8.4 Margin and Padding</h1>
+<p class="paragraph"><a name="d0e3857"></a>Margin and Padding are inspired by the CSS Box Model. Each
+component has a main content area (for example, text or icon) and
+optional surrounding <a class="indexterm" name="d0e3859"></a>padding
+and <a class="indexterm" name="d0e3863"></a>margin areas.
+The size of each area is specified by four integers that represent
+the top, bottom, left and right space (similar to component Insets
+terminology in SWING). The following diagram shows the placement
+of the areas in relation to the component content area:</p>
+<a name="Z4000f581290128"></a><div class="figurebox"><p class="figurecaption"><a name="d0e3869"></a><b>FIGURE 8-1&nbsp;&nbsp;&nbsp;Padding and Margin Relationships</b></p></div>
+<img alt="Padding and Margin Relationships" title="Padding and Margin Relationships" src="figures/margin.jpg"><br><br><br>
+<p class="paragraph"><a name="d0e3881"></a>Padding and margins can be set as follows:</p>
+<p class="literallayout"><pre>// Setting padding with positive values
+setPadding(int top, int bottom, int left, int right)
+
+// orientation can be Component.TOP, BOTTOM, LEFT or RIGHT
+setPadding(int orientation, int gap)
+
+// Setting margin with positive values
+setMargin(int top, int bottom, int left, int right)
+
+// orientation can be Component.TOP, BOTTOM, LEFT or RIGHT
+setMargin(int orientation, int gap)</p></pre></div>
+<div class="sect1"><a name="d0e3914"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e3915"></a>8.5 Images</h1>
+<p class="paragraph"><a name="d0e3918"></a>In Style, Images refer to a component <a class="indexterm" name="d0e3920"></a>background image. By default components
+do not have a background image, so the <a class="indexterm" name="d0e3924"></a>bgImage
+parameter is null by default. For more details about images, please
+refer to <a href="chapter11.html#CJBCGCDD">Chapter 11</a>.</p></div>
+<div class="sect1"><a name="d0e3931"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e3932"></a>8.6 Borders</h1>
+<p class="paragraph"><a name="d0e3935"></a>The Style object supports defining custom rendering of a border.
+There are several default built-in border types (see the Javadoc&#8482; of
+the Border class). Borders can either replace the background painter
+(as is the case with round borders and sometimes with image borders)
+or they can be rendered after the component itself is rendered.
+A custom border can be built by deriving the Border class and overriding the
+appropriate methods.</p>
+<p class="paragraph"><a name="d0e3938"></a>A border is rendered into the padding area of the component
+so it is important that the component padding is large enough to
+contain the border drawing. </p></div>
+<div class="sect1"><a name="d0e3941"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e3942"></a>8.7 Style Listener</h1>
+<p class="paragraph"><a name="d0e3945"></a>The <a class="indexterm" name="d0e3947"></a>Style
+listener gives you the ability to track changes in a certain component
+style object. For example you might want to monitor changes in the
+background color of a component, and react accordingly. </p>
+<p class="paragraph"><a name="d0e3952"></a>The following code shows how to add a listener and track any
+style property change to the Font.</p>
+<p class="literallayout"><pre>myComponent.getStyle().addStyleListener(new StyleListener() {
+&nbsp;&nbsp;&nbsp;public void styleChanged(String propertyName, Style source) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (propertyName.equals(Style.FONT)) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("Font of myComponent got changed.");
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;}
+});</p></pre></div>
+<div class="sect1"><a name="d0e3976"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e3977"></a>8.8 Painters</h1>
+<p class="paragraph"><a name="d0e3980"></a>Painters in Style refers to the component's background drawing.
+The Painter draws itself and then the component draws itself on
+top. For more information please refer to <a href="chapter7.html#CGFDAHFE">Chapter 7</a>.</p>
+<p class="paragraph"><a name="d0e3985"></a>To set a painter, use the <kbd class="command">setBgPainter</kbd> method.
+For example to set myPainter as the component background painter,
+write:<a class="indexterm" name="d0e3990"></a></p>
+<p class="literallayout"><pre>mycomponent.getStyle().setBgPainter(myPainter);</pre></p></div>
+<!-- =================== -->
+<!-- END OF MAIN CONTENT -->
+<!-- =================== -->
+
+
+
+<div class="navbar" align="center"><br><br>
+<table dir="LTR" width="100%" cellpadding="0" cellspacing="0" border="0" summary="Navigation bar, includes the book title and navigation buttons"><colgroup span="3"><col id="b1" span="1" width="45%"><col id="b2" span="1" width="25%"><col id="b3" span="1" width="30%"></colgroup><tr bgcolor="#cccccc"><td class="navbartitle" align="left" rowspan="1" colspan="1" abbr="ChapTitle">&nbsp;&nbsp;LWUIT Developer&#8217;s Guide</td><td class="navbartitle" align="right" rowspan="1" colspan="1" abbr="PartNum">12-11-09</td><td valign="top" align="right" rowspan="1" colspan="1" abbr="NavButtons"><a href="index.html"><img src="shared/toc01.gif" width="30" height="26" border="0" title="Table Of Contents" alt="Table Of Contents"></a>
+<a href="chapter7.html"><img width="30" height="26" border="0" src="shared/prev01.gif" title="Previous Chapter" alt="Previous Chapter"></a><a href="chapter9.html"><img src="shared/next01.gif" width="30" height="26" border="0" title="Next Chapter" alt="Next Chapter"></a><a href="ix.html"><img src="shared/index01.gif" width="30" height="26" border="0" title="Book Index" alt="Book Index"></a></td></tr></table>
+</div><p class="copyrightlink"><a href="bookinfo.html">Copyright</a> &copy; 2009, Sun Microsystems, Inc.  All rights reserved.</p></body></html>

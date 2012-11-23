@@ -1,0 +1,232 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en-US">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   <meta http-equiv="Content-Language" content="en-US">
+<title>Table and Tree</title>
+
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="Generator" content="XSolBook3.5 XML Custom XSLT Filter">
+<meta name="keywords" content="LWUIT">
+<meta name="dc.title" content="Table and Tree">
+<meta name="description" content="This Developer&#8217;s Guide describes how to use the Lightweight UI toolkit.">
+<meta name="identifier" content="12-11-09">
+<meta name="date" content="">
+<meta name="issued" content="2009-12-11">
+<meta name="revision" content="">
+<meta name="publisher" content="Sun Microsystems, Inc.">
+<meta name="collection" content="reference">
+<meta name="robots" content="index, follow">
+
+<!--Inserts the stylesheet-->
+<link rel="STYLESHEET" href="unx_str_styles.css" charset="ISO-8859-1" type="text/css">
+</head>
+<body class="HlpBdy" leftmargin="10" topmargin="10" marginheight="10" marginwidth="10" bgcolor="#ffffff"><a name="top"></a><div class="navbar" align="center">
+<table dir="LTR" width="100%" cellpadding="0" cellspacing="0" border="0" summary="Navigation bar, includes the book title and navigation buttons"><colgroup span="2"><col id="t1" span="1" width="50%"><col id="t2" span="1" width="50%"></colgroup><tr bgcolor="#cccccc"><td class="navbartitle" align="left" rowspan="1" colspan="1" abbr="ChapTitle"><a name="Z4002e6e1292041"></a>&nbsp;&nbsp;LWUIT Developer&#8217;s Guide</td><td valign="top" align="right" rowspan="1" colspan="1" abbr="NavButtons"><a href="index.html"><img src="shared/toc01.gif" width="30" height="26" border="0" title="Table Of Contents" alt="Table Of Contents"></a>
+<a href="chapter3.html"><img width="30" height="26" border="0" src="shared/prev01.gif" title="Previous Chapter" alt="Previous Chapter"></a><a href="chapter5.html"><img src="shared/next01.gif" width="30" height="26" border="0" title="Next Chapter" alt="Next Chapter"></a><a href="ix.html"><img src="shared/index01.gif" width="30" height="26" border="0" title="Book Index" alt="Book Index"></a></td></tr></table><br><br></div>
+<table dir="LTR" width="100%" border="0" summary="Chapter Number" abbr="ChapNum"><colgroup span="1"><col id="ch1" span="1"></colgroup><tr><td align="right" class="ChapNumber"><span class="ChapNumPrefix">C H A P T E R</span>&nbsp;
+<span class="ChapNumNum">4</span><span class="ChapNumSuffix"></span></td></tr></table>
+<hr size="7" noshade="1">
+<!-- ============ -->
+<!-- MAIN CONTENT -->
+<!-- ============ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- BEGIN PAGETITLE ONE LINE -->
+<h1 class="ChapTitle" align="right"><a name="d0e2351"></a>Table and Tree</h1>
+<!-- END PAGETITLE ONE LINE -->
+
+<div class="highlights"><p class="paragraph"><a name="d0e2355"></a>Unlike the list that uses the render
+approach to create exceptionally large lists without much of an
+overhead, the tree and table are more "stateful" components and use
+a more conventional approach of nesting components.</p>
+<p class="paragraph"><a name="d0e2358"></a>To create a table instance a developer needs to first instantiate
+a model with the data and then create a table as follows:</p></div>
+<div class="sect1"><a name="Z40022e81356328"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e2362"></a>4.1 Table</h1>
+<p class="paragraph"><a name="d0e2365"></a>A table is an editable grid component with variable sizes
+for its entries. Entries can be editable or not. Just like the list,
+the table has a model (<kbd class="command">TableModel</kbd>) and a default
+model implementation (DefaultTableModel).</p>
+<p class="paragraph"><a name="d0e2374"></a>To create a table instance a developer needs to first instantiate
+a model with the data and then create a table as follows:</p><br>
+<table class="code" border="1" cellpadding="5" cellspacing="0" dir="LTR" summary="Table for code examples or code output">
+<tbody><tr><td scope="ROW"><pre class="screentext">
+TableModel model = new DefaultTableModel(new String[] {
+&nbsp;&nbsp;&nbsp;"Col 1", "Col 2", "Col 3"}, new Object[][] {
+&nbsp; {"Row 1", "Row A", "Row X"},
+&nbsp; {"Row 2", "Row B", "Row Y"},
+&nbsp; {"Row 3", "Row C", "Row Z"},
+&nbsp; {"Row 4", "Row D", "Row K"},
+});
+Table table = new Table(model);
+</pre></td></tr>
+</tbody>
+</table>
+<br>
+<a name="Z40022e81357668"></a><div class="figurebox"><p class="figurecaption"><a name="d0e2380"></a><b>FIGURE 4-1&nbsp;&nbsp;&nbsp;Sample Table</b></p></div>
+<img alt="Table text" title="Table text" src="figures/tabletree.jpg"><br><br><br>
+<p class="paragraph"><a name="d0e2392"></a>A cell can be made editable by overriding the <kbd class="command">isCellEditable</kbd> method
+of the model as follows:</p><br>
+<table class="code" border="1" cellpadding="5" cellspacing="0" dir="LTR" summary="Table for code examples or code output">
+<tbody><tr><td scope="ROW"><pre class="screentext">
+public boolean isCellEditable(int row, int col) {
+&nbsp;&nbsp;&nbsp; return col != 0;
+}
+</pre></td></tr>
+</tbody>
+</table>
+<br>
+<p class="paragraph"><a name="d0e2400"></a>The table component contains a few more elaborate features
+such as the ability to span columns and rows and determine their
+width or height as percentage of available space. A table can be
+made to scroll on the X axis as well by setting it to <kbd class="command">setScrollableX(true)</kbd>,
+in which case it can "grow" beyond the screen size.</p>
+<p class="paragraph"><a name="d0e2406"></a>To control the "rendering", the way in which a table creates
+the cells within it one needs to derive the table itself and override
+the method <kbd class="command">createCell</kbd> as such:</p><br>
+<table class="code" border="1" cellpadding="5" cellspacing="0" dir="LTR" summary="Table for code examples or code output">
+<tbody><tr><td scope="ROW"><pre class="screentext">
+Table table = new Table(model) {
+&nbsp;&nbsp;&nbsp; protected Component createCell(Object value, int row, int column, boolean editable) {
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; // custom code for creating a table cell
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ...
+&nbsp;&nbsp;&nbsp; }
+};
+</pre></td></tr>
+</tbody>
+</table>
+<br>
+<p class="paragraph"><a name="d0e2414"></a>Notice that components created using <kbd class="command">createCell</kbd> will
+be "live" for the duration of the table's existence and so would
+be able to receive events and animate. They would also occupy resources
+for the duration of the table&#8217;s existence.</p></div>
+<div class="sect1"><a name="d0e2420"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e2421"></a>4.2 Tree</h1>
+<p class="paragraph"><a name="d0e2424"></a><strong></strong><strong></strong>The
+LWUIT tree is remarkably similar to the table in its design. It
+however represents a hierarchical view of data such as a filesystem.
+In that sense a tree is must be provided with a model to represent
+the underlying data. It is assumed that the underlying data is already
+"hierarchic" in its nature, such as a corporate structure or a file
+system.</p>
+<p class="paragraph"><a name="d0e2429"></a>The tree model exists as an interface for this reason alone.
+Building it as a class doesn't make sense for the common use case
+of a domain specific data model. To create a tree model one must
+implement the two methods in the interface: <kbd class="command">getChildren</kbd> and <kbd class="command">isLeaf</kbd>.</p>
+<p class="paragraph"><a name="d0e2438"></a><kbd class="command">getChildren</kbd> is the "heavy lifter" within
+the interface. It has one argument for the parent node and returns
+the children of this node as a vector. This method is called with
+a null argument for its parent representing the "root" of the tree
+(which isn't displayed). From that point forward all calls to the
+method will be with objects returned via this method (which are
+not leaf's).</p>
+<p class="paragraph"><a name="d0e2443"></a><kbd class="command">isLeaf</kbd> is trivial. It just indicates whether
+the object within a tree is a leaf node that has no children and
+can't be expanded.</p>
+<a name="Z4000ca51357825"></a><div class="figurebox"><p class="figurecaption"><a name="d0e2449"></a><b>FIGURE 4-2&nbsp;&nbsp;&nbsp;Tree Sample</b></p></div>
+<img alt="Tree sample output" title="Tree sample output" src="figures/tree.jpg"><br><br><br>
+<p class="paragraph"><a name="d0e2461"></a>For example, the Tree would invoke <kbd class="command">getChildren(null)</kbd> and
+receive back the String's "X", "Y' and  "Z" within the return vector.
+It would then call <kbd class="command">isLeaf("X"), isLeaf("Y"), isLeaf("Z")</kbd> and
+render the tree appropriately (as parent nodes or as leafs based
+on the response to <kbd class="command">isLeaf</kbd>).</p>
+<p class="paragraph"><a name="d0e2473"></a>If the user clicks the "X" node and it is not a leaf the tree
+expands to contain (in addition to the existing nodes) the response
+for <kbd class="command">getChildren("X")</kbd> as subnodes of "X".</p>
+<p class="paragraph"><a name="d0e2479"></a>Most of the code below relates to the model. It would be more
+domain specific for any specific case.</p><br>
+<table class="code" border="1" cellpadding="5" cellspacing="0" dir="LTR" summary="Table for code examples or code output">
+<tbody><tr><td scope="ROW"><pre class="screentext">
+class Node {
+&nbsp;&nbsp;&nbsp; Object[] children;
+&nbsp;&nbsp;&nbsp; String value;
+&nbsp;
+&nbsp;&nbsp;&nbsp; public Node(String value, Object[] children) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.children = children;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.value = value;
+&nbsp;&nbsp;&nbsp; }
+&nbsp;
+&nbsp;&nbsp;&nbsp; public String toString() {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return value;
+&nbsp;&nbsp;&nbsp; }
+}
+TreeModel model = new TreeModel() {
+&nbsp;&nbsp;&nbsp; Node[] sillyTree =&nbsp; {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; new Node("X", new Node[] {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; new Node("Child 1", new Node[] {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }),
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; new Node("Child 2", new Node[] {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }),
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; new Node("Child 3", new Node[] {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }),
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }),
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; new Node("Y", new Node[] {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; new Node("A", new Node[] {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; })
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }),
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; new Node("Z", new Node[] {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; new Node("A", new Node[] {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }),
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }),
+&nbsp;&nbsp;&nbsp; };
+&nbsp;
+&nbsp;&nbsp;&nbsp; public Vector getChildren(Object parent) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Node n = (Node)parent;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Object[] nodes;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if(parent == null) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; nodes = sillyTree;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } else {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; nodes = n.children;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Vector v = new Vector();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for(int iter = 0 ; iter &lt; nodes.length ; iter++) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; v.addElement(nodes[iter]);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return v;
+&nbsp;&nbsp;&nbsp; }
+&nbsp;
+&nbsp;&nbsp;&nbsp; public boolean isLeaf(Object node) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Node n = (Node)node;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return n.children == null || n.children.length == 0;
+&nbsp;&nbsp;&nbsp; }
+};
+&nbsp;
+Form treeForm = new Form("Tree");
+treeForm.setLayout(new BorderLayout());
+treeForm.addComponent(BorderLayout.CENTER, new Tree(model));
+treeForm.show();
+</pre></td></tr>
+</tbody>
+</table>
+<br></div>
+<div class="sect1"><a name="d0e2484"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e2485"></a>4.3 Customizing the Tree</h1>
+<p class="paragraph"><a name="d0e2488"></a>The tree has special static methods to determine icons appropriate
+for expanded or folded folder and leaf nodes: <kbd class="command">setFolderOpenIcon(Image)</kbd>, <kbd class="command">setFolderIcon(Image)</kbd>, <kbd class="command">setNodeIcon(Image)</kbd>.</p>
+<p class="paragraph"><a name="d0e2500"></a>Besides that, one can derive the tree component and override
+the <kbd class="command">createNodeComponent</kbd> method to customize the
+returned component in any desired way.</p></div>
+<!-- =================== -->
+<!-- END OF MAIN CONTENT -->
+<!-- =================== -->
+
+
+
+<div class="navbar" align="center"><br><br>
+<table dir="LTR" width="100%" cellpadding="0" cellspacing="0" border="0" summary="Navigation bar, includes the book title and navigation buttons"><colgroup span="3"><col id="b1" span="1" width="45%"><col id="b2" span="1" width="25%"><col id="b3" span="1" width="30%"></colgroup><tr bgcolor="#cccccc"><td class="navbartitle" align="left" rowspan="1" colspan="1" abbr="ChapTitle">&nbsp;&nbsp;LWUIT Developer&#8217;s Guide</td><td class="navbartitle" align="right" rowspan="1" colspan="1" abbr="PartNum">12-11-09</td><td valign="top" align="right" rowspan="1" colspan="1" abbr="NavButtons"><a href="index.html"><img src="shared/toc01.gif" width="30" height="26" border="0" title="Table Of Contents" alt="Table Of Contents"></a>
+<a href="chapter3.html"><img width="30" height="26" border="0" src="shared/prev01.gif" title="Previous Chapter" alt="Previous Chapter"></a><a href="chapter5.html"><img src="shared/next01.gif" width="30" height="26" border="0" title="Next Chapter" alt="Next Chapter"></a><a href="ix.html"><img src="shared/index01.gif" width="30" height="26" border="0" title="Book Index" alt="Book Index"></a></td></tr></table>
+</div><p class="copyrightlink"><a href="bookinfo.html">Copyright</a> &copy; 2009, Sun Microsystems, Inc.  All rights reserved.</p></body></html>

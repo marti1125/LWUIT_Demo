@@ -1,0 +1,477 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en-US">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   <meta http-equiv="Content-Language" content="en-US">
+<title>Using Lightweight UI Toolkit Widgets</title>
+
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="Generator" content="XSolBook3.5 XML Custom XSLT Filter">
+<meta name="keywords" content="LWUIT">
+<meta name="dc.title" content="Using Lightweight UI Toolkit Widgets">
+<meta name="description" content="This Developer&#8217;s Guide describes how to use the Lightweight UI toolkit.">
+<meta name="identifier" content="12-11-09">
+<meta name="date" content="">
+<meta name="issued" content="2009-12-11">
+<meta name="revision" content="">
+<meta name="publisher" content="Sun Microsystems, Inc.">
+<meta name="collection" content="reference">
+<meta name="robots" content="index, follow">
+
+<!--Inserts the stylesheet-->
+<link rel="STYLESHEET" href="unx_str_styles.css" charset="ISO-8859-1" type="text/css">
+</head>
+<body class="HlpBdy" leftmargin="10" topmargin="10" marginheight="10" marginwidth="10" bgcolor="#ffffff"><a name="top"></a><div class="navbar" align="center">
+<table dir="LTR" width="100%" cellpadding="0" cellspacing="0" border="0" summary="Navigation bar, includes the book title and navigation buttons"><colgroup span="2"><col id="t1" span="1" width="50%"><col id="t2" span="1" width="50%"></colgroup><tr bgcolor="#cccccc"><td class="navbartitle" align="left" rowspan="1" colspan="1" abbr="ChapTitle"><a name="CEHGAEFC"></a>&nbsp;&nbsp;LWUIT Developer&#8217;s Guide</td><td valign="top" align="right" rowspan="1" colspan="1" abbr="NavButtons"><a href="index.html"><img src="shared/toc01.gif" width="30" height="26" border="0" title="Table Of Contents" alt="Table Of Contents"></a>
+<a href="chapter1.html"><img width="30" height="26" border="0" src="shared/prev01.gif" title="Previous Chapter" alt="Previous Chapter"></a><a href="chapter3.html"><img src="shared/next01.gif" width="30" height="26" border="0" title="Next Chapter" alt="Next Chapter"></a><a href="ix.html"><img src="shared/index01.gif" width="30" height="26" border="0" title="Book Index" alt="Book Index"></a></td></tr></table><br><br></div>
+<table dir="LTR" width="100%" border="0" summary="Chapter Number" abbr="ChapNum"><colgroup span="1"><col id="ch1" span="1"></colgroup><tr><td align="right" class="ChapNumber"><span class="ChapNumPrefix">C H A P T E R</span>&nbsp;
+<span class="ChapNumNum">2</span><span class="ChapNumSuffix"></span></td></tr></table>
+<hr size="7" noshade="1">
+<!-- ============ -->
+<!-- MAIN CONTENT -->
+<!-- ============ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- BEGIN PAGETITLE ONE LINE -->
+<h1 class="ChapTitle" align="right"><a name="d0e815"></a>Using Lightweight UI Toolkit Widgets</h1>
+<!-- END PAGETITLE ONE LINE -->
+
+<div class="highlights"><p class="paragraph"><a name="d0e819"></a>This chapter introduces the LWUIT
+widgets and provides sample code for several components.</p></div>
+<div class="sect1"><a name="d0e822"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e823"></a>2.1 Component</h1>
+<p class="paragraph"><a name="d0e826"></a>A <a class="indexterm" name="d0e828"></a><i>Component</i> is
+an object having a graphical representation that can be displayed
+on the screen and can interact with the user. The buttons, check
+boxes, and radio buttons in a typical graphical UI are all examples
+of a component. Component is the base class. All the widgets in
+the Lightweight UI Toolkit library use the composite pattern in a manner similar
+to the AWT Container and Component relationship.</p></div>
+<div class="sect1"><a name="d0e835"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e836"></a>2.2 Container</h1>
+<p class="paragraph"><a name="d0e839"></a>A <i>Container</i> is a <a class="indexterm" name="d0e844"></a>composite
+pattern with a Component object. It enables nesting and arranging
+multiple components using a pluggable layout manager architecture. Containers
+can be nested one within the other to form elaborate UIs. Components added
+to a container are tracked in a list. The order of the list defines
+the components' front-to-back stacking order within the container.
+If you do not specify an index when you add a component to a container,
+it is added to the end of the list (and hence to the bottom of the
+stacking order). </p></div>
+<div class="sect1"><a name="d0e849"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e850"></a>2.3 Form</h1>
+<p class="paragraph"><a name="d0e853"></a><a class="indexterm" name="d0e854"></a><i>Form</i> is
+a top&#8208;level component that serves as the root for the UI
+library. This <a class="indexterm" name="d0e860"></a>Container
+handles the title and menus and allows content to be placed between them.
+By default the form's central content (the content pane) is scrollable.
+Form contains Title bar, MenuBar and a ContentPane. Invocations
+of Form's <kbd class="command">addComponent</kbd> method are delegated to
+the content pane&#8217;s <kbd class="command">addComponent</kbd>. The same applies
+to most <a class="indexterm" name="d0e870"></a>composite
+related methods (e.g. <kbd class="command">setLayout</kbd>, <kbd class="command">getComponent</kbd> and
+so forth).</p>
+<p class="paragraph"><a name="d0e881"></a>The following code demonstrates creation and setup of a <a class="indexterm" name="d0e883"></a>form. </p><a name="Z4000acc1292705"></a><br>
+<table class="code" cellpadding="5" cellspacing="0" dir="LTR" summary="Table for code examples or code output" border="1"><a name="d0e893"></a><caption class="codecaption"><b>EXAMPLE 2-1&nbsp;&nbsp;&nbsp;Create and Set Up a Form</b></caption>
+<tbody><tr><td scope="ROW"><pre class="screentext">// 1. Create a Form
+Form mainForm = new Form("Form Title");
+// 2. Set LayoutManager
+mainForm.setLayout(new BorderLayout());
+// 3. Add a Label to the center of Form content pane
+mainForm.addComponent(BorderLayout.CENTER, new Label(&#8220;Hello World&#8221;));
+// 4. Set Transitions animation of Fade
+mainForm.setTransitionOutAnimator(CommonTransitions.createFade(400));
+// 5. Add Command key
+mainForm.addCommand(new Command("Run", 2));
+// 6. Show it
+mainForm.show();
+</pre>
+</td></tr></tbody>
+</table>
+<br>
+<p class="paragraph"><a name="d0e899"></a>The following notes correspond to the comments in <a href="#Z4000acc1292705">EXAMPLE 2-1</a>.</p>
+<ol class="list1" type="1"><li class="list1"><p class="paragraph"><a name="d0e906"></a>The first line of
+code creates a form using a constructor that lets you set the form title.
+The other frequently used form constructor is the no-argument constructor. </p></li>
+<li class="list1"><p class="paragraph"><a name="d0e910"></a>Next the code specifies the layout manager of the
+form. Layout managers are discussed later in this guide.</p></li>
+<li class="list1"><p class="paragraph"><a name="d0e914"></a>The next bit of code adds a label to the form content
+pane. Adding components to a Form (which is a Container) is done
+with <a class="indexterm" name="d0e916"></a><kbd class="command">addComponent(Component cmp)</kbd> or <kbd class="command">addComponent(Object constraints, Component cmp)</kbd>,
+where <kbd class="command">constraints</kbd> are the locations in the layout
+manager, BorderLayout.</p></li>
+<li class="list1"><p class="paragraph"><a name="d0e930"></a>A Transition is the movement effect action that
+occurs when switching between forms. See the Transitions and Animation
+chapter.</p></li>
+<li class="list1"><p class="paragraph"><a name="d0e934"></a>Form has <a class="indexterm" name="d0e936"></a>menus to emulate the device
+soft keys, for example. To set such a menu bar item, command, use
+the <a class="indexterm" name="d0e943"></a><kbd class="command">addCommand(Command cmd)</kbd> method.
+The Commands are placed in the order they are added. If the Form
+has one Command it is placed on the right. If the Form has two Commands
+the first one added is placed on the left and the second one is
+placed on the right. If the Form has more than two Commands the
+first one stays on the left and a Menu is added with all the remaining
+Commands.</p></li>
+<li class="list1"><p class="paragraph"><a name="d0e951"></a>The <a class="indexterm" name="d0e953"></a>show
+method displays the current form on the screen.</p></li></ol>
+<a name="Z4000acc1292986"></a><div class="figurebox"><p class="figurecaption"><a name="d0e959"></a><b>FIGURE 2-1&nbsp;&nbsp;&nbsp;Form Element</b></p></div>
+<img alt="Form component with Title Bar, Content Pane,&#xA;and Menu Bar called out" title="Form component with Title Bar, Content Pane,&#xA;and Menu Bar called out" src="figures/form.jpg"><br><br><br></div>
+<div class="sect1"><a name="Z4000acc1292103"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e972"></a>2.4 Create and Set Up a Form Label</h1>
+<p class="paragraph"><a name="d0e975"></a>The <a class="indexterm" name="d0e977"></a>Label widget
+can display a single line of text and/or an image and align them using
+multiple options. If you need to create a component that displays
+a string, an image, or both, you should use or extend Label. If
+the component is interactive and has a specific state, a Button
+is the<a class="indexterm" name="d0e981"></a> most suitable
+widget (instead of a label). </p>
+<p class="paragraph"><a name="d0e986"></a>To create a Label, use one of the following calls:</p>
+<p class="literallayout"><pre>Label textLabel = new Label("I am a Label"); // for a text label</pre></p>
+<p class="paragraph"><a name="d0e992"></a>or</p>
+<p class="literallayout"><pre>// create an image for an icon label
+Image icon = Image.createImage("/images/duke.png"); 
+Label imageLabel = new Label(icon); </p></pre>
+<p class="paragraph"><a name="d0e1001"></a>Labels <a class="indexterm" name="d0e1003"></a>can be aligned to one of
+the following directions: CENTER, LEFT, RIGHT. LEFT is the default.
+In addition the text can be aligned relative to the image position. Valid
+values are TOP, BOTTOM, LEFT, RIGHT, where the default is RIGHT.
+To update the text position use:</p>
+<p class="literallayout"><pre>setTextPosition(int alignment);</pre></p>
+<p class="paragraph"><a name="d0e1014"></a><a href="chapter2.html#Z4000acc1292040">FIGURE 2-2</a> displays three types
+of labels with text to icon <a class="indexterm" name="d0e1017"></a>alignment position
+of RIGHT. The container is divided into three rows, and the label
+in each row is as wide as possible. <a href="chapter2.html#Z4000acc1292044">FIGURE 2-3</a> shows relative alignment,
+with the label below the icon.</p>
+<a name="Z4000acc1292040"></a><div class="figurebox"><p class="figurecaption"><a name="d0e1028"></a><b>FIGURE 2-2&nbsp;&nbsp;&nbsp;Label With Text, Label With
+Icon, and Label with Text and Icon</b></p></div>
+<img alt="Label With Text, Label With Icon, and Label&#xA;with Text and Icon" title="Label With Text, Label With Icon, and Label&#xA;with Text and Icon" src="figures/labels.jpg"><br><br><br>
+<a name="Z4000acc1292044"></a><div class="figurebox"><p class="figurecaption"><a name="d0e1045"></a><b>FIGURE 2-3&nbsp;&nbsp;&nbsp;Text to Icon Alignment Position
+of BOTTOM</b></p></div>
+<img alt="Label with image and text aligned below" title="Label with image and text aligned below" src="figures/label_text_pos.jpg"><br><br><br></div>
+<div class="sect1"><a name="Z4000acc1292115"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e1060"></a>2.5 Button</h1>
+<p class="paragraph"><a name="d0e1063"></a>The <a class="indexterm" name="d0e1065"></a>Button
+component enables the GUI developer to receive action events when
+the user focuses on the component and clicks. In some devices a
+button might be more practical and usable than a command option.
+Button is the base class for several UI widgets that accept click
+actions. It has three <a class="indexterm" name="d0e1069"></a>states: rollover, pressed,
+and the default state. It can also have ActionListeners that react
+when the Button is clicked.</p>
+<p class="paragraph"><a name="d0e1077"></a>To get the user clicking event, you must implement an <a class="indexterm" name="d0e1079"></a>ActionListener, which
+is notified each time the user clicks the button. The following
+code snippet creates an action listener and changes the text on
+the button, every time the user clicks it.</p>
+<p class="literallayout"><pre>final Button button  = new Button("Old Text");            button.addActionListener(new ActionListener() {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public void actionPerformed(ActionEvent evt) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;button.setText("New Text");
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;});</p></pre>
+<p class="paragraph"><a name="d0e1100"></a>Button extends Label, so you can create three type of buttons:<a class="indexterm" name="d0e1102"></a> text only, image only or
+image and text button.</p>
+<a name="Z4000acc1293982"></a><div class="figurebox"><p class="figurecaption"><a name="d0e1112"></a><b>FIGURE 2-4&nbsp;&nbsp;&nbsp;Button With Text, Button With
+Icon, and Button With Text and Icon</b></p></div>
+<img alt="Button With Text, Button With Icon, and Button&#xA;With Text and Icon" title="Button With Text, Button With Icon, and Button&#xA;With Text and Icon" src="figures/buttons.jpg"><br><br><br></div>
+<div class="sect1"><a name="d0e1124"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e1125"></a>2.6 RadioButton</h1>
+<p class="paragraph"><a name="d0e1128"></a>RadioButton is a Button that maintains a selection state exclusively
+within a specific ButtonGroup. <a class="indexterm" name="d0e1130"></a><a class="indexterm" name="d0e1136"></a>Because
+RadioButton inherits from Button, radio buttons have all the usual
+button characteristics, as discussed in <a href="chapter2.html#Z4000acc1292115">Button</a>. For example, you can
+specify the image displayed in a radio button. Each time the user clicks
+a radio button (even if it was already selected), the button fires
+an action event, just as in Button.</p>
+<p class="paragraph"><a name="d0e1143"></a>To create a RadioButton use:</p>
+<p class="literallayout"><pre>RadioButton radioButton = new RadioButton(&#8220;Radio Button&#8221;);</pre></p>
+<p class="paragraph"><a name="d0e1149"></a><a href="chapter2.html#Z4000acc1294049">FIGURE 2-5</a> shows the RadioButton
+this code produces.</p>
+<a name="Z4000acc1294049"></a><div class="figurebox"><p class="figurecaption"><a name="d0e1154"></a><b>FIGURE 2-5&nbsp;&nbsp;&nbsp;Sample Radio Button</b></p></div>
+<img alt="Sample Radio Button" title="Sample Radio Button" src="figures/radioButton.jpg"><br><br><br></div>
+<div class="sect1"><a name="d0e1166"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e1167"></a>2.7 ButtonGroup</h1>
+<p class="paragraph"><a name="d0e1170"></a>The <a class="indexterm" name="d0e1172"></a>ButtonGroup
+component manages the selected and unselected states for a set of RadioButtons.
+For the group, the ButtonGroup instance guarantees that only one button
+can be selected at a time. </p>
+<p class="paragraph"><a name="d0e1177"></a>Initially, all RadioButtons in a ButtonGroup are unselected.
+Each ButtonGroup maintains the selected index, and can get a specific
+RadioButton by calling <a class="indexterm" name="d0e1179"></a><kbd class="command">getRadioButton(int index)</kbd>.</p>
+<p class="paragraph"><a name="d0e1186"></a>The following code snippet creates a button group made of
+two RadioButtons.</p>
+<p class="literallayout"><pre>Label radioButtonsLabel = new Label("RadioButton:");
+....
+RadioButton rb1 = new RadioButton("First RadioButton in Group 1");
+RadioButton rb2 = new RadioButton("Second RadioButton in Group 1");
+
+&nbsp;&nbsp;&nbsp;ButtonGroup group1 = new ButtonGroup();
+&nbsp;&nbsp;&nbsp;group1.add(rb1);
+&nbsp;&nbsp;&nbsp;group1.add(rb2);
+
+exampleContainer.addComponent(radioButtonsLabel);
+&nbsp;&nbsp;&nbsp;exampleContainer.addComponent(rb1);
+&nbsp;&nbsp;&nbsp;exampleContainer.addComponent(rb2);</p></pre>
+<p class="paragraph"><a name="d0e1223"></a>The code snippet result is shown in <a href="chapter2.html#Z4000acc1294114">FIGURE 2-6</a>.</p>
+<a name="Z4000acc1294114"></a><div class="figurebox"><p class="figurecaption"><a name="d0e1229"></a><b>FIGURE 2-6&nbsp;&nbsp;&nbsp;RadioButton Group</b></p></div>
+<img alt="RadioButton Group with two buttons" title="RadioButton Group with two buttons" src="figures/radioGroup.jpg"><br><br><br></div>
+<div class="sect1"><a name="d0e1241"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e1242"></a>2.8 CheckBox</h1>
+<p class="paragraph"><a name="d0e1245"></a><a class="indexterm" name="d0e1246"></a>Check boxes
+are similar to RadioButtons but their selection model is different, because
+they can flip the selection state between selected and unselected
+modes. A group of radio buttons, on the other hand, can have only
+one button selected. Because CheckBox inherits from Button, check
+boxes have all the usual button characteristics, as discussed in <a href="chapter2.html#Z4000acc1292115">Button</a>. For example, you can
+specify the image displayed in a check box. Each time the user select
+a check box (even if it was already selected), it fires an action
+event, just as in Button.</p>
+<p class="paragraph"><a name="d0e1253"></a>To create a CheckBox use:</p>
+<p class="literallayout"><pre>final CheckBox checkBox = new CheckBox(&#8220;Check Box&#8221;);</pre></p>
+<p class="paragraph"><a name="d0e1259"></a>This code produces the CheckBox shown in <a href="chapter2.html#Z4000acc1294188">FIGURE 2-7</a>.</p>
+<p class="paragraph"><a name="d0e1264"></a>To catch select and unselect events you can try this:</p>
+<p class="literallayout"><pre>checkBox.addActionListener(new ActionListener() {
+&nbsp;&nbsp;&nbsp;public void actionPerformed(ActionEvent evt) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(checkBox.isSelected()) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("CheckBox got selected");
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} else {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("CheckBox got unselected");
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;}
+});</p></pre>
+<a name="Z4000acc1294188"></a><div class="figurebox"><p class="figurecaption"><a name="d0e1295"></a><b>FIGURE 2-7&nbsp;&nbsp;&nbsp;CheckBox Sample</b></p></div>
+<img alt="Sample Screen with CheckBox " title="Sample Screen with CheckBox " src="figures/checkbox.jpg"><br><br><br></div>
+<div class="sect1"><a name="d0e1307"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e1308"></a>2.9 ComboBox</h1>
+<p class="paragraph"><a name="d0e1311"></a>A combo box is a list that allows only one selection at a
+time. When a user clicks the combo box button, a drop&#8208;down
+list of elements allows the user to select a single element. The
+combo box is driven by the list model and allows all the renderer features
+of the List as well. </p>
+<p class="paragraph"><a name="d0e1314"></a>Other components that can display one-of-many choices are
+groups of radio buttons, check boxes, buttons, and lists. Groups
+of radio buttons are generally the easiest for users to understand,
+but combo boxes can be more appropriate when space is limited or
+more than a few choices are available. Lists are not always attractive,
+but they are more appropriate than combo boxes when the number of
+items is large (say, over five). </p>
+<p class="paragraph"><a name="d0e1317"></a>The following code creates a combo box (a list model that
+is built from check boxes) and sets it <a class="indexterm" name="d0e1319"></a>up: </p>
+<p class="literallayout"><pre>String[] content = { "Red", "Blue", "Green", "Yellow" };
+
+// 1. Creating the combo box
+ComboBox comboBox = new ComboBox(content);
+
+// 2. Setting a checkBox renderer 
+comboBox.setListCellRenderer(new checkBoxRenderer());
+
+// 3. Adding a action listener to catch user clicking 
+// &nbsp;&nbsp;&nbsp;to open the ComboBox
+comboBox.addActionListener(myActionListener......);</p></pre>
+<p class="paragraph"><a name="d0e1351"></a>The following notes correspond to the comments in the code
+above.</p>
+<ol class="list1" type="1"><li class="list1"><p class="paragraph"><a name="d0e1356"></a>This combo box code
+contains an array of strings, but you could just as easily use labels
+instead. </p></li>
+<li class="list1"><p class="paragraph"><a name="d0e1360"></a>To put anything else into a combo box or to customize
+how the items in a combo box look, you need to write a custom renderer. </p></li>
+<li class="list1"><p class="paragraph"><a name="d0e1364"></a>The next line of code (which calls<a class="indexterm" name="d0e1366"></a> setListCellRender)
+registers an action listener on the combo box.</p></li></ol>
+<p class="paragraph"><a name="d0e1371"></a>The following is a sample of renderer <a class="indexterm" name="d0e1373"></a>code:</p>
+<p class="literallayout"><pre>/**
+&nbsp;* Demonstrates implementation of a renderer derived from a CheckBox 
+&nbsp;*/
+private static class checkBoxRenderer extends CheckBox implements ListCellRenderer {
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/** Creates a new instance of checkBoxRenderer */
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public checkBoxRenderer() {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;super("");
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Setting the current check box text and status
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public Component getListCellRendererComponent(List list,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object value, int index, boolean isSelected) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;setText("" + value);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (isSelected) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;setFocus(true);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;setSelected(true);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} else {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;setFocus(false);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;setSelected(false);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return this;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Returning the list focus component 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public Component getListFocusComponent(List list) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;setText("");
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;setFocus(true);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;setSelected(true);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return this;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;}</p></pre>
+<p class="paragraph"><a name="d0e1468"></a>The sample code produces the combo box in <a href="chapter2.html#Z4000acc1294357">FIGURE 2-8</a>.</p>
+<a name="Z4000acc1294357"></a><div class="figurebox"><p class="figurecaption"><a name="d0e1474"></a><b>FIGURE 2-8&nbsp;&nbsp;&nbsp;Combo Box</b></p></div>
+<img alt="Combo Box created from a list of strings" title="Combo Box created from a list of strings" src="figures/combobox.jpg"><br><br><br></div>
+<div class="sect1"><a name="d0e1486"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e1487"></a>2.10 TabbedPane</h1>
+<p class="paragraph"><a name="d0e1490"></a>A tabbed Pane is a container that lets the user switch between
+a group of components that all share the same space by focusing
+on a tab with a title, an icon, or both. The user chooses which
+component to view by selecting the tab corresponding to the desired
+component. </p>
+<p class="paragraph"><a name="d0e1493"></a>To create a tabbed pane, instantiate <a class="indexterm" name="d0e1495"></a>TabbedPane,
+create the components you wish it to display, and then add the components
+to the tabbed pane using the <kbd class="command">addTab</kbd> or <kbd class="command">insertTab</kbd> methods. <a class="indexterm" name="d0e1505"></a>TabbedPane has the ability
+to remove tabs as well, by calling <a class="indexterm" name="d0e1510"></a><kbd class="command">removeTabAt(int index)</kbd> at
+a given position index. A tab is represented by an index corresponding
+to the position it was added in, where the first tab has an index equal
+to 0 and the last tab has an index equal to the tab count minus
+1.</p>
+<p class="paragraph"><a name="d0e1517"></a>If the tab count is greater than 0, then there is always a
+selected index, which by default is initialized to the first tab.
+If the tab count is 0, then the selected index is -1.</p>
+<p class="paragraph"><a name="d0e1520"></a>TabbedPane has four different tab placement orientations.
+The default <a class="indexterm" name="d0e1522"></a>tab
+placement is set to the TOP location. You can change the tab placement
+to LEFT, RIGHT, TOP or BOTTOM using the <kbd class="command">setTabPlacement</kbd> method.</p>
+<p class="paragraph"><a name="d0e1530"></a>The following code creates a TabbedPane with tab placement
+of bottom, and places a Label in the center of the first (and only)
+tab.</p>
+<p class="literallayout"><pre>TabbedPane tabbedPane = new TabbedPane(TabbedPane.TOP);
+tabbedPane.addTab("Tab 1", new Label("I am a TabbedPane!"));
+tabbedPane.addTab("Tab 2", new Label("Tab number 2"));
+....</p></pre>
+<a name="Z4000acc1294544"></a><div class="figurebox"><p class="figurecaption"><a name="d0e1546"></a><b>FIGURE 2-9&nbsp;&nbsp;&nbsp;Tabbed Pane</b></p></div>
+<img alt="Tabbed Pane" title="Tabbed Pane" src="figures/tabbedPane.jpg"><br><br><br></div>
+<div class="sect1"><a name="Z4000acc1292166"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e1559"></a>2.11 TextArea</h1>
+<p class="paragraph"><a name="d0e1562"></a>The text area represents text that might be editable using
+the system native editor (it might occur in a new screen). The native
+editor is used to enable complex input methods (such as T9) and
+application internationalization. The following code creates and
+initializes the text <a class="indexterm" name="d0e1564"></a>area: </p>
+<p class="literallayout"><pre>TextArea textArea = new TextArea(5, 20, TextArea.NUMERIC); 
+textArea.setEditable(false);</p></pre>
+<p class="paragraph"><a name="d0e1575"></a>The first two arguments to the TextArea constructor are hints
+as to the number of rows and columns, respectively, that the text
+area should display. The third one is a constraint that is passed
+into the native text editor. Valid values can be one of <kbd class="command">ANY</kbd>, <kbd class="command">EMAILADDR</kbd>, <kbd class="command">NUMERIC</kbd>, <kbd class="command">PHONENUMBER</kbd>, <kbd class="command">URL</kbd>,
+or <kbd class="command">DECIMAL</kbd>. In addition it can be bitwise OR'd
+with one of <kbd class="command">PASSWORD</kbd>, <kbd class="command">UNEDITABLE</kbd>, <kbd class="command">SENSITIVE</kbd>, <kbd class="command">NON_PREDICTIVE</kbd>, <kbd class="command">INITIAL_CAPS_SENTENCE</kbd>, <kbd class="command">INITIAL_CAPS_WORD</kbd>.
+For example, <kbd class="command">ANY | PASSWORD</kbd>. The default value
+is <kbd class="command">ANY</kbd>. In the above example <kbd class="command">NUMERIC</kbd> only
+allows the user to type numbers.</p>
+<p class="paragraph"><a name="d0e1623"></a>Text areas are editable by default. The <a class="indexterm" name="d0e1625"></a>code <kbd class="command">setEditable(false)</kbd> makes
+the text area uneditable. It is still selectable, but the user cannot
+change the text area's contents directly.</p>
+<p class="paragraph"><a name="d0e1633"></a>A 5 x 20 text area is shown in <a href="chapter2.html#Z4000acc1294489">FIGURE 2-10</a>.</p>
+<a name="Z4000acc1294489"></a><div class="figurebox"><p class="figurecaption"><a name="d0e1639"></a><b>FIGURE 2-10&nbsp;&nbsp;&nbsp;Form With Text Area</b></p></div>
+<img alt="Form with text area that reads, &#34;I&#8217;m a TextArea&#34;" title="Form with text area that reads, &#34;I&#8217;m a TextArea&#34;" src="figures/textarea.jpg"><br><br><br></div>
+<div class="sect1"><a name="d0e1651"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e1652"></a>2.12 TextField</h1>
+<p class="paragraph"><a name="d0e1655"></a><a href="chapter2.html#Z4000acc1292166">TextArea</a> <a class="indexterm" name="d0e1658"></a>doesn't
+always allow in-place editing on existing devices and doesn't provide
+"fine grained control" over the input. This allows a text area to
+be lightweight, and portable for all possible devices. These restrictions
+sometimes cause a poor user experience because it requires users
+to go into a different screen for input (since all input is handled
+natively by the device). From a developer standpoint the native
+input can be a problem since it doesn't send change events and doesn't
+provide control over allowed input. </p>
+<p class="paragraph"><a name="d0e1663"></a>LWUIT provides the TextField component to support direct mobile
+phone input from within LWUIT. Unlike a TextArea, TextField is completely
+implemented in LWUIT. Developers can override almost all of its
+features to provide deep customization (for example, masked input,
+localization, and more). </p>
+<p class="paragraph"><a name="d0e1666"></a>TextField inherits the TextArea component and all of its features.
+It also supports moving to the native text editor.</p>
+<p class="paragraph"><a name="d0e1669"></a>The constructor also accepts several arguments, similar to
+the <a href="chapter2.html#Z4000acc1292166">TextArea</a> component.</p>
+<p class="paragraph"><a name="d0e1674"></a>TextField also has some limitations:</p>
+<ul class="bullet1" type="square"><li class="bullet1"><p class="paragraph"><a name="d0e1679"></a>Does not support input
+in foreign locales unless you provide code for foreign input</p></li>
+<li class="bullet1"><p class="paragraph"><a name="d0e1683"></a>Does not support device features, such as T9 input</p></li>
+<li class="bullet1"><p class="paragraph"><a name="d0e1687"></a>Might not correctly detect QWERTY devices</p></li>
+<li class="bullet1"><p class="paragraph"><a name="d0e1691"></a>Does not work on devices with unique keyboards,
+such as the Perl</p></li></ul>
+<p class="paragraph"><a name="d0e1694"></a>Creating a text field is trivial:</p>
+<p class="paragraph"><a name="d0e1697"></a><kbd class="command">TextField f = new TextField();</kbd></p>
+<a name="Z4000e651296845"></a><div class="figurebox"><p class="figurecaption"><a name="d0e1702"></a><b>FIGURE 2-11&nbsp;&nbsp;&nbsp;Sample Text Field</b></p></div>
+<img src="figures/tree.jpg"><br><br><br></div>
+<div class="sect1"><a name="d0e1712"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e1713"></a>2.13 Calendar</h1>
+<p class="paragraph"><a name="d0e1716"></a>The LWUIT <a class="indexterm" name="d0e1718"></a>calendar
+component allows users to pick a date using a monthly calendar user
+interface. Use the calendar component to navigate and pick a date,
+as shown in the following code:</p>
+<p class="paragraph"><a name="d0e1723"></a><kbd class="command">Calendar cal = new Calendar();</kbd></p>
+<p class="paragraph"><a name="d0e1727"></a>Developers can monitor state changes within the calendar using
+a data change listener or an action listener.</p>
+<a name="Z40020e51296643"></a><div class="figurebox"><p class="figurecaption"><a name="d0e1731"></a><b>FIGURE 2-12&nbsp;&nbsp;&nbsp;Calendar Component</b></p></div>
+<img alt="Calendar Component" title="Calendar Component" src="figures/calendar.jpg"><br><br><br></div>
+<div class="sect1"><a name="Z4000f541295149"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e1744"></a>2.14 Tickering</h1>
+<p class="paragraph"><a name="d0e1747"></a>Label (and all its subclasses) includes ticker <a class="indexterm" name="d0e1749"></a>support. A ticker scrolls
+the content of a long label across the screen. Ticker ability in
+labels is usually indicated by displaying three dots "..." after
+the end of the label. When the label (button, checkbox, etcetera) receives
+focus, these three dots disappear and the label starts animating
+like a stock ticker.</p>
+<p class="paragraph"><a name="d0e1755"></a>A ticker can be started explicitly using a call to <kbd class="command">startTicker</kbd> or <kbd class="command">stopTicker</kbd> in Label.
+It can also be prevented by invoking <kbd class="command">setTickerEnabled(false)</kbd>.
+To prevent the three dots from appearing at the end of labels or
+components that support tickering, use <kbd class="command">setEndsWith3Points(false)</kbd>.</p></div>
+<div class="sect1"><a name="Z4000f541295175"></a><hr align="left" size="6" width="15%" noshade="1"><h1 class="head1"><a name="d0e1771"></a>2.15 Bidi</h1>
+<p class="paragraph"><a name="d0e1774"></a>BiDi refers<a class="indexterm" name="d0e1776"></a> to
+bidirectional language support, generally used for right-to-left
+(RTL) languages. There is plenty of information about RTL languages
+(Arabic, Hebrew, Syriac, Thaana) on the internet, but as a brief
+primer here is a minor summary.</p>
+<p class="paragraph"><a name="d0e1781"></a>Most western languages are written from left to right (LTR),
+however some languages are normally written from right to left (RTL).
+Speakers of these languages expect the UI to flow in the opposite
+direction, otherwise it seems "weird" just like reading this word
+in RTL would look: "driew" to most English speakers.</p>
+<p class="paragraph"><a name="d0e1784"></a>The problem posed by RTL languages is known as bi-directional)
+and not as RTL since the "true" problem isn't the reversal of the
+writing/UI but rather the mixing of RTL and LTR together. For example,
+numbers are always written from left to right (just like in English)
+so in an RTL language the direction is from right to left and once
+we reach a number or English text embedded in the middle of the
+sentence (such as a name) the direction switches for a duration
+and is later restored.</p>
+<p class="paragraph"><a name="d0e1787"></a>LWUIT supports BiDi with the following components:</p>
+<ul class="bullet1" type="square"><li class="bullet1"><p class="paragraph"><a name="d0e1792"></a>BiDi algorithm - allows
+converting between logical to visual representation for rendering </p></li>
+<li class="bullet1"><p class="paragraph"><a name="d0e1796"></a>Global RTL flag- default flag for the entire application
+indicating the UI should flow from right to left</p></li>
+<li class="bullet1"><p class="paragraph"><a name="d0e1800"></a>Individual RTL flag - flag indicating that the specific
+component/container should be presented as an RTL/LTR component
+(for example, for displaying English elements within an RTL UI). </p></li>
+<li class="bullet1"><p class="paragraph"><a name="d0e1804"></a>RTL text field input </p></li>
+<li class="bullet1"><p class="paragraph"><a name="d0e1808"></a>RTL text field input </p></li>
+<li class="bullet1"><p class="paragraph"><a name="d0e1812"></a>RTL bitmap font rendering</p></li></ul>
+<p class="paragraph"><a name="d0e1815"></a>Most of LWUIT's RTL support is under the hood. The LookAndFeel
+global RTL flag can be enabled using:</p>
+<p class="paragraph"><a name="d0e1818"></a><kbd class="command">UIManager.getInstance().getLookAndFeel().se</kbd>t<kbd class="command">RTL(true)</kbd></p>
+<p class="paragraph"><a name="d0e1825"></a>(Notice that setting the RTL to true implicitly activates
+the BiDi algorithm).Once RTL is activated all positions in LWUIT
+become reversed and the UI becomes a mirror of itself. For example,
+a softkey placed on the left moves to the right, padding on the
+left becomes padding on the right, the scroll moves to the left,
+etcetera.</p>
+<p class="paragraph"><a name="d0e1828"></a>This applies to the layout managers (except for group layout)
+and most components. BiDi is mostly seamless in LWUIT but a developer
+still needs to be aware that his UI might be mirrored for these
+cases.</p></div>
+<!-- =================== -->
+<!-- END OF MAIN CONTENT -->
+<!-- =================== -->
+
+
+
+<div class="navbar" align="center"><br><br>
+<table dir="LTR" width="100%" cellpadding="0" cellspacing="0" border="0" summary="Navigation bar, includes the book title and navigation buttons"><colgroup span="3"><col id="b1" span="1" width="45%"><col id="b2" span="1" width="25%"><col id="b3" span="1" width="30%"></colgroup><tr bgcolor="#cccccc"><td class="navbartitle" align="left" rowspan="1" colspan="1" abbr="ChapTitle">&nbsp;&nbsp;LWUIT Developer&#8217;s Guide</td><td class="navbartitle" align="right" rowspan="1" colspan="1" abbr="PartNum">12-11-09</td><td valign="top" align="right" rowspan="1" colspan="1" abbr="NavButtons"><a href="index.html"><img src="shared/toc01.gif" width="30" height="26" border="0" title="Table Of Contents" alt="Table Of Contents"></a>
+<a href="chapter1.html"><img width="30" height="26" border="0" src="shared/prev01.gif" title="Previous Chapter" alt="Previous Chapter"></a><a href="chapter3.html"><img src="shared/next01.gif" width="30" height="26" border="0" title="Next Chapter" alt="Next Chapter"></a><a href="ix.html"><img src="shared/index01.gif" width="30" height="26" border="0" title="Book Index" alt="Book Index"></a></td></tr></table>
+</div><p class="copyrightlink"><a href="bookinfo.html">Copyright</a> &copy; 2009, Sun Microsystems, Inc.  All rights reserved.</p></body></html>
